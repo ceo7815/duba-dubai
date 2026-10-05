@@ -2,8 +2,9 @@ FROM node:22-alpine AS build
 WORKDIR /app
 
 COPY package.json package-lock.json ./
-# Dev dependencies are required to compile. A production NODE_ENV on the server must not drop them.
-RUN npm ci --include=dev
+# npm ci on the image's npm 10 rejects this lockfile: Tailwind's wasm package
+# lists @emnapi/* dependencies that Windows npm does not record. npm install applies the lockfile.
+RUN npm install --include=dev --no-audit --no-fund
 
 COPY . .
 
