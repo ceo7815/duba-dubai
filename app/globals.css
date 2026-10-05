@@ -1,26 +1,301 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --color-paper: #f2f2f2;
+  --color-ink: #111111;
+  --color-muted: #5e5e5e;
+  --color-line: #d5d5d5;
+  --color-card: #ffffff;
+  --color-accent: #111111;
+  --color-accent-ink: #ffffff;
+  --font-sans: var(--font-rubik), "Rubik", sans-serif;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans);
+  background: var(--color-paper);
+  color: var(--color-ink);
+}
+
+.field {
+  min-height: 3.25rem;
+  width: 100%;
+  border-radius: 1rem;
+  border: 1px solid #cfcfcf;
+  background: #ffffff;
+  padding-inline: 1rem;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #111111;
+}
+
+.field:focus {
+  outline: 1px solid #111111;
+  outline-offset: 2px;
+}
+
+.button {
+  min-height: 3.25rem;
+  width: 100%;
+  border-radius: 1rem;
+  background: #111111;
+  color: #ffffff;
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.button-quiet {
+  min-height: 3.25rem;
+  width: 100%;
+  border-radius: 1rem;
+  border: 1px solid #111111;
+  background: #ffffff;
+  color: #111111;
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.button:disabled {
+  opacity: 0.55;
+}
+
+select.field {
+  appearance: none;
+}
+
+.login-stage {
+  position: relative;
+  min-height: 100dvh;
+  overflow: hidden;
+  display: grid;
+  place-items: center;
+  padding: 1.5rem 1.25rem max(1.5rem, env(safe-area-inset-bottom));
+  background: #050505;
+}
+
+.login-tech {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 50% 18%, #3a3a3a 0%, transparent 46%),
+    linear-gradient(180deg, #141414 0%, #070707 55%, #000 100%);
+}
+
+.login-grid,
+.login-grid-fine {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(186, 186, 186, 0.14) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(186, 186, 186, 0.14) 1px, transparent 1px);
+  background-size: 72px 72px;
+  animation: grid-move 22s linear infinite;
+}
+
+.login-grid-fine {
+  background-size: 18px 18px;
+  opacity: 0.35;
+  animation-duration: 34s;
+  animation-direction: reverse;
+}
+
+.login-floor {
+  position: absolute;
+  left: -25%;
+  right: -25%;
+  bottom: -8%;
+  height: 58%;
+  background-image:
+    linear-gradient(rgba(200, 200, 200, 0.28) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(200, 200, 200, 0.28) 1px, transparent 1px);
+  background-size: 80px 80px;
+  transform: perspective(420px) rotateX(68deg);
+  transform-origin: center top;
+  animation: floor-move 7s linear infinite;
+  mask-image: linear-gradient(to top, #000 10%, transparent 78%);
+}
+
+.login-scan {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 18%;
+  background: linear-gradient(180deg, transparent, rgba(230, 230, 230, 0.09), transparent);
+  animation: scan 11s linear infinite;
+}
+
+.login-frame {
+  position: relative;
+  z-index: 1;
+  width: min(100%, 40rem);
+  border-radius: 3rem;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(10, 10, 10, 0.82);
+  padding: 3.25rem 2.25rem 2.4rem;
+  box-shadow: 0 0 0 10px rgba(255, 255, 255, 0.04);
+  color: #f7f4ef;
+}
+
+.login-logo {
+  display: block;
+  width: min(86%, 18rem);
+  height: auto;
+  margin-inline: auto;
+}
+
+.login-kicker {
+  margin: 1.5rem 0 1.75rem;
+  text-align: center;
+  font-size: 1.65rem;
+  font-weight: 800;
+  letter-spacing: 0.01em;
+}
+
+.login-frame .field,
+.login-frame .button {
+  border-radius: 1.35rem;
+  min-height: 3.6rem;
+}
+
+.login-frame .field {
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  background: rgba(255, 255, 255, 0.04);
+  color: #f7f4ef;
+}
+
+.login-frame .field:focus {
+  outline-color: #f4efe6;
+}
+
+.login-frame .button {
+  background: #f4efe6;
+  color: #111111;
+}
+
+.app-nav {
+  position: fixed;
+  inset-inline: 0;
+  bottom: 0;
+  z-index: 20;
+  overflow: visible;
+  background: #111111;
+  color: #ffffff;
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+header.app-header {
+  background: #111111;
+  color: #ffffff;
+}
+
+.drawer-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 30;
+  background: rgba(0, 0, 0, 0.45);
+}
+
+.drawer {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  z-index: 40;
+  width: min(86vw, 22rem);
+  transform: translateX(105%);
+  background: #111111;
+  color: #ffffff;
+  transition: transform 0.22s ease;
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+.drawer.open {
+  transform: translateX(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .drawer {
+    transition: none;
+  }
+}
+
+@media print {
+  .app-nav,
+  .drawer,
+  .drawer-backdrop,
+  .no-print,
+  header {
+    display: none !important;
+  }
+
+  body,
+  main {
+    background: #ffffff !important;
+  }
+}
+
+.field-en {
+  direction: ltr;
+  text-align: left;
+}
+
+.guest-hero {
+  position: relative;
+  overflow: hidden;
+  background: #070707;
+}
+
+.guest-hero-glow,
+.guest-hero-grid,
+.guest-hero-scan {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.guest-hero-glow {
+  background:
+    radial-gradient(ellipse at 50% 0%, rgba(255, 255, 255, 0.16), transparent 58%),
+    linear-gradient(180deg, #1a1a1a 0%, #070707 100%);
+}
+
+.guest-hero-grid {
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.08) 1px, transparent 1px);
+  background-size: 48px 48px;
+  mask-image: radial-gradient(ellipse at 50% 30%, #000 0%, transparent 70%);
+  animation: grid-move 16s linear infinite;
+}
+
+.guest-hero-scan {
+  height: 45%;
+  background: linear-gradient(180deg, transparent, rgba(255, 255, 255, 0.07), transparent);
+  animation: scan 8s linear infinite;
+}
+
+@keyframes grid-move {
+  from { background-position: 0 0; }
+  to { background-position: 0 72px; }
+}
+
+@keyframes floor-move {
+  from { background-position: 0 0; }
+  to { background-position: 0 80px; }
+}
+
+@keyframes scan {
+  from { transform: translateY(-40dvh); }
+  to { transform: translateY(130dvh); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .login-grid,
+  .login-grid-fine,
+  .login-floor,
+  .login-scan,
+  .guest-hero-grid,
+  .guest-hero-scan {
+    animation: none;
+  }
 }
