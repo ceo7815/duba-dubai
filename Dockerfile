@@ -2,7 +2,8 @@ FROM node:22-alpine AS build
 WORKDIR /app
 
 COPY package.json package-lock.json ./
-RUN npm ci
+# Dev dependencies are required to compile. A production NODE_ENV on the server must not drop them.
+RUN npm ci --include=dev
 
 COPY . .
 
