@@ -93,7 +93,7 @@ export function UserForm({
         הצג סיסמה
       </label>
       {self ? (
-        <input type="hidden" name="role" value="owner" />
+        <input type="hidden" name="role" value={user?.role ?? "owner"} />
       ) : (
         <label className="flex flex-col gap-2 text-sm font-medium">
           תפקיד
@@ -107,14 +107,17 @@ export function UserForm({
         </label>
       )}
       {mode === "edit" && !self ? (
-        <label className="flex min-h-12 items-center gap-3 text-sm font-medium">
+        <label className="flex min-h-12 items-start gap-3 rounded-2xl bg-paper px-4 py-3 text-sm font-medium">
           <input
             type="checkbox"
             name="active"
             defaultChecked={user?.active}
-            className="size-5 accent-accent"
+            className="mt-0.5 size-5 shrink-0 accent-accent"
           />
-          החשבון פעיל
+          <span>
+            <span className="block font-extrabold">החשבון פעיל</span>
+            <span className="block text-muted">בלי הסימון החשבון מושבת והמשתמש לא יכול להיכנס</span>
+          </span>
         </label>
       ) : mode === "edit" ? (
         <input type="hidden" name="active" value="on" />

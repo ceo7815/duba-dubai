@@ -2,6 +2,7 @@ import Link from "next/link";
 import { redirect } from "next/navigation";
 import { Work } from "@/app/shell";
 import { requireProfile } from "@/lib/profile";
+import { fullAccess } from "@/lib/roles";
 
 const groups = [
   {
@@ -10,38 +11,40 @@ const groups = [
       { href: "/today", label: "היום" },
       { href: "/orders", label: "הזמנות" },
       { href: "/board", label: "לוח" },
-      { href: "/expected", label: "מה צפוי" },
-      { href: "/morning", label: "משוב בוקר" },
     ],
   },
   {
     title: "עסק",
     links: [
+      { href: "/menu", label: "תפריט" },
       { href: "/customers", label: "לקוחות" },
-      { href: "/products", label: "מוצרים" },
-      { href: "/dishes", label: "מנות" },
-      { href: "/money", label: "כסף" },
+      { href: "/products", label: "מכירות לפי מוצר" },
+    ],
+  },
+  {
+    title: "כספים",
+    links: [
+      { href: "/money/income", label: "הכנסות" },
+      { href: "/money/expenses", label: "הוצאות" },
+      { href: "/money/reports", label: "דוחות" },
     ],
   },
   {
     title: "חיבורים",
     links: [
       { href: "/grok", label: "Grok" },
-      { href: "/connections", label: "שופיפיי וסטרייפ" },
+      { href: "/connections", label: "חנות וסטרייפ" },
     ],
   },
   {
     title: "ניהול",
-    links: [
-      { href: "/users", label: "משתמשים" },
-      { href: "/account", label: "חשבון" },
-    ],
+    links: [{ href: "/users", label: "משתמשים" }],
   },
 ];
 
 export default async function MorePage() {
   const profile = await requireProfile();
-  if (profile.role !== "owner") redirect("/");
+  if (!fullAccess(profile?.role)) redirect("/login");
 
   return (
     <Work title="עוד" role={profile.role}>

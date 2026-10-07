@@ -5,13 +5,30 @@ function isMachine(pathname: string) {
   return (
     pathname.startsWith("/api/bot") ||
     pathname.startsWith("/api/stripe") ||
-    pathname.startsWith("/api/shopify") ||
-    pathname.startsWith("/o/")
+    pathname.startsWith("/o/") ||
+    pathname === "/shop" ||
+    pathname.startsWith("/shop/") ||
+    pathname.startsWith("/store/") ||
+    pathname === "/manifest.webmanifest" ||
+    pathname === "/sw.js" ||
+    /(^|\/)(opengraph-image|icon|apple-icon)(-\w+)?$/.test(pathname)
   );
 }
 
 export async function proxy(request: NextRequest) {
-  if (isMachine(request.nextUrl.pathname)) return NextResponse.next();
+  const { pathname } = request.nextUrl;
+  if (pathname === "/admin" || pathname === "/admin/") {
+    const url = request.nextUrl.clone();
+    url.pathname = "/login";
+    url.search = "";
+    return NextResponse.redirect(url, 308);
+  }
+  if (pathname === "/") {
+    const url = request.nextUrl.clone();
+    url.pathname = "/shop";
+    return NextResponse.rewrite(url);
+  }
+  if (isMachine(pathname)) return NextResponse.next();
 
   let supabaseResponse = NextResponse.next({ request });
 
@@ -41,7 +58,7 @@ export async function proxy(request: NextRequest) {
 
   const { data } = await supabase.auth.getClaims();
   const userId = data?.claims.sub;
-  const isLogin = request.nextUrl.pathname.startsWith("/login");
+  const isLogin = pathname === "/login";
 
   if (!userId && !isLogin) {
     return withSession(supabaseResponse, request.nextUrl.clone(), "/login");
@@ -61,12 +78,24 @@ export async function proxy(request: NextRequest) {
       return withSession(supabaseResponse, request.nextUrl.clone(), "/login");
     }
 
-    if (isLogin) {
-      return withSession(supabaseResponse, request.nextUrl.clone(), "/");
-    }
+    if (isLogin) return rewriteWithSession(supabaseResponse, request, "/");
   }
 
   return supabaseResponse;
+}
+
+function rewriteWithSession(source: NextResponse, request: NextRequest, pathname: string) {
+  const url = request.nextUrl.clone();
+  url.pathname = pathname;
+  const rewrite = NextResponse.rewrite(url, { request });
+  source.cookies.getAll().forEach((cookie) => {
+    rewrite.cookies.set(cookie);
+  });
+  for (const header of ["cache-control", "expires", "pragma"]) {
+    const value = source.headers.get(header);
+    if (value) rewrite.headers.set(header, value);
+  }
+  return rewrite;
 }
 
 function withSession(source: NextResponse, url: URL, pathname: string) {
@@ -84,6 +113,6 @@ function withSession(source: NextResponse, url: URL, pathname: string) {
 
 export const config = {
   matcher: [
-    "/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)",
+    "/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp|mp4)$).*)",
   ],
 };

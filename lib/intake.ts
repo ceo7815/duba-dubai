@@ -5,6 +5,7 @@ import {
   needsDestination,
   nextSteps,
   phoneKey,
+  stageOf,
   stepPatch,
 } from "@/lib/domain";
 import { adminClient } from "@/lib/supabase/admin";
@@ -16,7 +17,7 @@ function dubaiStamp(value: string) {
   return date.toISOString();
 }
 
-export function intakeReady(secretName: "WHATSAPP_BOT_TOKEN" | "STRIPE_WEBHOOK_SECRET" | "SHOPIFY_WEBHOOK_SECRET") {
+export function intakeReady(secretName: "WHATSAPP_BOT_TOKEN" | "STRIPE_WEBHOOK_SECRET") {
   return Boolean(process.env[secretName] && process.env.SUPABASE_SERVICE_ROLE_KEY);
 }
 
@@ -166,64 +167,14 @@ export async function markStripePaid(orderId: string) {
   if (order.order_kind === "group_event") {
     return { ok: false as const, status: 409, error: "אירוע קבוצתי לא נסגר לבד" };
   }
-  const allowed = nextSteps(order.status).some((step) => step.status === "paid_shopify");
-  if (!allowed) return { ok: false as const, status: 409, error: "ההזמנה לא ממתינה לתשלום" };
-  await admin.from("orders").update(stepPatch("paid_shopify", Number(order.amount))).eq("id", order.id);
+  if (order.status === "draft") return { ok: false as const, status: 409, error: "ההזמנה עוד לא נשלחה" };
+  await admin
+    .from("orders")
+    .update({
+      paid: Number(order.amount),
+      ending: "shopify_paid",
+      ...(stageOf(order.status) === "waiting" ? { status: "in_kitchen" } : {}),
+    })
+    .eq("id", order.id);
   return { ok: true as const, status: 200, id: order.id };
-}
-
-export async function writeShopifyOrder(body: {
-  external_id?: unknown;
-  phone?: unknown;
-  customer_name?: unknown;
-  scheduled_at?: unknown;
-  order_kind?: unknown;
-  fulfillment?: unknown;
-  destination?: unknown;
-  allergy?: unknown;
-  amount?: unknown;
-  paid?: unknown;
-  items?: unknown;
-}) {
-  const externalId = String(body.external_id ?? "").trim();
-  const saved = await customer(String(body.phone ?? ""), String(body.customer_name ?? "").trim());
-  if (!saved || !externalId) return { ok: false as const, status: 400, error: "צריך מזהה הזמנה, שם וטלפון" };
-  const marker = `shopify:${externalId}`;
-  const { data: existing } = await saved.admin.from("orders").select("id, status, order_kind, amount").eq("shopify_url", marker).maybeSingle();
-  const when = dubaiStamp(String(body.scheduled_at ?? ""));
-  const orderKind = String(body.order_kind ?? "regular");
-  const fulfillment = String(body.fulfillment ?? "delivery");
-  const amount = Number(body.amount);
-  const items = itemsOf(body.items);
-  if (!when || !isOrderKind(orderKind) || !isFulfillment(fulfillment) || !items || !Number.isFinite(amount)) {
-    return { ok: false as const, status: 400, error: "חסרים פרטי הזמנה" };
-  }
-  const paid = body.paid === true && orderKind !== "group_event";
-  const status = paid ? "in_kitchen" : "awaiting";
-  const row = {
-    customer_id: saved.id,
-    customer_name: String(body.customer_name).trim(),
-    phone: String(body.phone),
-    phone_key: saved.key,
-    scheduled_at: when,
-    order_kind: orderKind,
-    fulfillment,
-    destination: String(body.destination ?? "").trim(),
-    allergy: String(body.allergy ?? "אין"),
-    source: "shopify" as const,
-    ending: paid ? "shopify_paid" : null,
-    status,
-    amount,
-    paid: paid ? amount : 0,
-    shopify_url: marker,
-  };
-  if (existing?.id) {
-    if (existing.order_kind === "group_event") return { ok: true as const, status: 200, id: existing.id };
-    await saved.admin.from("orders").update(row).eq("id", existing.id);
-    return { ok: true as const, status: 200, id: existing.id as string };
-  }
-  const { data, error } = await saved.admin.from("orders").insert(row).select("id").single();
-  if (error || !data) return { ok: false as const, status: 500, error: "ההזמנה לא נשמרה" };
-  await saved.admin.from("order_items").insert(items.map((item) => ({ ...item, order_id: data.id })));
-  return { ok: true as const, status: 200, id: data.id as string };
 }

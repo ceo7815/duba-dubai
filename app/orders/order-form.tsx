@@ -325,15 +325,15 @@ export function OrderForm({
             onClick={() => setPay("card")}
           >
             <span className="block text-base font-extrabold">כרטיס אשראי</span>
-            <span className="mt-1 block text-xs font-bold opacity-80">סיכום עם כפתור לתשלום</span>
+            <span className="mt-1 block text-xs font-bold opacity-80">אישור וקישור לתשלום</span>
           </button>
           <button
             type="button"
             className={`min-h-24 rounded-2xl px-3 text-center ${pay === "cash" ? "bg-[#111111] text-white" : "border border-[#111111] bg-white"}`}
             onClick={() => setPay("cash")}
           >
-            <span className="block text-base font-extrabold">מזומן</span>
-            <span className="mt-1 block text-xs font-bold opacity-80">סיכום עם אישור הזמנה</span>
+            <span className="block text-base font-extrabold">מזומן במסירה</span>
+            <span className="mt-1 block text-xs font-bold opacity-80">אישור הזמנה</span>
           </button>
         </div>
       </section>
@@ -344,7 +344,7 @@ export function OrderForm({
         </p>
       ) : null}
       <button type="submit" disabled={pending || !pay} className="button">
-        {pending ? "שומרים" : pay === "card" ? "שליחת סיכום לתשלום" : pay === "cash" ? "שליחת סיכום לאישור" : "בחירת אופן תשלום"}
+        {pending ? "שומרים" : pay ? "שליחת סיכום ללקוח" : "בחירת אופן תשלום"}
       </button>
     </form>
   );

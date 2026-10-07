@@ -1,6 +1,7 @@
 "use server";
 
-import { randomBytes } from "crypto";
+import { done } from "@/lib/flash";
+import { randomInt } from "crypto";
 import { networkInterfaces } from "os";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
@@ -19,7 +20,9 @@ import {
   type OrderStatus,
 } from "@/lib/domain";
 import { getProfile } from "@/lib/profile";
+import { stripeCheckout } from "@/lib/stripe";
 import { createClient } from "@/lib/supabase/server";
+import { canOperate } from "@/lib/roles";
 
 function field(formData: FormData, name: string) {
   return String(formData.get(name) ?? "").trim();
@@ -32,15 +35,18 @@ function moneyField(value: string) {
 
 async function owner() {
   const profile = await getProfile();
-  if (profile?.role !== "owner") return null;
+  if (!canOperate(profile?.role)) return null;
   return profile;
 }
 
 export async function saveOrder(
   _state: FormState,
   formData: FormData,
-): Promise<{ error: string; id?: string } | { id: string; phone?: string; message?: string }> {
-  if (!(await owner())) return { error: "רק הבעלים שומרת הזמנה" };
+): Promise<
+  | { error: string; id?: string }
+  | { id: string; phone?: string; message?: string }
+> {
+  if (!(await owner())) return { error: "אין לך הרשאה לשמור הזמנה" };
 
   const id = field(formData, "id");
   const customerName = field(formData, "customer_name");
@@ -63,9 +69,11 @@ export async function saveOrder(
   const amount = moneyField(field(formData, "amount"));
   const paid = moneyField(field(formData, "paid") || "0");
   const method = field(formData, "payment_method");
-  let shopifyUrl = field(formData, "shopify_url");
+  let shopifyUrl = "";
   const dishIds = formData.getAll("item_dish_id").map((value) => String(value));
-  const quantities = formData.getAll("item_quantity").map((value) => Number(String(value)));
+  const quantities = formData
+    .getAll("item_quantity")
+    .map((value) => Number(String(value)));
 
   if (!customerName || key.length < 7) {
     return { error: "צריך שם וטלפון" };
@@ -80,8 +88,14 @@ export async function saveOrder(
     return { error: "צריך יעד" };
   }
   if (!allergy) return { error: "צריך אלרגיה, או לסמן שאין" };
-  if (method !== "card" && method !== "cash") return { error: "צריך אופן תשלום" };
-  if (!Number.isFinite(amount) || amount < 0 || !Number.isFinite(paid) || paid < 0) {
+  if (method !== "card" && method !== "cash")
+    return { error: "צריך אופן תשלום" };
+  if (
+    !Number.isFinite(amount) ||
+    amount < 0 ||
+    !Number.isFinite(paid) ||
+    paid < 0
+  ) {
     return { error: "הסכום לא תקין" };
   }
   if (
@@ -97,7 +111,12 @@ export async function saveOrder(
   if (leavesAt.length > 20) return { error: "שעת היציאה ארוכה מדי" };
   if (
     dishIds.length === 0 ||
-    dishIds.some((dishId, index) => !dishId || !Number.isInteger(quantities[index]) || quantities[index] < 1)
+    dishIds.some(
+      (dishId, index) =>
+        !dishId ||
+        !Number.isInteger(quantities[index]) ||
+        quantities[index] < 1,
+    )
   ) {
     return { error: "צריך לבחור מנות מהתפריט" };
   }
@@ -124,18 +143,23 @@ export async function saveOrder(
   if (id) {
     const { data: existing } = await supabase
       .from("orders")
-      .select("status, ending, shopify_url, source")
+      .select("status, ending, shopify_url, source, amount")
       .eq("id", id)
       .maybeSingle();
     if (existing && isStatus(existing.status)) {
       status = existing.status;
       ending = existing.ending;
       if (isSource(existing.source)) source = existing.source;
-      if (!shopifyUrl) shopifyUrl = existing.shopify_url ?? "";
+      // A Stripe Checkout link is fixed to the amount it was created for.
+      if (Number(existing.amount) === amount)
+        shopifyUrl = existing.shopify_url ?? "";
     }
   }
 
-  const { data: catalog } = await supabase.from("dishes").select("id, name, price").in("id", dishIds);
+  const { data: catalog } = await supabase
+    .from("dishes")
+    .select("id, name, price")
+    .in("id", dishIds);
   const byId = new Map((catalog ?? []).map((dish) => [dish.id, dish]));
   const items = dishIds.map((dishId, index) => {
     const dish = byId.get(dishId);
@@ -152,7 +176,10 @@ export async function saveOrder(
   if (lines.length !== dishIds.length) return { error: "מנה לא נמצאה בתפריט" };
 
   const progressed =
-    status === "in_kitchen" || status === "out" || status === "feedback_sent" || status === "paid_shopify";
+    status === "in_kitchen" ||
+    status === "out" ||
+    status === "feedback_sent" ||
+    status === "paid_shopify";
   if (!progressed && method === "cash") {
     status = "cash_agreed";
     ending = "cash";
@@ -195,22 +222,21 @@ export async function saveOrder(
     if (error) return { error: "ההזמנה לא נשמרה" };
     await supabase.from("order_items").delete().eq("order_id", id);
   } else {
-    const { data, error } = await supabase.from("orders").insert(row).select("id").single();
+    const { data, error } = await supabase
+      .from("orders")
+      .insert(row)
+      .select("id")
+      .single();
     if (error || !data) return { error: "ההזמנה לא נשמרה" };
     orderId = data.id;
   }
 
-  const { error: itemsError } = await supabase.from("order_items").insert(
-    lines.map((item) => ({ ...item, order_id: orderId })),
-  );
+  const { error: itemsError } = await supabase
+    .from("order_items")
+    .insert(lines.map((item) => ({ ...item, order_id: orderId })));
   if (itemsError) return { error: "המנות לא נשמרו" };
 
-  revalidatePath("/");
-  revalidatePath("/orders");
-  revalidatePath("/board");
-  revalidatePath("/customers");
-  revalidatePath("/morning");
-  revalidatePath("/today");
+  await done("ההזמנה נשמרה ✓");
   if (!progressed) {
     const sent = await issueGuestLink(orderId, field(formData, "origin"));
     if ("error" in sent) return { error: sent.error, id: orderId };
@@ -223,18 +249,19 @@ export async function setOrderStatus(formData: FormData) {
   const profile = await getProfile();
   const id = field(formData, "id");
   const status = field(formData, "status");
-  const paymentUrl = field(formData, "payment_url");
   if (!id || !isStatus(status)) return;
-  if (profile?.role !== "owner" && profile?.role !== "kitchen") return;
+  if (!canOperate(profile?.role) && profile?.role !== "kitchen") return;
 
   const supabase = await createClient();
   const { data: existing } = await supabase
     .from("orders")
-    .select("status, amount, order_kind, source")
+    .select("status, amount, order_kind")
     .eq("id", id)
     .maybeSingle();
   if (!existing || !isStatus(existing.status)) return;
-  const allowed = nextSteps(existing.status, existing.source).some((step) => step.status === status);
+  const allowed = nextSteps(existing.status).some(
+    (step) => step.status === status,
+  );
   if (!allowed) return;
   if (profile.role === "kitchen" && status !== "out") return;
   if (
@@ -244,29 +271,26 @@ export async function setOrderStatus(formData: FormData) {
   ) {
     return;
   }
-  if (existing.order_kind === "group_event" && status === "paid_shopify" && profile.role !== "owner") return;
+  if (
+    existing.order_kind === "group_event" &&
+    status === "paid_shopify" &&
+    !canOperate(profile?.role)
+  )
+    return;
 
-  const patch = {
-    ...stepPatch(status, Number(existing.amount)),
-    ...(paymentUrl ? { shopify_url: paymentUrl } : {}),
-  };
-  await supabase.from("orders").update(patch).eq("id", id);
+  await supabase
+    .from("orders")
+    .update(stepPatch(status, Number(existing.amount)))
+    .eq("id", id);
 
-  revalidatePath("/");
-  revalidatePath("/orders");
-  revalidatePath(`/orders/${id}`);
-  revalidatePath("/morning");
-  revalidatePath("/board");
-  revalidatePath("/today");
-  revalidatePath("/expected");
+  await done("השלב עודכן ✓");
 }
 
 export async function issueGuestLink(
   orderId: string,
   origin: string,
-  paymentUrl = "",
 ): Promise<{ error: string } | { phone: string; message: string }> {
-  if (!(await owner())) return { error: "רק הבעלים שולחת ללקוח" };
+  if (!(await owner())) return { error: "אין לך הרשאה לשלוח ללקוח" };
   if (!/^https?:\/\/[^/]+$/i.test(origin)) return { error: "הכתובת לא תקינה" };
 
   const supabase = await createClient();
@@ -280,18 +304,19 @@ export async function issueGuestLink(
   if (!order) return { error: "ההזמנה לא נמצאה" };
 
   let token = String(order.share_token ?? "");
-  if (token.length < 20) {
-    token = randomBytes(24).toString("base64url");
-  }
+  if (token.length < 8) token = shortToken();
   const cash = order.ending === "cash";
   const host = customerOrigin(origin);
   const payment = cash
     ? ""
-    : paymentUrl.startsWith("https://")
-      ? paymentUrl
-      : String(order.shopify_url ?? "").startsWith("https://")
-        ? String(order.shopify_url)
-        : await stripeCheckout(order.id, Number(order.amount), order.customer_name, `${host}/o/${token}`);
+    : String(order.shopify_url ?? "").startsWith("https://")
+      ? String(order.shopify_url)
+      : await stripeCheckout({
+          orderId: order.id,
+          amount: Number(order.amount),
+          name: order.customer_name,
+          successUrl: `${host}/o/${token}`,
+        });
   const { error } = await supabase
     .from("orders")
     .update({
@@ -334,10 +359,18 @@ export async function issueGuestLink(
     cash ? "cash" : "card",
   );
 
-  revalidatePath(`/orders/${orderId}`);
-  revalidatePath("/orders");
-  revalidatePath("/today");
+  revalidatePath("/", "layout");
   return { phone: String(order.phone), message };
+}
+
+const tokenAlphabet =
+  "ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz23456789";
+
+function shortToken() {
+  return Array.from(
+    { length: 10 },
+    () => tokenAlphabet[randomInt(tokenAlphabet.length)],
+  ).join("");
 }
 
 function customerOrigin(origin: string) {
@@ -345,12 +378,17 @@ function customerOrigin(origin: string) {
   if (/^https:\/\/[^/]+$/i.test(configured)) return configured;
   try {
     const url = new URL(origin);
-    if (url.hostname !== "localhost" && url.hostname !== "127.0.0.1") return origin.replace(/\/$/, "");
+    if (url.hostname !== "localhost" && url.hostname !== "127.0.0.1")
+      return origin.replace(/\/$/, "");
     const addresses = Object.values(networkInterfaces())
       .flatMap((list) => list ?? [])
       .filter((net) => {
         const family = String(net.family);
-        return (family === "IPv4" || family === "4") && !net.internal && net.address.startsWith("192.168.");
+        return (
+          (family === "IPv4" || family === "4") &&
+          !net.internal &&
+          net.address.startsWith("192.168.")
+        );
       })
       .map((net) => net.address);
     const address = addresses[0];
@@ -361,49 +399,78 @@ function customerOrigin(origin: string) {
   }
 }
 
-async function stripeCheckout(orderId: string, amount: number, name: string, successUrl: string) {
-  const key = process.env.STRIPE_SECRET_KEY;
-  const fils = Math.round(amount * 100);
-  if (!key || fils < 1) return "";
-  const body = new URLSearchParams();
-  body.set("mode", "payment");
-  body.set("success_url", successUrl);
-  body.set("cancel_url", successUrl);
-  body.set("client_reference_id", orderId);
-  body.set("metadata[order_id]", orderId);
-  body.set("line_items[0][quantity]", "1");
-  body.set("line_items[0][price_data][currency]", "aed");
-  body.set("line_items[0][price_data][unit_amount]", String(fils));
-  body.set("line_items[0][price_data][product_data][name]", `דובה · ${name}`.slice(0, 120));
-  const response = await fetch("https://api.stripe.com/v1/checkout/sessions", {
-    method: "POST",
-    headers: {
-      Authorization: `Bearer ${key}`,
-      "Content-Type": "application/x-www-form-urlencoded",
-    },
-    body,
-  });
-  if (!response.ok) return "";
-  const json = (await response.json()) as { url?: string };
-  return json.url ?? "";
-}
-
 export async function deleteOrder(formData: FormData) {
   if (!(await owner())) return;
   const id = field(formData, "id");
   const supabase = await createClient();
   await supabase.from("orders").delete().eq("id", id);
-  revalidatePath("/");
-  revalidatePath("/orders");
+  await done("ההזמנה נמחקה ✓");
   redirect("/orders");
+}
+
+export async function sendOut(id: string) {
+  const profile = await getProfile();
+  if (!id || (!canOperate(profile?.role) && profile?.role !== "kitchen"))
+    return { error: "אין הרשאה" };
+  const supabase = await createClient();
+  const { data, error } = await supabase
+    .from("orders")
+    .update({ status: "out" })
+    .eq("id", id)
+    .in("status", ["in_kitchen", "paid_shopify"])
+    .select("id");
+  if (error || !data?.length) return { error: "ההזמנה לא במטבח" };
+  await done("סומן שיצא ✓");
+  return {};
+}
+
+export async function undoOut(id: string) {
+  const profile = await getProfile();
+  if (!id || (!canOperate(profile?.role) && profile?.role !== "kitchen"))
+    return { error: "אין הרשאה" };
+  const supabase = await createClient();
+  const { data } = await supabase.rpc("undo_order_out", { target: id });
+  if (!(data as { ok?: boolean } | null)?.ok)
+    return { error: "עבר הזמן לביטול" };
+  await done("היציאה בוטלה ✓");
+  return {};
+}
+
+export async function markPaid(id: string) {
+  if (!(await owner()) || !id) return { error: "אין הרשאה" };
+  const supabase = await createClient();
+  const { data: existing } = await supabase
+    .from("orders")
+    .select("amount")
+    .eq("id", id)
+    .maybeSingle();
+  if (!existing) return { error: "ההזמנה לא נמצאה" };
+  const { error } = await supabase
+    .from("orders")
+    .update({ paid: Number(existing.amount) })
+    .eq("id", id);
+  if (error) return { error: "התשלום לא נשמר" };
+  await done("סומן כשולם ✓");
+  return {};
+}
+
+export async function removeOrder(id: string) {
+  if (!(await owner()) || !id) return { error: "אין הרשאה" };
+  const supabase = await createClient();
+  const { error } = await supabase.from("orders").delete().eq("id", id);
+  if (error) return { error: "ההזמנה לא נמחקה" };
+  await done("ההזמנה נמחקה ✓");
+  return {};
 }
 
 export async function markFeedback(formData: FormData) {
   if (!(await owner())) return;
   const id = field(formData, "id");
   const supabase = await createClient();
-  await supabase.from("orders").update({ status: "feedback_sent" }).eq("id", id).eq("status", "out");
-  revalidatePath("/");
-  revalidatePath("/morning");
-  revalidatePath(`/orders/${id}`);
+  await supabase
+    .from("orders")
+    .update({ status: "feedback_sent" })
+    .eq("id", id)
+    .eq("status", "out");
+  await done("נשמר ✓");
 }

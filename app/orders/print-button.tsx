@@ -1,9 +1,9 @@
-"use client";
+import Link from "next/link";
 
-export function PrintButton() {
+export function PrintButton({ orderId }: { orderId: string }) {
   return (
-    <button type="button" className="button" onClick={() => window.print()}>
-      הדפסה
-    </button>
+    <Link href={`/orders/${orderId}/print`} className="button flex items-center justify-center">
+      הדפסה למטבח ולשקית
+    </Link>
   );
 }

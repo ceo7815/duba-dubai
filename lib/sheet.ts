@@ -37,7 +37,7 @@ export function customerMessage(order: SheetOrder, url: string, pay: "card" | "c
   const attached = order.is_quote
     ? "מצורפת הצעת המחיר מקייטרינג דובה דובאי."
     : pay === "card"
-      ? "מצורפת ההזמנה לתשלום."
-      : "מצורפת ההזמנה לאישורכם.";
+      ? "מצורפת ההזמנה. נא לאשר בקישור, ושם אפשר גם לשלם בכרטיס."
+      : "מצורפת ההזמנה. נא לאשר בקישור. התשלום במזומן במסירה.";
   return `שלום ${order.customer_name},\n\nתודה שבחרתם בקייטרינג דובה דובאי.\n${attached}\n\n${url}`;
 }

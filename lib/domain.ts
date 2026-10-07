@@ -46,14 +46,14 @@ export const fulfillmentLabels: Record<Fulfillment, string> = {
   hosting: "אירוח אצלנו",
 };
 
-export const sources = ["bot", "owner_chat", "shopify", "manual"] as const;
+export const sources = ["bot", "owner_chat", "site", "manual"] as const;
 
 export type OrderSource = (typeof sources)[number];
 
 export const sourceLabels: Record<OrderSource, string> = {
   bot: "בוט וואטסאפ",
   owner_chat: "שיחה שלה",
-  shopify: "שופיפיי",
+  site: "חנות האתר",
   manual: "הקלדה",
 };
 
@@ -90,6 +90,26 @@ export const statusLabels: Record<OrderStatus, string> = {
   out: "יצא",
   feedback_sent: "משוב נשלח",
 };
+
+export const stages = ["waiting", "kitchen", "out"] as const;
+
+export type Stage = (typeof stages)[number];
+
+export const stageLabels: Record<Stage, string> = {
+  waiting: "ממתין לאישור",
+  kitchen: "במטבח",
+  out: "יצא ללקוח",
+};
+
+export function stageOf(status: OrderStatus): Stage {
+  if (status === "paid_shopify" || status === "in_kitchen") return "kitchen";
+  if (status === "out" || status === "feedback_sent") return "out";
+  return "waiting";
+}
+
+export function isStage(value: string): value is Stage {
+  return (stages as readonly string[]).includes(value);
+}
 
 export const pathLabels: Record<OrderStatus, string> = {
   draft: "שיחה",
@@ -156,23 +176,15 @@ const cashPath: OrderStatus[] = [
   "feedback_sent",
 ];
 
-const shopifyPath: OrderStatus[] = ["paid_shopify", "in_kitchen", "out", "feedback_sent"];
+const sitePath: OrderStatus[] = ["link_sent", "paid_shopify", "in_kitchen", "out", "feedback_sent"];
 
 export function pathFor(status: OrderStatus, source: string, ending: string | null) {
-  if (source === "shopify") return shopifyPath;
+  if (source === "site") return sitePath;
   if (ending === "cash" || status === "cash_agreed") return cashPath;
   return mainPath;
 }
 
-export function nextSteps(status: OrderStatus, source = "") {
-  if (source === "shopify") {
-    if (status === "out") return [{ status: "feedback_sent" as const, label: "משוב נשלח" }];
-    if (status === "feedback_sent") return [];
-    if (status === "in_kitchen" || status === "paid_shopify") {
-      return [{ status: "out" as const, label: "יצא" }];
-    }
-    return [{ status: "paid_shopify" as const, label: "התשלום נכנס למטבח" }];
-  }
+export function nextSteps(status: OrderStatus) {
   if (status === "draft") return [{ status: "awaiting" as const, label: "אושר בוואטסאפ" }];
   if (status === "awaiting") {
     return [

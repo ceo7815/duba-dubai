@@ -10,21 +10,14 @@ function waPhone(phone: string) {
   return digits;
 }
 
-export function SendToCustomer({
-  orderId,
-  paymentUrl,
-}: {
-  orderId: string;
-  paymentUrl: string;
-}) {
-  const [link, setLink] = useState(paymentUrl.startsWith("https://") ? paymentUrl : "");
+export function SendToCustomer({ orderId }: { orderId: string }) {
   const [error, setError] = useState("");
   const [pending, setPending] = useState(false);
 
   async function send() {
     setPending(true);
     setError("");
-    const result = await issueGuestLink(orderId, window.location.origin, link);
+    const result = await issueGuestLink(orderId, window.location.origin);
     setPending(false);
     if ("error" in result) {
       setError(result.error);
@@ -36,13 +29,6 @@ export function SendToCustomer({
 
   return (
     <div className="flex flex-col gap-2">
-      <input
-        value={link}
-        onChange={(event) => setLink(event.target.value)}
-        dir="ltr"
-        placeholder="קישור סטרייפ, אם כבר יש"
-        className="field field-en"
-      />
       <button type="button" className="button" disabled={pending} onClick={send}>
         {pending ? "מכינים" : "שליחה לוואטסאפ"}
       </button>

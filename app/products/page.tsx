@@ -6,10 +6,11 @@ import { dayKey, monthKey, previousMonthKey } from "@/lib/metrics";
 import { listOrders } from "@/lib/orders";
 import { requireProfile } from "@/lib/profile";
 import { createClient } from "@/lib/supabase/server";
+import { fullAccess } from "@/lib/roles";
 
 export default async function ProductsPage() {
   const profile = await requireProfile();
-  if (profile.role !== "owner") redirect("/");
+  if (!fullAccess(profile?.role)) redirect("/login");
 
   const supabase = await createClient();
   const [orders, itemsResult] = await Promise.all([
@@ -42,8 +43,8 @@ export default async function ProductsPage() {
       <p className="text-sm leading-6 text-muted">
         כמה נמכר החודש, כמה כסף זה הכניס, ולעומת החודש הקודם. רווח למנה נמצא בנפרד.
       </p>
-      <Link href="/dishes" className="text-sm font-bold underline">
-        רווח למנה
+      <Link href="/menu" className="text-sm font-bold underline">
+        מחירים ועלויות בתפריט
       </Link>
       {list.length === 0 ? (
         <p className="rounded-2xl border border-line bg-card px-4 py-5 text-sm text-muted">

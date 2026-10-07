@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { formatWhen } from "@/lib/dates";
-import { endingLabels, isEnding, isSource, money, sourceLabels, statusLabels } from "@/lib/domain";
+import { endingLabels, isEnding, isSource, money, sourceLabels, stageLabels, stageOf } from "@/lib/domain";
 import type { OrderItem, OrderRow } from "@/lib/orders";
 
 export function Ticket({
@@ -75,7 +75,7 @@ export function Ticket({
         </p>
       ) : null}
       <p className="mt-3 text-sm">
-        {statusLabels[order.status]}
+        {stageLabels[stageOf(order.status)]}
         {order.ending && isEnding(order.ending) ? ` · ${endingLabels[order.ending]}` : ""}
         {isSource(order.source) ? ` · ${sourceLabels[order.source]}` : ""}
       </p>

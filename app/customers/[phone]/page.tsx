@@ -5,6 +5,7 @@ import { money } from "@/lib/domain";
 import { requireProfile } from "@/lib/profile";
 import { createClient } from "@/lib/supabase/server";
 import type { OrderRow } from "@/lib/orders";
+import { canOperate } from "@/lib/roles";
 
 export default async function CustomerPage({
   params,
@@ -12,7 +13,7 @@ export default async function CustomerPage({
   params: Promise<{ phone: string }>;
 }) {
   const profile = await requireProfile();
-  if (profile.role !== "owner") redirect("/");
+  if (!canOperate(profile?.role)) redirect("/login");
 
   const { phone } = await params;
   const supabase = await createClient();

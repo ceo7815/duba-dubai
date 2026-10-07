@@ -6,12 +6,13 @@ import { money, orderKindLabels, isOrderKind } from "@/lib/domain";
 import { inDays } from "@/lib/metrics";
 import { listOrders } from "@/lib/orders";
 import { requireProfile } from "@/lib/profile";
+import { fullAccess } from "@/lib/roles";
 
 const eventKinds = new Set(["group_event", "holiday", "hosting", "shabbat_couple", "shabbat_family"]);
 
 export default async function ExpectedPage() {
   const profile = await requireProfile();
-  if (profile.role !== "owner") redirect("/");
+  if (!fullAccess(profile?.role)) redirect("/login");
 
   const orders = await listOrders();
   const start = dubaiKey();

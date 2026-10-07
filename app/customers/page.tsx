@@ -3,10 +3,11 @@ import { redirect } from "next/navigation";
 import { Work } from "@/app/shell";
 import { requireProfile } from "@/lib/profile";
 import { createClient } from "@/lib/supabase/server";
+import { canOperate } from "@/lib/roles";
 
 export default async function CustomersPage() {
   const profile = await requireProfile();
-  if (profile.role !== "owner") redirect("/");
+  if (!canOperate(profile?.role)) redirect("/login");
 
   const supabase = await createClient();
   const { data } = await supabase

@@ -11,6 +11,163 @@
   --font-sans: var(--font-rubik), "Rubik", sans-serif;
 }
 
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #bdbdbd transparent;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  border: 2px solid transparent;
+  border-radius: 999px;
+  background: #bdbdbd padding-box;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #8f8f8f;
+}
+
+::-webkit-scrollbar-button,
+::-webkit-scrollbar-corner {
+  display: none;
+}
+
+html {
+  background: var(--color-paper);
+  -webkit-tap-highlight-color: transparent;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+a,
+button,
+label,
+summary,
+select,
+[role="button"] {
+  touch-action: manipulation;
+}
+
+@media (display-mode: standalone) {
+  html,
+  body {
+    overscroll-behavior-y: none;
+  }
+}
+
+/* iOS zooms into any focused field under 16px. */
+@media (max-width: 767px) {
+  input:not([type="checkbox"]):not([type="radio"]),
+  select,
+  textarea {
+    font-size: max(16px, 1em);
+  }
+}
+
+.app-main {
+  padding-bottom: calc(8rem + env(safe-area-inset-bottom));
+}
+
+header.app-header {
+  height: calc(4.75rem + env(safe-area-inset-top));
+  padding-top: env(safe-area-inset-top);
+  padding-inline: max(1rem, env(safe-area-inset-left)) max(1rem, env(safe-area-inset-right));
+}
+
+.app-nav,
+.drawer {
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
+}
+
+.app-nav a,
+.button {
+  transition: transform 0.08s ease;
+}
+
+.app-nav a:active,
+.button:active {
+  transform: scale(0.96);
+}
+
+.flash-toast {
+  position: fixed;
+  left: 50%;
+  bottom: calc(6.5rem + env(safe-area-inset-bottom));
+  z-index: 60;
+  transform: translateX(-50%);
+  max-width: calc(100vw - 2rem);
+  border-radius: 999px;
+  background: #111111;
+  color: #ffffff;
+  padding: 0.7rem 1.25rem;
+  font-size: 0.95rem;
+  font-weight: 800;
+  white-space: nowrap;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.28);
+  pointer-events: none;
+  animation: flash-toast 2.2s ease forwards;
+}
+
+@keyframes flash-toast {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, 0.75rem);
+  }
+  10%,
+  80% {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, 0.25rem);
+  }
+}
+
+.skeleton {
+  background: linear-gradient(90deg, #e6e6e6 0%, #f4f4f4 50%, #e6e6e6 100%);
+  background-size: 200% 100%;
+  animation: skeleton 1.1s ease-in-out infinite;
+}
+
+@keyframes skeleton {
+  from {
+    background-position: 100% 0;
+  }
+  to {
+    background-position: -100% 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .skeleton {
+    animation: none;
+  }
+}
+
+.drawer,
+.drawer * {
+  scrollbar-color: rgba(255, 255, 255, 0.22) transparent;
+}
+
+.drawer ::-webkit-scrollbar-thumb {
+  background-color: rgba(255, 255, 255, 0.22);
+}
+
+.drawer ::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(255, 255, 255, 0.4);
+}
+
 body {
   font-family: var(--font-sans);
   background: var(--color-paper);
@@ -57,6 +214,29 @@ body {
 
 .button:disabled {
   opacity: 0.55;
+}
+
+.icon-button {
+  display: flex;
+  height: 2.75rem;
+  width: 2.75rem;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.75rem;
+  border: 1px solid var(--color-line);
+}
+
+.quick {
+  display: flex;
+  min-height: 2.5rem;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.5rem;
+  border: 1px solid var(--color-line);
+  background: var(--color-card);
+  font-size: 0.875rem;
+  font-weight: 800;
 }
 
 select.field {
@@ -206,7 +386,13 @@ header.app-header {
   background: #111111;
   color: #ffffff;
   transition: transform 0.22s ease;
+  padding-top: env(safe-area-inset-top);
   padding-bottom: env(safe-area-inset-bottom);
+  overscroll-behavior: contain;
+}
+
+.drawer .overflow-y-auto {
+  overscroll-behavior: contain;
 }
 
 .drawer.open {
@@ -272,6 +458,11 @@ header.app-header {
   height: 45%;
   background: linear-gradient(180deg, transparent, rgba(255, 255, 255, 0.07), transparent);
   animation: scan 8s linear infinite;
+}
+
+@keyframes shop-marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
 }
 
 @keyframes grid-move {

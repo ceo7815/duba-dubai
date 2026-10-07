@@ -4,10 +4,11 @@ import { Ticket } from "@/app/orders/ticket";
 import { Work } from "@/app/shell";
 import { listOrders } from "@/lib/orders";
 import { requireProfile } from "@/lib/profile";
+import { fullAccess } from "@/lib/roles";
 
 export default async function MorningPage() {
   const profile = await requireProfile();
-  if (profile.role !== "owner") redirect("/");
+  if (!fullAccess(profile?.role)) redirect("/login");
 
   const waiting = (await listOrders()).filter((order) => order.status === "out");
 

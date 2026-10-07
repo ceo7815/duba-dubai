@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import { summaryDescription } from "@/lib/og-summary";
 import { createClient } from "@supabase/supabase-js";
 import { ConfirmOrder } from "@/app/o/confirm-order";
 import { PrintSheet } from "@/app/o/print-sheet";
@@ -10,7 +11,9 @@ import { foodTotal, lineTotal, type SheetItem } from "@/lib/sheet";
 type GuestItem = SheetItem & { image_url?: string };
 
 export const metadata: Metadata = {
-  title: "ההזמנה שלך · דובה",
+  title: "סיכום ההזמנה שלך · דובה",
+  description: summaryDescription,
+  openGraph: { title: "סיכום ההזמנה שלך · Duba Dubai", description: summaryDescription },
   robots: { index: false, follow: false },
 };
 
@@ -62,25 +65,28 @@ export default async function GuestOrderPage({
   const settled = amount > 0 && paid >= amount;
   const cash = order.ending === "cash";
   const inKitchen = ["in_kitchen", "out", "feedback_sent", "paid_shopify"].includes(order.status);
-  const action =
-    cash && order.status === "cash_agreed" ? (
-      <ConfirmOrder token={token} />
-    ) : cash && inKitchen ? (
-      <p className="rounded-full bg-[#1c1c1c] px-4 py-3.5 text-center text-sm font-medium text-white">
-        ההזמנה אושרה. הקישור נשאר פתוח
-      </p>
-    ) : settled || inKitchen ? (
-      <p className="rounded-full bg-[#1c1c1c] px-4 py-3.5 text-center text-sm font-medium text-white">
-        שולם · ההזמנה במטבח
-      </p>
-    ) : order.payment_url ? (
+  const payLink =
+    !cash && !settled && order.payment_url ? (
       <a
         href={order.payment_url}
-        className="flex min-h-12 items-center justify-center rounded-full bg-[#1c1c1c] text-sm font-medium text-white shadow-[0_10px_30px_rgba(0,0,0,0.16)]"
+        className="flex min-h-12 items-center justify-center rounded-full border border-[#1c1c1c] bg-white text-sm font-medium text-[#1c1c1c]"
       >
-        לחץ לתשלום
+        תשלום בכרטיס
       </a>
     ) : null;
+  const action = !inKitchen ? (
+    <div className="flex flex-col gap-2">
+      <ConfirmOrder token={token} />
+      {payLink}
+    </div>
+  ) : (
+    <div className="flex flex-col gap-2">
+      <p className="rounded-full bg-[#1c1c1c] px-4 py-3.5 text-center text-sm font-medium text-white">
+        {settled ? "ההזמנה אושרה ושולמה" : cash ? "ההזמנה אושרה · תשלום במזומן במסירה" : "ההזמנה אושרה"}
+      </p>
+      {payLink}
+    </div>
+  );
 
   const day = new Intl.DateTimeFormat("he-IL", {
     timeZone: "Asia/Dubai",

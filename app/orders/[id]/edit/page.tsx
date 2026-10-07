@@ -5,6 +5,7 @@ import { toDubaiInput } from "@/lib/dates";
 import { listMenu } from "@/lib/menu";
 import { getOrder } from "@/lib/orders";
 import { requireProfile } from "@/lib/profile";
+import { canOperate } from "@/lib/roles";
 
 export default async function EditOrderPage({
   params,
@@ -12,7 +13,7 @@ export default async function EditOrderPage({
   params: Promise<{ id: string }>;
 }) {
   const profile = await requireProfile();
-  if (profile.role !== "owner") redirect("/");
+  if (!canOperate(profile?.role)) redirect("/login");
 
   const { id } = await params;
   const found = await getOrder(id);

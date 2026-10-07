@@ -1,0 +1,3674 @@
+{
+ "products": {
+  "fried-hot-pepper": {
+   "handle": "fried-hot-pepper",
+   "title": "Fried hot pepper",
+   "he": "פלפל חריף מטוגן",
+   "body": "<p>Fried hot pepper salad. Spicy-smoky flavor, soft and juicy</p>",
+   "tags": [
+    "סלט"
+   ],
+   "options": [],
+   "variants": [
+    {
+     "id": 47605306491050,
+     "title": "Default Title",
+     "options": [
+      "Default Title"
+     ],
+     "price": 35,
+     "compare": null,
+     "available": true,
+     "kept": ""
+    }
+   ],
+   "images": [
+    "/store/Friedhotpepper-1000.webp"
+   ]
+  },
+  "baqila": {
+   "handle": "baqila",
+   "title": "Pkaila",
+   "he": "פקאילה",
+   "body": "<p><strong>Pkaila</strong> – a traditional Tunisian stew made from slow-cooked spinach, beef, and beans, rich in flavor and aroma.</p>",
+   "tags": [],
+   "options": [
+    {
+     "name": "Quantity",
+     "values": [
+      "For two",
+      "Family"
+     ]
+    }
+   ],
+   "variants": [
+    {
+     "id": 47564408946858,
+     "title": "For two",
+     "options": [
+      "For two"
+     ],
+     "price": 220,
+     "compare": null,
+     "available": true,
+     "kept": "For two"
+    },
+    {
+     "id": 47564408979626,
+     "title": "Family",
+     "options": [
+      "Family"
+     ],
+     "price": 450,
+     "compare": null,
+     "available": true,
+     "kept": "Family"
+    }
+   ],
+   "images": [
+    "/store/GeneratedImageOctober27_2025-11_02AM-1000.webp"
+   ]
+  },
+  "meat-filled-pastry": {
+   "handle": "meat-filled-pastry",
+   "title": "Meat-Filled Pastry",
+   "he": "פסטלים",
+   "body": "<p><strong>Puff Pastry with Meat Filling</strong> – flaky, golden puff pastry stuffed with savory minced beef, baked to perfection for a warm, rich, and satisfying flavor.</p>",
+   "tags": [],
+   "options": [
+    {
+     "name": "Quantity",
+     "values": [
+      "For two",
+      "Family"
+     ]
+    }
+   ],
+   "variants": [
+    {
+     "id": 47564408848554,
+     "title": "For two",
+     "options": [
+      "For two"
+     ],
+     "price": 122,
+     "compare": null,
+     "available": true,
+     "kept": "For two"
+    },
+    {
+     "id": 47564408881322,
+     "title": "Family",
+     "options": [
+      "Family"
+     ],
+     "price": 240,
+     "compare": null,
+     "available": true,
+     "kept": "Family"
+    }
+   ],
+   "images": [
+    "/store/62-1000.webp"
+   ]
+  },
+  "beet-kubbeh": {
+   "handle": "beet-kubbeh",
+   "title": "Beet Kubbeh",
+   "he": "קובה סלק",
+   "body": "<p><strong>Beet Kubbeh Soup</strong> – a classic Middle Eastern dish featuring semolina dumplings stuffed with seasoned minced meat, served in a rich, tangy beet broth that’s both hearty and comforting.</p>",
+   "tags": [],
+   "options": [
+    {
+     "name": "Quantity",
+     "values": [
+      "For two",
+      "Family"
+     ]
+    }
+   ],
+   "variants": [
+    {
+     "id": 47564408750250,
+     "title": "For two",
+     "options": [
+      "For two"
+     ],
+     "price": 220,
+     "compare": null,
+     "available": true,
+     "kept": "For two"
+    },
+    {
+     "id": 47564408783018,
+     "title": "Family",
+     "options": [
+      "Family"
+     ],
+     "price": 450,
+     "compare": null,
+     "available": true,
+     "kept": "Family"
+    }
+   ],
+   "images": [
+    "/store/Generated_Image_October_27_2025_-_10_53AM-1000.webp"
+   ]
+  },
+  "meat-filled-cigars": {
+   "handle": "meat-filled-cigars",
+   "title": "Meat-Filled Cigars",
+   "he": "סיגרים",
+   "body": "<p><strong>Meat-Filled Cigars</strong> – crispy golden pastry rolls filled with seasoned minced beef, combining a crunchy texture with rich flavor in every bite.</p>",
+   "tags": [],
+   "options": [
+    {
+     "name": "Quantity",
+     "values": [
+      "For two ( 4 pieces)",
+      "Family (10 pieces)"
+     ]
+    }
+   ],
+   "variants": [
+    {
+     "id": 47564408619178,
+     "title": "For two ( 4 pieces)",
+     "options": [
+      "For two ( 4 pieces)"
+     ],
+     "price": 122,
+     "compare": null,
+     "available": true,
+     "kept": "For two ( 4 pieces)"
+    },
+    {
+     "id": 47564408651946,
+     "title": "Family (10 pieces)",
+     "options": [
+      "Family (10 pieces)"
+     ],
+     "price": 240,
+     "compare": null,
+     "available": true,
+     "kept": "Family (10 pieces)"
+    }
+   ],
+   "images": [
+    "/store/Meat-Filled_Cigars-1000.webp"
+   ]
+  },
+  "maklouba": {
+   "handle": "maklouba",
+   "title": "Maklouba",
+   "he": "מקלובה",
+   "body": "<p><strong>Maqluba with Chicken</strong> – a traditional Middle Eastern dish made of layered rice, chicken, and vegetables, flipped upside down after cooking into a fragrant, colorful, and flavorful meal.</p>",
+   "tags": [],
+   "options": [
+    {
+     "name": "Quantity",
+     "values": [
+      "for two",
+      "family"
+     ]
+    }
+   ],
+   "variants": [
+    {
+     "id": 47564407439530,
+     "title": "for two",
+     "options": [
+      "for two"
+     ],
+     "price": 310,
+     "compare": null,
+     "available": true,
+     "kept": "for two"
+    },
+    {
+     "id": 47564407472298,
+     "title": "family",
+     "options": [
+      "family"
+     ],
+     "price": 520,
+     "compare": null,
+     "available": true,
+     "kept": "family"
+    }
+   ],
+   "images": [
+    "/store/Maklouba-1000.webp"
+   ]
+  },
+  "meatballs-with-green-beans-in-moroccan-red-sauce": {
+   "handle": "meatballs-with-green-beans-in-moroccan-red-sauce",
+   "title": "Meatballs with Green Beans in Moroccan Red Sauce",
+   "he": "קציצות עם שעועית ירוקה",
+   "body": "",
+   "tags": [
+    "עיקרית"
+   ],
+   "options": [],
+   "variants": [
+    {
+     "id": 47475081347242,
+     "title": "Default Title",
+     "options": [
+      "Default Title"
+     ],
+     "price": 98,
+     "compare": null,
+     "available": true,
+     "kept": ""
+    }
+   ],
+   "images": [
+    "/store/Meatballs_with_Green_Beans_in_Moroccan_Red_Sauce-1000.webp"
+   ]
+  },
+  "fried-eggplant": {
+   "handle": "fried-eggplant",
+   "title": "Fried Eggplant",
+   "he": "חציל מטוגן",
+   "body": "",
+   "tags": [
+    "סלט"
+   ],
+   "options": [],
+   "variants": [
+    {
+     "id": 47474995101866,
+     "title": "Default Title",
+     "options": [
+      "Default Title"
+     ],
+     "price": 35,
+     "compare": null,
+     "available": true,
+     "kept": ""
+    }
+   ],
+   "images": [
+    "/store/Fried_Eggplant-1000.webp"
+   ]
+  },
+  "electric-hot-plate-for-rent": {
+   "handle": "electric-hot-plate-for-rent",
+   "title": "Electric Hot Plate for Rent",
+   "he": "פלטה להשכרה",
+   "body": "<p><strong>The hot plate is available for rent for Shabbat (Friday–Saturday) or for a 24-hour period.</strong></p>\n<p>We will personally collect it from the same address where the order was delivered.<br>Please leave the hot plate at the reception of your hotel or accommodation,<br>take a photo of the receipt or note you receive from the staff, and send it to us via WhatsApp so we can complete the return process.</p>",
+   "tags": [],
+   "options": [],
+   "variants": [
+    {
+     "id": 46758204342442,
+     "title": "Default Title",
+     "options": [
+      "Default Title"
+     ],
+     "price": 100,
+     "compare": null,
+     "available": true,
+     "kept": ""
+    }
+   ],
+   "images": [
+    "/store/Electric_Hot_Plate_for_Rent-1000.webp"
+   ]
+  },
+  "water": {
+   "handle": "water",
+   "title": "Water",
+   "he": "מים",
+   "body": "",
+   "tags": [],
+   "options": [],
+   "variants": [
+    {
+     "id": 47321352274090,
+     "title": "Default Title",
+     "options": [
+      "Default Title"
+     ],
+     "price": 18,
+     "compare": null,
+     "available": true,
+     "kept": ""
+    }
+   ],
+   "images": [
+    "/store/Water-1000.webp"
+   ]
+  },
+  "mirinda": {
+   "handle": "mirinda",
+   "title": "Mirinda",
+   "he": "מירנדה",
+   "body": "",
+   "tags": [],
+   "options": [],
+   "variants": [
+    {
+     "id": 47321349062826,
+     "title": "Default Title",
+     "options": [
+      "Default Title"
+     ],
+     "price": 18,
+     "compare": null,
+     "available": true,
+     "kept": ""
+    }
+   ],
+   "images": [
+    "/store/Mirinda-1000.webp"
+   ]
+  },
+  "sprite": {
+   "handle": "sprite",
+   "title": "Sprite",
+   "he": "ספרייט",
+   "body": "",
+   "tags": [],
+   "options": [],
+   "variants": [
+    {
+     "id": 47321347719338,
+     "title": "Default Title",
+     "options": [
+      "Default Title"
+     ],
+     "price": 18,
+     "compare": null,
+     "available": true,
+     "kept": ""
+    }
+   ],
+   "images": [
+    "/store/Sprite-1000.webp"
+   ]
+  },
+  "soda": {
+   "handle": "soda",
+   "title": "Soda",
+   "he": "סודה",
+   "body": "",
+   "tags": [],
+   "options": [],
+   "variants": [
+    {
+     "id": 47321345982634,
+     "title": "Default Title",
+     "options": [
+      "Default Title"
+     ],
+     "price": 18,
+     "compare": null,
+     "available": true,
+     "kept": ""
+    }
+   ],
+   "images": [
+    "/store/Soda-1000.webp"
+   ]
+  },
+  "coca-cola-zero": {
+   "handle": "coca-cola-zero",
+   "title": "Coca-Cola Zero",
+   "he": "קולה זירו",
+   "body": "",
+   "tags": [],
+   "options": [],
+   "variants": [
+    {
+     "id": 47321335300266,
+     "title": "Default Title",
+     "options": [
+      "Default Title"
+     ],
+     "price": 18,
+     "compare": null,
+     "available": true,
+     "kept": ""
+    }
+   ],
+   "images": [
+    "/store/Coca-Cola_Zero-1000.webp"
+   ]
+  },
+  "coca-cola": {
+   "handle": "coca-cola",
+   "title": "Coca-Cola",
+   "he": "קולה",
+   "body": "",
+   "tags": [],
+   "options": [],
+   "variants": [
+    {
+     "id": 47321330712746,
+     "title": "Default Title",
+     "options": [
+      "Default Title"
+     ],
+     "price": 18,
+     "compare": null,
+     "available": true,
+     "kept": ""
+    }
+   ],
+   "images": [
+    "/store/Coca-Cola-1000.webp"
+   ]
+  },
+  "couscous-with-vegetables": {
+   "handle": "couscous-with-vegetables",
+   "title": "Couscous with Vegetables",
+   "he": "קוסקוס עם ירקות",
+   "body": "<p>Light and airy homemade couscous combined with a colorful mixture of cooked vegetables.<br><br></p>",
+   "tags": [
+    "עיקרית"
+   ],
+   "options": [],
+   "variants": [
+    {
+     "id": 46741045477546,
+     "title": "Default Title",
+     "options": [
+      "Default Title"
+     ],
+     "price": 87,
+     "compare": null,
+     "available": true,
+     "kept": ""
+    }
+   ],
+   "images": [
+    "/store/Couscous_with_Vegetables-1000.webp"
+   ]
+  },
+  "pasta-with-tomato-sauce": {
+   "handle": "pasta-with-tomato-sauce",
+   "title": "Pasta with tomato sauce",
+   "he": "פסטה ברוטב עגבניות",
+   "body": "",
+   "tags": [],
+   "options": [],
+   "variants": [
+    {
+     "id": 46889278931114,
+     "title": "Default Title",
+     "options": [
+      "Default Title"
+     ],
+     "price": 94,
+     "compare": null,
+     "available": true,
+     "kept": ""
+    }
+   ],
+   "images": [
+    "/store/1_4e7f945c-0f67-4ea1-b3f3-d74aada4d1e9-1000.webp"
+   ]
+  },
+  "bottle-of-grape-juice-for-kiddush-1": {
+   "handle": "bottle-of-grape-juice-for-kiddush-1",
+   "title": "Bottle of Grape Juice for Kiddush",
+   "he": "תירוש",
+   "body": "<p>*Image for illustration only</p>\n<p>A 330 ml bottle of Kiddush wine</p>",
+   "tags": [],
+   "options": [],
+   "variants": [
+    {
+     "id": 46759601078442,
+     "title": "Default Title",
+     "options": [
+      "Default Title"
+     ],
+     "price": 32,
+     "compare": null,
+     "available": true,
+     "kept": ""
+    }
+   ],
+   "images": [
+    "/store/Bottle_of_Grape_Juice_for_Kiddush-1000.webp"
+   ]
+  },
+  "omelette-challah-with-toppings-of-your-choice-combo": {
+   "handle": "omelette-challah-with-toppings-of-your-choice-combo",
+   "title": "Omelette Challah with Toppings of Your Choice Combo",
+   "he": "קומבו חביתה",
+   "body": "<p>A freshly baked challah roll filled with a fluffy omelette, crisp lettuce, and our signature house-made pickles for a light and satisfying bite.</p>\n<p><br>All sandwiches are accompanied by our handcrafted house pickles and homemade schug.<br><strong>The meal includes a side of fries and a bottled drink of your choice.</strong></p>",
+   "tags": [],
+   "options": [
+    {
+     "name": "Toppings of Your Choice ",
+     "values": [
+      "without",
+      "Herbs",
+      "Mushrooms",
+      "Onion"
+     ]
+    },
+    {
+     "name": "Sides",
+     "values": [
+      "French fries"
+     ]
+    },
+    {
+     "name": "Soft Drinks",
+     "values": [
+      "Coca Cola",
+      "Coca-Cola Zero",
+      "Mirinda",
+      "Sprite",
+      "Water",
+      "Soda"
+     ]
+    }
+   ],
+   "variants": [
+    {
+     "id": 46758657982634,
+     "title": "without / French fries / Coca Cola",
+     "options": [
+      "without",
+      "French fries",
+      "Coca Cola"
+     ],
+     "price": 114,
+     "compare": 114,
+     "available": true,
+     "kept": "without"
+    },
+    {
+     "id": 46758658015402,
+     "title": "without / French fries / Coca-Cola Zero",
+     "options": [
+      "without",
+      "French fries",
+      "Coca-Cola Zero"
+     ],
+     "price": 114,
+     "compare": 114,
+     "available": true,
+     "kept": "without"
+    },
+    {
+     "id": 47321368264874,
+     "title": "without / French fries / Mirinda",
+     "options": [
+      "without",
+      "French fries",
+      "Mirinda"
+     ],
+     "price": 114,
+     "compare": 114,
+     "available": true,
+     "kept": "without"
+    },
+    {
+     "id": 47321368297642,
+     "title": "without / French fries / Sprite",
+     "options": [
+      "without",
+      "French fries",
+      "Sprite"
+     ],
+     "price": 114,
+     "compare": 114,
+     "available": true,
+     "kept": "without"
+    },
+    {
+     "id": 46758658048170,
+     "title": "without / French fries / Water",
+     "options": [
+      "without",
+      "French fries",
+      "Water"
+     ],
+     "price": 114,
+     "compare": 114,
+     "available": true,
+     "kept": "without"
+    },
+    {
+     "id": 47321368330410,
+     "title": "without / French fries / Soda",
+     "options": [
+      "without",
+      "French fries",
+      "Soda"
+     ],
+     "price": 114,
+     "compare": 114,
+     "available": true,
+     "kept": "without"
+    },
+    {
+     "id": 46762748674218,
+     "title": "Herbs / French fries / Coca Cola",
+     "options": [
+      "Herbs",
+      "French fries",
+      "Coca Cola"
+     ],
+     "price": 116,
+     "compare": 116,
+     "available": true,
+     "kept": "Herbs"
+    },
+    {
+     "id": 46762748706986,
+     "title": "Herbs / French fries / Coca-Cola Zero",
+     "options": [
+      "Herbs",
+      "French fries",
+      "Coca-Cola Zero"
+     ],
+     "price": 116,
+     "compare": 116,
+     "available": true,
+     "kept": "Herbs"
+    },
+    {
+     "id": 47321368363178,
+     "title": "Herbs / French fries / Mirinda",
+     "options": [
+      "Herbs",
+      "French fries",
+      "Mirinda"
+     ],
+     "price": 116,
+     "compare": 116,
+     "available": true,
+     "kept": "Herbs"
+    },
+    {
+     "id": 47321368395946,
+     "title": "Herbs / French fries / Sprite",
+     "options": [
+      "Herbs",
+      "French fries",
+      "Sprite"
+     ],
+     "price": 116,
+     "compare": 116,
+     "available": true,
+     "kept": "Herbs"
+    },
+    {
+     "id": 46762748739754,
+     "title": "Herbs / French fries / Water",
+     "options": [
+      "Herbs",
+      "French fries",
+      "Water"
+     ],
+     "price": 116,
+     "compare": 116,
+     "available": true,
+     "kept": "Herbs"
+    },
+    {
+     "id": 47321368428714,
+     "title": "Herbs / French fries / Soda",
+     "options": [
+      "Herbs",
+      "French fries",
+      "Soda"
+     ],
+     "price": 116,
+     "compare": 116,
+     "available": true,
+     "kept": "Herbs"
+    },
+    {
+     "id": 46762748772522,
+     "title": "Mushrooms / French fries / Coca Cola",
+     "options": [
+      "Mushrooms",
+      "French fries",
+      "Coca Cola"
+     ],
+     "price": 116,
+     "compare": 116,
+     "available": true,
+     "kept": "Mushrooms"
+    },
+    {
+     "id": 46762748805290,
+     "title": "Mushrooms / French fries / Coca-Cola Zero",
+     "options": [
+      "Mushrooms",
+      "French fries",
+      "Coca-Cola Zero"
+     ],
+     "price": 116,
+     "compare": 116,
+     "available": true,
+     "kept": "Mushrooms"
+    },
+    {
+     "id": 47321368461482,
+     "title": "Mushrooms / French fries / Mirinda",
+     "options": [
+      "Mushrooms",
+      "French fries",
+      "Mirinda"
+     ],
+     "price": 116,
+     "compare": 116,
+     "available": true,
+     "kept": "Mushrooms"
+    },
+    {
+     "id": 47321368494250,
+     "title": "Mushrooms / French fries / Sprite",
+     "options": [
+      "Mushrooms",
+      "French fries",
+      "Sprite"
+     ],
+     "price": 116,
+     "compare": 116,
+     "available": true,
+     "kept": "Mushrooms"
+    },
+    {
+     "id": 46762748838058,
+     "title": "Mushrooms / French fries / Water",
+     "options": [
+      "Mushrooms",
+      "French fries",
+      "Water"
+     ],
+     "price": 116,
+     "compare": 116,
+     "available": true,
+     "kept": "Mushrooms"
+    },
+    {
+     "id": 47321368527018,
+     "title": "Mushrooms / French fries / Soda",
+     "options": [
+      "Mushrooms",
+      "French fries",
+      "Soda"
+     ],
+     "price": 116,
+     "compare": 116,
+     "available": true,
+     "kept": "Mushrooms"
+    },
+    {
+     "id": 46762748870826,
+     "title": "Onion / French fries / Coca Cola",
+     "options": [
+      "Onion",
+      "French fries",
+      "Coca Cola"
+     ],
+     "price": 116,
+     "compare": 116,
+     "available": true,
+     "kept": "Onion"
+    },
+    {
+     "id": 46762748903594,
+     "title": "Onion / French fries / Coca-Cola Zero",
+     "options": [
+      "Onion",
+      "French fries",
+      "Coca-Cola Zero"
+     ],
+     "price": 116,
+     "compare": 116,
+     "available": true,
+     "kept": "Onion"
+    },
+    {
+     "id": 47321368559786,
+     "title": "Onion / French fries / Mirinda",
+     "options": [
+      "Onion",
+      "French fries",
+      "Mirinda"
+     ],
+     "price": 116,
+     "compare": 116,
+     "available": true,
+     "kept": "Onion"
+    },
+    {
+     "id": 47321368592554,
+     "title": "Onion / French fries / Sprite",
+     "options": [
+      "Onion",
+      "French fries",
+      "Sprite"
+     ],
+     "price": 116,
+     "compare": 116,
+     "available": true,
+     "kept": "Onion"
+    },
+    {
+     "id": 46762748936362,
+     "title": "Onion / French fries / Water",
+     "options": [
+      "Onion",
+      "French fries",
+      "Water"
+     ],
+     "price": 116,
+     "compare": 116,
+     "available": true,
+     "kept": "Onion"
+    },
+    {
+     "id": 47321368625322,
+     "title": "Onion / French fries / Soda",
+     "options": [
+      "Onion",
+      "French fries",
+      "Soda"
+     ],
+     "price": 116,
+     "compare": 116,
+     "available": true,
+     "kept": "Onion"
+    }
+   ],
+   "images": [
+    "/store/Omelette_Challah_with_Toppings_of_Your_Choice-1000.webp",
+    "/store/French_fries-1000.webp"
+   ]
+  },
+  "sabich-challah-combo": {
+   "handle": "sabich-challah-combo",
+   "title": "Sabich Challah Combo",
+   "he": "קומבו סביח",
+   "body": "<p>A freshly baked challah roll filled with creamy tahini, roasted eggplant, and a hard-boiled egg, bringing the classic Sabich flavors into a rich and satisfying sandwich.</p>\n<p><br>All sandwiches are accompanied by our handcrafted house pickles and homemade schug.<br><strong>The meal includes a side of fries and a bottled drink of your choice.</strong></p>",
+   "tags": [],
+   "options": [
+    {
+     "name": "Sides",
+     "values": [
+      "French fries"
+     ]
+    },
+    {
+     "name": "Soft Drinks",
+     "values": [
+      "Coca Cola",
+      "Coca-Cola Zero",
+      "Mirinda",
+      "Sprite",
+      "Soda",
+      "Water"
+     ]
+    }
+   ],
+   "variants": [
+    {
+     "id": 46758651592874,
+     "title": "French fries / Coca Cola",
+     "options": [
+      "French fries",
+      "Coca Cola"
+     ],
+     "price": 119,
+     "compare": 117,
+     "available": true,
+     "kept": ""
+    },
+    {
+     "id": 46758651625642,
+     "title": "French fries / Coca-Cola Zero",
+     "options": [
+      "French fries",
+      "Coca-Cola Zero"
+     ],
+     "price": 119,
+     "compare": 117,
+     "available": true,
+     "kept": ""
+    },
+    {
+     "id": 47321366364330,
+     "title": "French fries / Mirinda",
+     "options": [
+      "French fries",
+      "Mirinda"
+     ],
+     "price": 119,
+     "compare": 117,
+     "available": true,
+     "kept": ""
+    },
+    {
+     "id": 47321366397098,
+     "title": "French fries / Sprite",
+     "options": [
+      "French fries",
+      "Sprite"
+     ],
+     "price": 119,
+     "compare": 117,
+     "available": true,
+     "kept": ""
+    },
+    {
+     "id": 47321366429866,
+     "title": "French fries / Soda",
+     "options": [
+      "French fries",
+      "Soda"
+     ],
+     "price": 119,
+     "compare": 117,
+     "available": true,
+     "kept": ""
+    },
+    {
+     "id": 46758651658410,
+     "title": "French fries / Water",
+     "options": [
+      "French fries",
+      "Water"
+     ],
+     "price": 119,
+     "compare": 117,
+     "available": true,
+     "kept": ""
+    }
+   ],
+   "images": [
+    "/store/Sabich_Challah_Combo-1000.webp",
+    "/store/French_fries-1000.webp"
+   ]
+  },
+  "vegetable-patties-challah-combo": {
+   "handle": "vegetable-patties-challah-combo",
+   "title": "Vegetable Patties Challah Combo",
+   "he": "קומבו קציצות ירק",
+   "body": "<p>A freshly baked challah roll filled with homemade vegetable patties, crisp lettuce, and our signature house-made pickles for a fresh and wholesome bite.</p>\n<p><br>All sandwiches are accompanied by our handcrafted house pickles and homemade schug.<br><strong>The meal includes a side of fries and a bottled drink of your choice.</strong></p>",
+   "tags": [],
+   "options": [
+    {
+     "name": "Sides",
+     "values": [
+      "French fries"
+     ]
+    },
+    {
+     "name": "Soft Drinks",
+     "values": [
+      "Coca Cola",
+      "Coca-Cola Zero",
+      "Mirinda",
+      "Sprite",
+      "Soda",
+      "Water"
+     ]
+    }
+   ],
+   "variants": [
+    {
+     "id": 46758644777130,
+     "title": "French fries / Coca Cola",
+     "options": [
+      "French fries",
+      "Coca Cola"
+     ],
+     "price": 123,
+     "compare": 117,
+     "available": true,
+     "kept": ""
+    },
+    {
+     "id": 46758644809898,
+     "title": "French fries / Coca-Cola Zero",
+     "options": [
+      "French fries",
+      "Coca-Cola Zero"
+     ],
+     "price": 123,
+     "compare": 117,
+     "available": true,
+     "kept": ""
+    },
+    {
+     "id": 47321366102186,
+     "title": "French fries / Mirinda",
+     "options": [
+      "French fries",
+      "Mirinda"
+     ],
+     "price": 123,
+     "compare": 117,
+     "available": true,
+     "kept": ""
+    },
+    {
+     "id": 47321366134954,
+     "title": "French fries / Sprite",
+     "options": [
+      "French fries",
+      "Sprite"
+     ],
+     "price": 123,
+     "compare": 117,
+     "available": true,
+     "kept": ""
+    },
+    {
+     "id": 47321366167722,
+     "title": "French fries / Soda",
+     "options": [
+      "French fries",
+      "Soda"
+     ],
+     "price": 123,
+     "compare": 117,
+     "available": true,
+     "kept": ""
+    },
+    {
+     "id": 46758644842666,
+     "title": "French fries / Water",
+     "options": [
+      "French fries",
+      "Water"
+     ],
+     "price": 123,
+     "compare": 117,
+     "available": true,
+     "kept": ""
+    }
+   ],
+   "images": [
+    "/store/4_266d2480-ef70-467b-81c4-b81a7b344172-1000.webp",
+    "/store/French_fries-1000.webp"
+   ]
+  },
+  "shakshuka-challah-combo": {
+   "handle": "shakshuka-challah-combo",
+   "title": "Shakshuka Challah Combo",
+   "he": "קומבו שקשוקה",
+   "body": "<p>A freshly baked challah roll filled with rich, homemade shakshuka — a flavorful blend of tomatoes, peppers, and spices — wrapped in a warm and hearty embrace.</p>\n<p><br>All sandwiches are accompanied by our handcrafted house pickles and homemade schug.<br><strong>The meal includes a side of fries and a bottled drink of your choice.</strong></p>",
+   "tags": [],
+   "options": [
+    {
+     "name": "Sides",
+     "values": [
+      "French fries"
+     ]
+    },
+    {
+     "name": "Soft Drinks",
+     "values": [
+      "Coca Cola",
+      "Coca-Cola Zero",
+      "Mirinda",
+      "Sprite",
+      "Soda",
+      "Water"
+     ]
+    }
+   ],
+   "variants": [
+    {
+     "id": 46758634782890,
+     "title": "French fries / Coca Cola",
+     "options": [
+      "French fries",
+      "Coca Cola"
+     ],
+     "price": 114,
+     "compare": 126,
+     "available": true,
+     "kept": ""
+    },
+    {
+     "id": 46758634815658,
+     "title": "French fries / Coca-Cola Zero",
+     "options": [
+      "French fries",
+      "Coca-Cola Zero"
+     ],
+     "price": 114,
+     "compare": 126,
+     "available": true,
+     "kept": ""
+    },
+    {
+     "id": 47321365905578,
+     "title": "French fries / Mirinda",
+     "options": [
+      "French fries",
+      "Mirinda"
+     ],
+     "price": 114,
+     "compare": 126,
+     "available": true,
+     "kept": ""
+    },
+    {
+     "id": 47321365938346,
+     "title": "French fries / Sprite",
+     "options": [
+      "French fries",
+      "Sprite"
+     ],
+     "price": 114,
+     "compare": 126,
+     "available": true,
+     "kept": ""
+    },
+    {
+     "id": 47321365971114,
+     "title": "French fries / Soda",
+     "options": [
+      "French fries",
+      "Soda"
+     ],
+     "price": 114,
+     "compare": 126,
+     "available": true,
+     "kept": ""
+    },
+    {
+     "id": 46758634848426,
+     "title": "French fries / Water",
+     "options": [
+      "French fries",
+      "Water"
+     ],
+     "price": 114,
+     "compare": 126,
+     "available": true,
+     "kept": ""
+    }
+   ],
+   "images": [
+    "/store/64-1000.webp",
+    "/store/2_13f911ee-c57e-43d1-9aa4-2e7430a87c28-1000.webp",
+    "/store/French_fries-1000.webp"
+   ]
+  },
+  "fish-patties-challah": {
+   "handle": "fish-patties-challah",
+   "title": "Fish Patties Challah Combo",
+   "he": "קומבו קציצות דג",
+   "body": "<p>A freshly baked challah roll filled with homemade fish patties and a spicy pepper for an extra bold kick, delivering a fresh and flavorful experience in every bite.</p>\n<p><br>All sandwiches are accompanied by our handcrafted house pickles and homemade schug.<br><strong>The meal includes a side of fries and a bottled drink of your choice.</strong></p>",
+   "tags": [],
+   "options": [
+    {
+     "name": "Sides",
+     "values": [
+      "French fries"
+     ]
+    },
+    {
+     "name": "Soft Drinks",
+     "values": [
+      "Coca Cola",
+      "Coca-Cola Zero",
+      "Mirinda",
+      "Sprite",
+      "Soda",
+      "Water"
+     ]
+    }
+   ],
+   "variants": [
+    {
+     "id": 46758496272554,
+     "title": "French fries / Coca Cola",
+     "options": [
+      "French fries",
+      "Coca Cola"
+     ],
+     "price": 146,
+     "compare": 140,
+     "available": true,
+     "kept": ""
+    },
+    {
+     "id": 46758496305322,
+     "title": "French fries / Coca-Cola Zero",
+     "options": [
+      "French fries",
+      "Coca-Cola Zero"
+     ],
+     "price": 146,
+     "compare": 140,
+     "available": true,
+     "kept": ""
+    },
+    {
+     "id": 47321365315754,
+     "title": "French fries / Mirinda",
+     "options": [
+      "French fries",
+      "Mirinda"
+     ],
+     "price": 146,
+     "compare": 140,
+     "available": true,
+     "kept": ""
+    },
+    {
+     "id": 47321365348522,
+     "title": "French fries / Sprite",
+     "options": [
+      "French fries",
+      "Sprite"
+     ],
+     "price": 146,
+     "compare": 140,
+     "available": true,
+     "kept": ""
+    },
+    {
+     "id": 47321365381290,
+     "title": "French fries / Soda",
+     "options": [
+      "French fries",
+      "Soda"
+     ],
+     "price": 146,
+     "compare": 140,
+     "available": true,
+     "kept": ""
+    },
+    {
+     "id": 46758496338090,
+     "title": "French fries / Water",
+     "options": [
+      "French fries",
+      "Water"
+     ],
+     "price": 146,
+     "compare": 140,
+     "available": true,
+     "kept": ""
+    }
+   ],
+   "images": [
+    "/store/3_71b8442f-9cf9-4043-a5b7-a5271387ad48-1000.webp",
+    "/store/French_fries-1000.webp"
+   ]
+  },
+  "hamburger-combo": {
+   "handle": "hamburger-combo",
+   "title": "Hamburger Combo",
+   "he": "קומבו המבורגר",
+   "body": "<p>Our signature 220g burger patty is made from fresh, premium-cut meat, ground and prepared on-site by the chef.</p>\n<p>All sandwiches are accompanied by our handcrafted house pickles and homemade schug.<br><strong>The meal includes a side of fries and a bottled drink of your choice.</strong></p>",
+   "tags": [],
+   "options": [
+    {
+     "name": "Sides",
+     "values": [
+      "French fries"
+     ]
+    },
+    {
+     "name": "Soft Drinks",
+     "values": [
+      "Coca Cola",
+      "Coca-Cola Zero",
+      "Mirinda",
+      "Sprite",
+      "Soda",
+      "Water"
+     ]
+    }
+   ],
+   "variants": [
+    {
+     "id": 46758480937130,
+     "title": "French fries / Coca Cola",
+     "options": [
+      "French fries",
+      "Coca Cola"
+     ],
+     "price": 163,
+     "compare": 148,
+     "available": true,
+     "kept": ""
+    },
+    {
+     "id": 46758480969898,
+     "title": "French fries / Coca-Cola Zero",
+     "options": [
+      "French fries",
+      "Coca-Cola Zero"
+     ],
+     "price": 163,
+     "compare": 148,
+     "available": true,
+     "kept": ""
+    },
+    {
+     "id": 47321362989226,
+     "title": "French fries / Mirinda",
+     "options": [
+      "French fries",
+      "Mirinda"
+     ],
+     "price": 163,
+     "compare": 148,
+     "available": true,
+     "kept": ""
+    },
+    {
+     "id": 47321363021994,
+     "title": "French fries / Sprite",
+     "options": [
+      "French fries",
+      "Sprite"
+     ],
+     "price": 163,
+     "compare": 148,
+     "available": true,
+     "kept": ""
+    },
+    {
+     "id": 47321363054762,
+     "title": "French fries / Soda",
+     "options": [
+      "French fries",
+      "Soda"
+     ],
+     "price": 163,
+     "compare": 148,
+     "available": true,
+     "kept": ""
+    },
+    {
+     "id": 46758481002666,
+     "title": "French fries / Water",
+     "options": [
+      "French fries",
+      "Water"
+     ],
+     "price": 163,
+     "compare": 148,
+     "available": true,
+     "kept": ""
+    }
+   ],
+   "images": [
+    "/store/Hamburger_Combo-1000.webp",
+    "/store/French_fries-1000.webp"
+   ]
+  },
+  "meatballs-challah-combo": {
+   "handle": "meatballs-challah-combo",
+   "title": "Meatballs Challah Combo",
+   "he": "קומבו קציצות בשר",
+   "body": "<p>A freshly baked challah roll filled with juicy homemade beef meatballs, rich matbucha, creamy tahini, and roasted eggplant spread, creating a hearty and flavorful bite.</p>\n<p><br>All sandwiches are accompanied by our handcrafted house pickles and homemade schug.<br><strong>The meal includes a side of fries and a bottled drink of your choice.</strong></p>",
+   "tags": [],
+   "options": [
+    {
+     "name": "Sides",
+     "values": [
+      "French fries"
+     ]
+    },
+    {
+     "name": "Soft Drinks",
+     "values": [
+      "Coca Cola",
+      "Coca-Cola Zero",
+      "Mirinda",
+      "Sprite",
+      "Soda",
+      "water"
+     ]
+    }
+   ],
+   "variants": [
+    {
+     "id": 46758474481834,
+     "title": "French fries / Coca Cola",
+     "options": [
+      "French fries",
+      "Coca Cola"
+     ],
+     "price": 149,
+     "compare": 144,
+     "available": true,
+     "kept": ""
+    },
+    {
+     "id": 46758474514602,
+     "title": "French fries / Coca-Cola Zero",
+     "options": [
+      "French fries",
+      "Coca-Cola Zero"
+     ],
+     "price": 149,
+     "compare": 144,
+     "available": true,
+     "kept": ""
+    },
+    {
+     "id": 47321365053610,
+     "title": "French fries / Mirinda",
+     "options": [
+      "French fries",
+      "Mirinda"
+     ],
+     "price": 149,
+     "compare": 144,
+     "available": true,
+     "kept": ""
+    },
+    {
+     "id": 47321365086378,
+     "title": "French fries / Sprite",
+     "options": [
+      "French fries",
+      "Sprite"
+     ],
+     "price": 149,
+     "compare": 144,
+     "available": true,
+     "kept": ""
+    },
+    {
+     "id": 47321365119146,
+     "title": "French fries / Soda",
+     "options": [
+      "French fries",
+      "Soda"
+     ],
+     "price": 149,
+     "compare": 144,
+     "available": true,
+     "kept": ""
+    },
+    {
+     "id": 46758474547370,
+     "title": "French fries / water",
+     "options": [
+      "French fries",
+      "water"
+     ],
+     "price": 149,
+     "compare": 144,
+     "available": true,
+     "kept": ""
+    }
+   ],
+   "images": [
+    "/store/Meatballs_Challah_Combo-1000.webp",
+    "/store/Meatballs_Challah-1000.webp",
+    "/store/French_fries-1000.webp"
+   ]
+  },
+  "asado-challah-combo": {
+   "handle": "asado-challah-combo",
+   "title": "Asado Challah Combo",
+   "he": "קומבו אסאדו",
+   "body": "<p>A freshly baked challah roll filled with slow-cooked, tender asado beef, homemade aioli, crisp lettuce, and our signature house-made pickles for a rich and satisfying bite.</p>\n<p><br>All sandwiches are accompanied by our handcrafted house pickles and homemade schug.<br><strong>The meal includes a side of fries and a bottled drink of your choice.</strong></p>",
+   "tags": [],
+   "options": [
+    {
+     "name": "Sides",
+     "values": [
+      "French fries"
+     ]
+    },
+    {
+     "name": "Soft Drinks",
+     "values": [
+      "Coca Cola",
+      "Coca-Cola Zero",
+      "Mirinda",
+      "Sprite",
+      "Soda",
+      "water"
+     ]
+    }
+   ],
+   "variants": [
+    {
+     "id": 46758464159914,
+     "title": "French fries / Coca Cola",
+     "options": [
+      "French fries",
+      "Coca Cola"
+     ],
+     "price": 174,
+     "compare": 160,
+     "available": true,
+     "kept": ""
+    },
+    {
+     "id": 46758464192682,
+     "title": "French fries / Coca-Cola Zero",
+     "options": [
+      "French fries",
+      "Coca-Cola Zero"
+     ],
+     "price": 174,
+     "compare": 160,
+     "available": true,
+     "kept": ""
+    },
+    {
+     "id": 47321364857002,
+     "title": "French fries / Mirinda",
+     "options": [
+      "French fries",
+      "Mirinda"
+     ],
+     "price": 174,
+     "compare": 160,
+     "available": true,
+     "kept": ""
+    },
+    {
+     "id": 47321364889770,
+     "title": "French fries / Sprite",
+     "options": [
+      "French fries",
+      "Sprite"
+     ],
+     "price": 174,
+     "compare": 160,
+     "available": true,
+     "kept": ""
+    },
+    {
+     "id": 47321364922538,
+     "title": "French fries / Soda",
+     "options": [
+      "French fries",
+      "Soda"
+     ],
+     "price": 174,
+     "compare": 160,
+     "available": true,
+     "kept": ""
+    },
+    {
+     "id": 46758464225450,
+     "title": "French fries / water",
+     "options": [
+      "French fries",
+      "water"
+     ],
+     "price": 174,
+     "compare": 160,
+     "available": true,
+     "kept": ""
+    }
+   ],
+   "images": [
+    "/store/2_5e53f054-e7b2-4785-838b-9429cc40f240-1000.webp",
+    "/store/6-1000.webp",
+    "/store/4-1000.webp",
+    "/store/French_fries-1000.webp"
+   ]
+  },
+  "shawarma-pita-combo": {
+   "handle": "shawarma-pita-combo",
+   "title": "Shawarma Pita Combo",
+   "he": "קומבו שווארמה",
+   "body": "<p>A fresh pita bread filled with tender, seasoned shawarma, creamy hummus, and a crisp cabbage salad for the perfect balance of flavors and textures.</p>\n<p><br>All sandwiches are accompanied by our handcrafted house pickles and homemade schug.<br><strong>The meal includes a side of fries and a bottled drink of your choice.</strong></p>",
+   "tags": [],
+   "options": [
+    {
+     "name": "Sides",
+     "values": [
+      "French fries"
+     ]
+    },
+    {
+     "name": "Soft Drinks",
+     "values": [
+      "Coca Cola",
+      "Coca-Cola Zero",
+      "Mirinda",
+      "Sprite",
+      "Soda",
+      "water"
+     ]
+    }
+   ],
+   "variants": [
+    {
+     "id": 46758427361450,
+     "title": "French fries / Coca Cola",
+     "options": [
+      "French fries",
+      "Coca Cola"
+     ],
+     "price": 128,
+     "compare": 126,
+     "available": true,
+     "kept": ""
+    },
+    {
+     "id": 46758427394218,
+     "title": "French fries / Coca-Cola Zero",
+     "options": [
+      "French fries",
+      "Coca-Cola Zero"
+     ],
+     "price": 128,
+     "compare": 126,
+     "available": true,
+     "kept": ""
+    },
+    {
+     "id": 47321364267178,
+     "title": "French fries / Mirinda",
+     "options": [
+      "French fries",
+      "Mirinda"
+     ],
+     "price": 128,
+     "compare": 126,
+     "available": true,
+     "kept": ""
+    },
+    {
+     "id": 47321364299946,
+     "title": "French fries / Sprite",
+     "options": [
+      "French fries",
+      "Sprite"
+     ],
+     "price": 128,
+     "compare": 126,
+     "available": true,
+     "kept": ""
+    },
+    {
+     "id": 47321364332714,
+     "title": "French fries / Soda",
+     "options": [
+      "French fries",
+      "Soda"
+     ],
+     "price": 128,
+     "compare": 126,
+     "available": true,
+     "kept": ""
+    },
+    {
+     "id": 46758427426986,
+     "title": "French fries / water",
+     "options": [
+      "French fries",
+      "water"
+     ],
+     "price": 128,
+     "compare": 126,
+     "available": true,
+     "kept": ""
+    }
+   ],
+   "images": [
+    "/store/Shawarma_Pita_Combo-1000.webp",
+    "/store/Pita_Shawarma-1000.webp",
+    "/store/French_fries-1000.webp"
+   ]
+  },
+  "schnitzel-challah-combo": {
+   "handle": "schnitzel-challah-combo",
+   "title": "Schnitzel Challah Combo",
+   "he": "קומבו שניצל",
+   "body": "<p>A freshly baked challah roll filled with crispy golden schnitzel, homemade matbucha, and fried eggplants.<br></p>\n<p><br>All sandwiches are accompanied by our handcrafted house pickles and homemade schug.<br><strong>The meal includes a side of fries and a bottled drink of your choice.</strong></p>",
+   "tags": [],
+   "options": [
+    {
+     "name": "Sides ",
+     "values": [
+      "French fries"
+     ]
+    },
+    {
+     "name": "Soft Drinks",
+     "values": [
+      "Coca Cola",
+      "Coca-Cola Zero",
+      "Mirinda",
+      "Sprite",
+      "Soda",
+      "water"
+     ]
+    }
+   ],
+   "variants": [
+    {
+     "id": 46758404063402,
+     "title": "French fries / Coca Cola",
+     "options": [
+      "French fries",
+      "Coca Cola"
+     ],
+     "price": 156,
+     "compare": 144,
+     "available": true,
+     "kept": ""
+    },
+    {
+     "id": 46758404096170,
+     "title": "French fries / Coca-Cola Zero",
+     "options": [
+      "French fries",
+      "Coca-Cola Zero"
+     ],
+     "price": 156,
+     "compare": 144,
+     "available": true,
+     "kept": ""
+    },
+    {
+     "id": 47321363939498,
+     "title": "French fries / Mirinda",
+     "options": [
+      "French fries",
+      "Mirinda"
+     ],
+     "price": 156,
+     "compare": 144,
+     "available": true,
+     "kept": ""
+    },
+    {
+     "id": 47321363906730,
+     "title": "French fries / Sprite",
+     "options": [
+      "French fries",
+      "Sprite"
+     ],
+     "price": 156,
+     "compare": 144,
+     "available": true,
+     "kept": ""
+    },
+    {
+     "id": 47321363972266,
+     "title": "French fries / Soda",
+     "options": [
+      "French fries",
+      "Soda"
+     ],
+     "price": 156,
+     "compare": 144,
+     "available": true,
+     "kept": ""
+    },
+    {
+     "id": 46758404128938,
+     "title": "French fries / water",
+     "options": [
+      "French fries",
+      "water"
+     ],
+     "price": 156,
+     "compare": 144,
+     "available": true,
+     "kept": ""
+    }
+   ],
+   "images": [
+    "/store/Schnitzel_Challah_Combo-1000.webp",
+    "/store/French_fries-1000.webp"
+   ]
+  },
+  "chamin": {
+   "handle": "chamin",
+   "title": "Traditional Hamin",
+   "he": "חמין",
+   "body": "<p>Traditional Shabbat Chamin – Slow-cooked beef short ribs with beans, chickpeas, barley, potatoes, and sweet potatoes<br><br>Image for illustration purposes only. Serves up to 2-3 people.<br></p>",
+   "tags": [],
+   "options": [],
+   "variants": [
+    {
+     "id": 46758225248426,
+     "title": "Default Title",
+     "options": [
+      "Default Title"
+     ],
+     "price": 255,
+     "compare": null,
+     "available": true,
+     "kept": ""
+    }
+   ],
+   "images": [
+    "/store/Traditional_Hamin-1000.webp",
+    "/store/2_1be982dd-b169-48a8-a324-494da6f24c11-1000.webp",
+    "/store/1_112113f3-2859-4014-8609-4766e91b52e0-1000.webp"
+   ]
+  },
+  "jachnun": {
+   "handle": "jachnun",
+   "title": "Jachnun- ג׳חנון",
+   "he": "ג׳חנון",
+   "body": "<p>Homemade Jachnun Served with Hard-Boiled Egg, Fresh Tomato Sauce and Homemade Zhug</p>",
+   "tags": [],
+   "options": [
+    {
+     "name": "Jachnun- ג׳חנון",
+     "values": [
+      "Frozen",
+      "Ready"
+     ]
+    }
+   ],
+   "variants": [
+    {
+     "id": 47246252212394,
+     "title": "Frozen",
+     "options": [
+      "Frozen"
+     ],
+     "price": 54,
+     "compare": null,
+     "available": true,
+     "kept": "Frozen"
+    },
+    {
+     "id": 47246252245162,
+     "title": "Ready",
+     "options": [
+      "Ready"
+     ],
+     "price": 54,
+     "compare": null,
+     "available": true,
+     "kept": "Ready"
+    }
+   ],
+   "images": [
+    "/store/Jachnun-1000.webp",
+    "/store/2_738f38b7-3173-44a3-b3d9-152a10a9ca9b-1000.webp",
+    "/store/3_f47718c7-0d57-412c-8971-9cffa3bcebc8-1000.webp"
+   ]
+  },
+  "schnitzel-platter-1kg": {
+   "handle": "schnitzel-platter-1kg",
+   "title": "Fresh Schnitzel Platter",
+   "he": "מגש שניצל",
+   "body": "",
+   "tags": [],
+   "options": [
+    {
+     "name": "Weight",
+     "values": [
+      "1/2 kg",
+      "1 kg"
+     ]
+    }
+   ],
+   "variants": [
+    {
+     "id": 47474990284970,
+     "title": "1/2 kg",
+     "options": [
+      "1/2 kg"
+     ],
+     "price": 195,
+     "compare": null,
+     "available": true,
+     "kept": "1/2 kg"
+    },
+    {
+     "id": 47474990317738,
+     "title": "1 kg",
+     "options": [
+      "1 kg"
+     ],
+     "price": 384,
+     "compare": null,
+     "available": true,
+     "kept": "1 kg"
+    }
+   ],
+   "images": [
+    "/store/Fresh_Schnitzel_Platter-1000.webp"
+   ]
+  },
+  "egg-salad": {
+   "handle": "egg-salad",
+   "title": "Egg Salad",
+   "he": "סלט ביצים",
+   "body": "",
+   "tags": [
+    "סלט"
+   ],
+   "options": [],
+   "variants": [
+    {
+     "id": 46750744314026,
+     "title": "Default Title",
+     "options": [
+      "Default Title"
+     ],
+     "price": 35,
+     "compare": null,
+     "available": true,
+     "kept": ""
+    }
+   ],
+   "images": [
+    "/store/Egg_Salad-1000.webp"
+   ]
+  },
+  "friday-couples-meal": {
+   "handle": "friday-couples-meal",
+   "title": "Couple's Packages Friday Dinner",
+   "he": "חבילת זוג לשישי",
+   "body": "",
+   "tags": [
+    "saturday_delivery",
+    "shabbat-package"
+   ],
+   "options": [
+    {
+     "name": "Couple's Friday dinner",
+     "values": [
+      "Couple's Friday dinner"
+     ]
+    }
+   ],
+   "variants": [
+    {
+     "id": 46750593581226,
+     "title": "Couple's Friday dinner",
+     "options": [
+      "Couple's Friday dinner"
+     ],
+     "price": 1050,
+     "compare": null,
+     "available": true,
+     "kept": "Couple's Friday dinner"
+    }
+   ],
+   "images": [
+    "/store/Couple_s_Packages_Friday_Dinner-1000.webp",
+    "/store/2_0cdd16c2-c1c9-4dcb-9218-2ad48c9e6e60-1000.webp",
+    "/store/3_4b100b0e-1937-45cf-893f-ff96822c9642-1000.webp",
+    "/store/4_2ebb950f-18c3-4675-a0c8-cc00164def8f-1000.webp",
+    "/store/6_ca8f01b3-fbdb-4f12-81a2-5d4e3729166d-1000.webp",
+    "/store/7_87d289f3-3525-4de3-bfd1-b1693be4dcc4-1000.webp",
+    "/store/8_f088366f-2956-40a3-909b-e42935ddc8d9-1000.webp",
+    "/store/9_cc38e5ae-7776-48f1-a566-04246311846d-1000.webp",
+    "/store/5_9619f34e-ef2a-4bd0-a924-0057b5ceede6-1000.webp"
+   ]
+  },
+  "spicy-moroccan-sea-bream-fillet": {
+   "handle": "spicy-moroccan-sea-bream-fillet",
+   "title": "Spicy Moroccan Sea Bream Fillet",
+   "he": "דניס מרוקאי",
+   "body": "<p>Spicy Moroccan Sea Bream Fillet</p>",
+   "tags": [
+    "ראשונה"
+   ],
+   "options": [],
+   "variants": [
+    {
+     "id": 46750046552234,
+     "title": "Default Title",
+     "options": [
+      "Default Title"
+     ],
+     "price": 128,
+     "compare": null,
+     "available": true,
+     "kept": ""
+    }
+   ],
+   "images": [
+    "/store/ChatGPT_Image_Nov_23_2025_03_18_45_PM-1000.webp"
+   ]
+  },
+  "spicy-moroccan-tilapia-fillet": {
+   "handle": "spicy-moroccan-tilapia-fillet",
+   "title": "Spicy Moroccan Amnon Fillet",
+   "he": "אמנון מרוקאי",
+   "body": "<p>an oriental Middle Eastern dish. Tilapia filet, seasoned with aromatic herbs and zesty lemon, simmered in a flavorful tomato-based sauce.</p>",
+   "tags": [
+    "ראשונה"
+   ],
+   "options": [],
+   "variants": [
+    {
+     "id": 46750046486698,
+     "title": "Default Title",
+     "options": [
+      "Default Title"
+     ],
+     "price": 128,
+     "compare": null,
+     "available": true,
+     "kept": ""
+    }
+   ],
+   "images": [
+    "/store/6ff11d84-d5c7-4132-a783-721b24b167a2-1000.webp"
+   ]
+  },
+  "premium-disposable-cutlery": {
+   "handle": "premium-disposable-cutlery",
+   "title": "Premium Disposable Cutlery",
+   "he": "סכו״ם",
+   "body": "",
+   "tags": [],
+   "options": [
+    {
+     "name": "Premium Disposable Cutlery",
+     "values": [
+      "Premium Disposable Cutlery"
+     ]
+    }
+   ],
+   "variants": [
+    {
+     "id": 46752961953962,
+     "title": "Premium Disposable Cutlery",
+     "options": [
+      "Premium Disposable Cutlery"
+     ],
+     "price": 0,
+     "compare": null,
+     "available": true,
+     "kept": "Premium Disposable Cutlery"
+    }
+   ],
+   "images": [
+    "/store/images_3-1000.webp"
+   ]
+  },
+  "fresh-shabbat-challah": {
+   "handle": "fresh-shabbat-challah",
+   "title": "Fresh Shabbat Challahs",
+   "he": "חלות שבת",
+   "body": "",
+   "tags": [],
+   "options": [
+    {
+     "name": "Fresh Shabbat Challah",
+     "values": [
+      "Fresh Shabbat Challah"
+     ]
+    }
+   ],
+   "variants": [
+    {
+     "id": 46752962379946,
+     "title": "Fresh Shabbat Challah",
+     "options": [
+      "Fresh Shabbat Challah"
+     ],
+     "price": 0,
+     "compare": null,
+     "available": true,
+     "kept": "Fresh Shabbat Challah"
+    }
+   ],
+   "images": [
+    "/store/Fresh_Shabbat_Challahs-1000.webp"
+   ]
+  },
+  "shabbat-candles": {
+   "handle": "shabbat-candles",
+   "title": "Shabbat Candles",
+   "he": "נרות שבת",
+   "body": "",
+   "tags": [],
+   "options": [
+    {
+     "name": "Shabbat Candles",
+     "values": [
+      "Shabbat Candles"
+     ]
+    }
+   ],
+   "variants": [
+    {
+     "id": 46752963068074,
+     "title": "Shabbat Candles",
+     "options": [
+      "Shabbat Candles"
+     ],
+     "price": 0,
+     "compare": null,
+     "available": true,
+     "kept": "Shabbat Candles"
+    }
+   ],
+   "images": [
+    "/store/images_1-1000.webp"
+   ]
+  },
+  "bottle-of-grape-juice-for-kiddush": {
+   "handle": "bottle-of-grape-juice-for-kiddush",
+   "title": "Bottle of Grape Juice for Kiddush",
+   "he": "תירוש",
+   "body": "<p>*Image for illustration only</p>",
+   "tags": [],
+   "options": [
+    {
+     "name": "Bottle of Grape Juice for Kiddush",
+     "values": [
+      "Bottle of Grape Juice for Kiddush"
+     ]
+    }
+   ],
+   "variants": [
+    {
+     "id": 46752963428522,
+     "title": "Bottle of Grape Juice for Kiddush",
+     "options": [
+      "Bottle of Grape Juice for Kiddush"
+     ],
+     "price": 0,
+     "compare": null,
+     "available": true,
+     "kept": "Bottle of Grape Juice for Kiddush"
+    }
+   ],
+   "images": [
+    "/store/Bottle_of_Grape_Juice_for_Kiddush-1000.webp"
+   ]
+  },
+  "roasted-potato": {
+   "handle": "roasted-potato",
+   "title": "Roasted Potato",
+   "he": "תפוחי אדמה צלויים",
+   "body": "",
+   "tags": [],
+   "options": [
+    {
+     "name": "Roasted Potato",
+     "values": [
+      "Roasted Potato"
+     ]
+    }
+   ],
+   "variants": [
+    {
+     "id": 46752963887274,
+     "title": "Roasted Potato",
+     "options": [
+      "Roasted Potato"
+     ],
+     "price": 0,
+     "compare": null,
+     "available": true,
+     "kept": "Roasted Potato"
+    }
+   ],
+   "images": [
+    "/store/Roasted_Potato-1000.webp"
+   ]
+  },
+  "white-rice-for-two": {
+   "handle": "white-rice-for-two",
+   "title": "White Rice",
+   "he": "אורז",
+   "body": "",
+   "tags": [],
+   "options": [
+    {
+     "name": "White Rice",
+     "values": [
+      "White Rice"
+     ]
+    }
+   ],
+   "variants": [
+    {
+     "id": 46752964608170,
+     "title": "White Rice",
+     "options": [
+      "White Rice"
+     ],
+     "price": 0,
+     "compare": null,
+     "available": true,
+     "kept": "White Rice"
+    }
+   ],
+   "images": [
+    "/store/White_Rice-1000.webp"
+   ]
+  },
+  "grilled-chicken-with-potatoes": {
+   "handle": "grilled-chicken-with-potatoes",
+   "title": "Grilled Chicken with Potatoes",
+   "he": "עוף עם תפוחי אדמה",
+   "body": "<p>Grilled Chicken with Potatoes<br><br>Image for illustration purposes only<br></p>",
+   "tags": [
+    "עיקרית"
+   ],
+   "options": [],
+   "variants": [
+    {
+     "id": 46750036230314,
+     "title": "Default Title",
+     "options": [
+      "Default Title"
+     ],
+     "price": 94,
+     "compare": null,
+     "available": true,
+     "kept": ""
+    }
+   ],
+   "images": [
+    "/store/16_6c9a92dd-ccc5-4ca0-a3ae-bfbf4364be2a-1000.webp"
+   ]
+  },
+  "meatballs-in-moroccan-red-sauce": {
+   "handle": "meatballs-in-moroccan-red-sauce",
+   "title": "Meatballs in Moroccan Red Sauce",
+   "he": "קציצות ברוטב מרוקאי",
+   "body": "<p>Meatballs in Moroccan Red Sauce</p>",
+   "tags": [
+    "עיקרית"
+   ],
+   "options": [],
+   "variants": [
+    {
+     "id": 46749989044394,
+     "title": "Default Title",
+     "options": [
+      "Default Title"
+     ],
+     "price": 98,
+     "compare": null,
+     "available": true,
+     "kept": ""
+    }
+   ],
+   "images": [
+    "/store/Meatballs_in_Moroccan_Red_Sauce-1000.webp"
+   ]
+  },
+  "family-friday-dinner": {
+   "handle": "family-friday-dinner",
+   "title": "Family Packages Friday Dinner",
+   "he": "חבילת משפחה לשישי",
+   "body": "",
+   "tags": [
+    "saturday_delivery",
+    "shabbat-package"
+   ],
+   "options": [
+    {
+     "name": "Family Friday dinner",
+     "values": [
+      "Family Friday dinner"
+     ]
+    }
+   ],
+   "variants": [
+    {
+     "id": 46750657347754,
+     "title": "Family Friday dinner",
+     "options": [
+      "Family Friday dinner"
+     ],
+     "price": 2270,
+     "compare": null,
+     "available": true,
+     "kept": "Family Friday dinner"
+    }
+   ],
+   "images": [
+    "/store/9-1000.webp",
+    "/store/6_cb01e2f8-57b3-4a7e-88c7-49c471edc8bc-1000.webp",
+    "/store/7-1000.webp",
+    "/store/8-1000.webp",
+    "/store/1_f5f55895-c756-4706-8cd5-64a9bb74cb9b-1000.webp",
+    "/store/3_31f82ef4-0987-41c2-a4dc-8479ca2ff4ff-1000.webp",
+    "/store/4_722a3afa-b8ed-49ab-9d73-f232791d0121-1000.webp",
+    "/store/5_aa4e757b-214e-4d55-8b80-e44447c4babf-1000.webp",
+    "/store/2_711c5af3-8937-46d3-8ae4-fe53549a6726-1000.webp"
+   ]
+  },
+  "omelette-challah-with-toppings-of-your-choice": {
+   "handle": "omelette-challah-with-toppings-of-your-choice",
+   "title": "Omelette Challah with Toppings of Your Choice",
+   "he": "חביתה בחלת",
+   "body": "<p>A freshly baked challah roll filled with a fluffy omelette, crisp lettuce, and our signature house-made pickles for a light and satisfying bite.</p>\n<p><br>All sandwiches are accompanied by our handcrafted house pickles and homemade schug.</p>",
+   "tags": [],
+   "options": [
+    {
+     "name": "Toppings of Your Choice",
+     "values": [
+      "without",
+      "Herbs",
+      "Mushrooms",
+      "Onion"
+     ]
+    }
+   ],
+   "variants": [
+    {
+     "id": 46762754343082,
+     "title": "without",
+     "options": [
+      "without"
+     ],
+     "price": 84,
+     "compare": null,
+     "available": true,
+     "kept": "without"
+    },
+    {
+     "id": 46762754375850,
+     "title": "Herbs",
+     "options": [
+      "Herbs"
+     ],
+     "price": 88,
+     "compare": null,
+     "available": true,
+     "kept": "Herbs"
+    },
+    {
+     "id": 46762754408618,
+     "title": "Mushrooms",
+     "options": [
+      "Mushrooms"
+     ],
+     "price": 88,
+     "compare": null,
+     "available": true,
+     "kept": "Mushrooms"
+    },
+    {
+     "id": 46762754441386,
+     "title": "Onion",
+     "options": [
+      "Onion"
+     ],
+     "price": 88,
+     "compare": null,
+     "available": true,
+     "kept": "Onion"
+    }
+   ],
+   "images": [
+    "/store/Omelette_Challah_with_Toppings_of_Your_Choice-1000.webp"
+   ]
+  },
+  "sabich-challah": {
+   "handle": "sabich-challah",
+   "title": "Sabich Challah",
+   "he": "סביח בחלת",
+   "body": "<p>A freshly baked challah roll filled with creamy tahini, roasted eggplant, and a hard-boiled egg, bringing the classic Sabich flavors into a rich and satisfying sandwich.</p>\n<p><br>All sandwiches are accompanied by our handcrafted house pickles and homemade schug.</p>",
+   "tags": [],
+   "options": [],
+   "variants": [
+    {
+     "id": 46741077852330,
+     "title": "Default Title",
+     "options": [
+      "Default Title"
+     ],
+     "price": 88,
+     "compare": null,
+     "available": true,
+     "kept": ""
+    }
+   ],
+   "images": [
+    "/store/Sabich_Challah-1000.webp"
+   ]
+  },
+  "vegetable-patties-challah": {
+   "handle": "vegetable-patties-challah",
+   "title": "Vegetable Patties Challah",
+   "he": "קציצות ירק בחלת",
+   "body": "<p>A freshly baked challah roll filled with homemade vegetable patties, crisp lettuce, and our signature house-made pickles for a fresh and wholesome bite.</p>\n<p><br>All sandwiches are accompanied by our handcrafted house pickles and homemade schug.<br><br></p>",
+   "tags": [],
+   "options": [],
+   "variants": [
+    {
+     "id": 46741077524650,
+     "title": "Default Title",
+     "options": [
+      "Default Title"
+     ],
+     "price": 88,
+     "compare": null,
+     "available": true,
+     "kept": ""
+    }
+   ],
+   "images": [
+    "/store/5_cdc5655a-816c-4aec-b22b-609a152cf6e2-1000.webp"
+   ]
+  },
+  "shakshuka-challah": {
+   "handle": "shakshuka-challah",
+   "title": "Shakshuka Challah",
+   "he": "שקשוקה בחלת",
+   "body": "<p>A freshly baked challah roll filled with rich, homemade shakshuka — a flavorful blend of tomatoes, peppers, and spices.</p>\n<p><br>All sandwiches are accompanied by our handcrafted house pickles and homemade schug.</p>",
+   "tags": [],
+   "options": [],
+   "variants": [
+    {
+     "id": 46741077131434,
+     "title": "Default Title",
+     "options": [
+      "Default Title"
+     ],
+     "price": 97,
+     "compare": null,
+     "available": true,
+     "kept": ""
+    }
+   ],
+   "images": [
+    "/store/65-1000.webp",
+    "/store/3_ac8bcf41-60c2-4ab4-b828-9fff7e9b0b58-1000.webp"
+   ]
+  },
+  "challah-bread-medium": {
+   "handle": "challah-bread-medium",
+   "title": "Challah Bread - medium",
+   "he": "חלה בינונית",
+   "body": "<p>Fresh baked homemade challah</p>",
+   "tags": [],
+   "options": [],
+   "variants": [
+    {
+     "id": 46741076639914,
+     "title": "Default Title",
+     "options": [
+      "Default Title"
+     ],
+     "price": 22,
+     "compare": null,
+     "available": true,
+     "kept": ""
+    }
+   ],
+   "images": [
+    "/store/challah_breadmedium-1000.webp",
+    "/store/1G4A2450_35b96175-1429-4dee-bb07-12733ea63a91-1000.webp"
+   ]
+  },
+  "fish-cuts-challah": {
+   "handle": "fish-cuts-challah",
+   "title": "Fish Patties Challah",
+   "he": "קציצות דג בחלת",
+   "body": "<p>A freshly baked challah roll filled with homemade fish patties and a spicy pepper for an extra bold kick, delivering a fresh and flavorful experience in every bite.</p>\n<p><br>All sandwiches are accompanied by our handcrafted house pickles and homemade schug.</p>",
+   "tags": [],
+   "options": [],
+   "variants": [
+    {
+     "id": 46741068546218,
+     "title": "Default Title",
+     "options": [
+      "Default Title"
+     ],
+     "price": 118,
+     "compare": null,
+     "available": true,
+     "kept": ""
+    }
+   ],
+   "images": [
+    "/store/4_61ee0186-0c32-4cab-892c-2bf186a2a54a-1000.webp"
+   ]
+  },
+  "beef-cuts-challah": {
+   "handle": "beef-cuts-challah",
+   "title": "Meatballs Challah",
+   "he": "קציצות בשר בחלת",
+   "body": "<p>A freshly baked challah roll filled with juicy homemade beef meatballs, rich matbucha, creamy tahini, and roasted eggplant spread, creating a hearty and flavorful bite.</p>\n<p><br>All sandwiches are accompanied by our handcrafted house pickles and homemade schug.</p>",
+   "tags": [],
+   "options": [],
+   "variants": [
+    {
+     "id": 46741066907818,
+     "title": "Default Title",
+     "options": [
+      "Default Title"
+     ],
+     "price": 128,
+     "compare": null,
+     "available": true,
+     "kept": ""
+    }
+   ],
+   "images": [
+    "/store/63-1000.webp"
+   ]
+  },
+  "asado-challah": {
+   "handle": "asado-challah",
+   "title": "Asado Challah",
+   "he": "אסאדו בחלת",
+   "body": "<p>A freshly baked challah roll filled with slow-cooked, tender asado beef, homemade aioli, crisp lettuce, and our signature house-made pickles for a rich and satisfying bite.</p>\n<p><br>All sandwiches are accompanied by our handcrafted house pickles and homemade schug.</p>",
+   "tags": [],
+   "options": [],
+   "variants": [
+    {
+     "id": 46741065793706,
+     "title": "Default Title",
+     "options": [
+      "Default Title"
+     ],
+     "price": 146,
+     "compare": null,
+     "available": true,
+     "kept": ""
+    }
+   ],
+   "images": [
+    "/store/3_f720d676-748b-435d-8c7d-216fa1a0ee30-1000.webp",
+    "/store/6-1000.webp"
+   ]
+  },
+  "pita-shawarma": {
+   "handle": "pita-shawarma",
+   "title": "Pita Shawarma",
+   "he": "שווארמה בפיתה",
+   "body": "<p>A fresh pita bread filled with tender, seasoned shawarma, creamy hummus, and a crisp cabbage salad for the perfect balance of flavors and textures.</p>\n<p><br>All sandwiches are accompanied by our handcrafted house pickles and homemade schug</p>",
+   "tags": [],
+   "options": [],
+   "variants": [
+    {
+     "id": 46741056290986,
+     "title": "Default Title",
+     "options": [
+      "Default Title"
+     ],
+     "price": 99,
+     "compare": null,
+     "available": true,
+     "kept": ""
+    }
+   ],
+   "images": [
+    "/store/Pita_Shawarma-1000.webp",
+    "/store/1G4A2396-1000.webp"
+   ]
+  },
+  "halat-schnitzel": {
+   "handle": "halat-schnitzel",
+   "title": "Schnitzel Challah",
+   "he": "שניצל בחלת",
+   "body": "<p>A freshly baked challah roll filled with crispy golden schnitzel, homemade matbucha, and fried eggplants.<br></p>\n<p><br>All sandwiches are accompanied by our handcrafted house pickles and homemade schug.</p>",
+   "tags": [],
+   "options": [],
+   "variants": [
+    {
+     "id": 46741055766698,
+     "title": "Default Title",
+     "options": [
+      "Default Title"
+     ],
+     "price": 123,
+     "compare": null,
+     "available": true,
+     "kept": ""
+    }
+   ],
+   "images": [
+    "/store/Schnitzel_Challah-1000.webp"
+   ]
+  },
+  "yeast-cake": {
+   "handle": "yeast-cake",
+   "title": "Yeast Cake",
+   "he": "עוגת שמרים",
+   "body": "<p>Individual yeast cake filled with chocolate, coconut, and nuts.</p>",
+   "tags": [],
+   "options": [],
+   "variants": [
+    {
+     "id": 46741054423210,
+     "title": "Default Title",
+     "options": [
+      "Default Title"
+     ],
+     "price": 74,
+     "compare": null,
+     "available": true,
+     "kept": ""
+    }
+   ],
+   "images": [
+    "/store/Yeast_Cake-1000.webp"
+   ]
+  },
+  "fruit-salad": {
+   "handle": "fruit-salad",
+   "title": "Fruit Salad",
+   "he": "סלט פירות",
+   "body": "<p>Seasonal fruit salad in sweet</p>",
+   "tags": [],
+   "options": [],
+   "variants": [
+    {
+     "id": 46741053931690,
+     "title": "Default Title",
+     "options": [
+      "Default Title"
+     ],
+     "price": 41,
+     "compare": null,
+     "available": true,
+     "kept": ""
+    }
+   ],
+   "images": [
+    "/store/Fruit_Salad-1000.webp"
+   ]
+  },
+  "shakshuka": {
+   "handle": "shakshuka",
+   "title": "Shakshuka",
+   "he": "שקשוקה",
+   "body": "An indulgent and richly flavored shakshuka cooked in a spicy oriental fresh tomato sauce accompanied by two eggs and vegetable garnishes.",
+   "tags": [],
+   "options": [],
+   "variants": [
+    {
+     "id": 46741052194986,
+     "title": "Default Title",
+     "options": [
+      "Default Title"
+     ],
+     "price": 97,
+     "compare": null,
+     "available": true,
+     "kept": ""
+    }
+   ],
+   "images": [
+    "/store/Shakshuka-1000.webp"
+   ]
+  },
+  "roast-beef-with-mushrooms": {
+   "handle": "roast-beef-with-mushrooms",
+   "title": "Roast Beef with Mushrooms",
+   "he": "אסאדו עם פטריות",
+   "body": "<p>Succulent roast beef bathed in mushroom sauce, this elegant dish is a true celebration of hearty flavors.</p>",
+   "tags": [],
+   "options": [],
+   "variants": [
+    {
+     "id": 46741050753194,
+     "title": "Default Title",
+     "options": [
+      "Default Title"
+     ],
+     "price": 142,
+     "compare": null,
+     "available": true,
+     "kept": ""
+    }
+   ],
+   "images": [
+    "/store/Roast_Beef_with_Mushrooms-1000.webp"
+   ]
+  },
+  "mafrum": {
+   "handle": "mafrum",
+   "title": "Mafrum",
+   "he": "מפרום",
+   "body": "<p>Potato Stuffed with Spiced Ground Beef in Red Sauce</p>",
+   "tags": [],
+   "options": [],
+   "variants": [
+    {
+     "id": 46741048623274,
+     "title": "Default Title",
+     "options": [
+      "Default Title"
+     ],
+     "price": 115,
+     "compare": null,
+     "available": true,
+     "kept": ""
+    }
+   ],
+   "images": [
+    "/store/Mafrum-1000.webp"
+   ]
+  },
+  "homemade-schnitzel": {
+   "handle": "homemade-schnitzel",
+   "title": "Homemade Schnitzel",
+   "he": "שניצל",
+   "body": "<p>sAbout 220 grams of crispy and golden schnitzel that is tender in every bite, just like at home only with a delicious and unique twist for our chef’s kitchen.</p>",
+   "tags": [],
+   "options": [],
+   "variants": [
+    {
+     "id": 46741048131754,
+     "title": "Default Title",
+     "options": [
+      "Default Title"
+     ],
+     "price": 92,
+     "compare": null,
+     "available": true,
+     "kept": ""
+    }
+   ],
+   "images": [
+    "/store/Homemade_Schnitzel-1000.webp",
+    "/store/69c86e77-9964-43a3-ae86-49684072b041-1000.webp"
+   ]
+  },
+  "head-stew-with-chickpeas-and-peppers": {
+   "handle": "head-stew-with-chickpeas-and-peppers",
+   "title": "Head Stew with Chickpeas and Peppers",
+   "he": "מרק ראש",
+   "body": "<p>A flavorful head stew. Slow-cooked tender meat, hearty chickpeas, and vibrant peppers simmered in aromatic spices.</p>",
+   "tags": [],
+   "options": [],
+   "variants": [
+    {
+     "id": 46741047705770,
+     "title": "Default Title",
+     "options": [
+      "Default Title"
+     ],
+     "price": 123,
+     "compare": null,
+     "available": true,
+     "kept": ""
+    }
+   ],
+   "images": [
+    "/store/Head_Stew_with_Chickpeas_and_Peppers-1000.webp"
+   ]
+  },
+  "hamburger-and-fries": {
+   "handle": "hamburger-and-fries",
+   "title": "Hamburger",
+   "he": "המבורגר",
+   "body": "<p>Our signature 220g burger patty is made from fresh, premium-cut meat, ground and prepared on-site by the chef.</p>\n<p>All sandwiches are accompanied by our handcrafted house pickles and homemade schug.<br><br></p>",
+   "tags": [],
+   "options": [],
+   "variants": [
+    {
+     "id": 46741046886570,
+     "title": "Default Title",
+     "options": [
+      "Default Title"
+     ],
+     "price": 129,
+     "compare": null,
+     "available": true,
+     "kept": ""
+    }
+   ],
+   "images": [
+    "/store/Hamburger-1000.webp"
+   ]
+  },
+  "chicken-thigh-steak": {
+   "handle": "chicken-thigh-steak",
+   "title": "Chicken Thighs in Mushroom Sauce",
+   "he": "פרגית ברוטב פטריות",
+   "body": "<p><strong>Chicken Thigh Steak</strong> – pan-seared chicken thigh fillets in a rich mushroom sauce, marinated to deliver a juicy flavor and a perfect dining experience.</p>\n<p>Served in a <strong>250-gram portion</strong>.</p>\n<p><br></p>",
+   "tags": [],
+   "options": [],
+   "variants": [
+    {
+     "id": 46741043675306,
+     "title": "Default Title",
+     "options": [
+      "Default Title"
+     ],
+     "price": 92,
+     "compare": null,
+     "available": true,
+     "kept": ""
+    }
+   ],
+   "images": [
+    "/store/Chicken_Thighs_in_Mushroom_Sauce-1000.webp"
+   ]
+  },
+  "chicken-shawarma": {
+   "handle": "chicken-shawarma",
+   "title": "Chicken Shawarma",
+   "he": "שווארמה עוף",
+   "body": "<p>Indulge in the tantalizing taste of our slow-roasted chicken shawarma.</p>",
+   "tags": [],
+   "options": [],
+   "variants": [
+    {
+     "id": 46741043216554,
+     "title": "Default Title",
+     "options": [
+      "Default Title"
+     ],
+     "price": 96,
+     "compare": null,
+     "available": true,
+     "kept": ""
+    }
+   ],
+   "images": [
+    "/store/Chicken_Shawarma-1000.webp"
+   ]
+  },
+  "white-rice": {
+   "handle": "white-rice",
+   "title": "White Rice",
+   "he": "אורז",
+   "body": "<p>Approximately 220 grams of white rice. Caramelized onions can be added (chef’s recommendation).</p>",
+   "tags": [],
+   "options": [],
+   "variants": [
+    {
+     "id": 46741038760106,
+     "title": "Default Title",
+     "options": [
+      "Default Title"
+     ],
+     "price": 38,
+     "compare": null,
+     "available": true,
+     "kept": ""
+    }
+   ],
+   "images": [
+    "/store/White_Rice-1000.webp"
+   ]
+  },
+  "potatoes": {
+   "handle": "potatoes",
+   "title": "Potatoes",
+   "he": "תפוחי אדמה",
+   "body": "<p>Tiny potatoes roasted to perfect crispiness.</p>",
+   "tags": [],
+   "options": [],
+   "variants": [
+    {
+     "id": 46741038399658,
+     "title": "Default Title",
+     "options": [
+      "Default Title"
+     ],
+     "price": 38,
+     "compare": null,
+     "available": true,
+     "kept": ""
+    }
+   ],
+   "images": [
+    "/store/Roasted_Potato-1000.webp"
+   ]
+  },
+  "mujadara-rice": {
+   "handle": "mujadara-rice",
+   "title": "Mujadara Rice",
+   "he": "מג׳דרה",
+   "body": "<p>Approximately 220 grams of fresh rice with lentils. Caramelized onions can be added.</p>",
+   "tags": [],
+   "options": [],
+   "variants": [
+    {
+     "id": 46741037875370,
+     "title": "Default Title",
+     "options": [
+      "Default Title"
+     ],
+     "price": 38,
+     "compare": null,
+     "available": true,
+     "kept": ""
+    }
+   ],
+   "images": [
+    "/store/Mujadara_Rice-1000.webp"
+   ]
+  },
+  "green-beans": {
+   "handle": "green-beans",
+   "title": "Green Beans",
+   "he": "שעועית ירוקה",
+   "body": "<p>220g of Steamed green beans, lightly seasoned with olive oil and herbs.</p>",
+   "tags": [],
+   "options": [],
+   "variants": [
+    {
+     "id": 46741037023402,
+     "title": "Default Title",
+     "options": [
+      "Default Title"
+     ],
+     "price": 38,
+     "compare": null,
+     "available": true,
+     "kept": ""
+    }
+   ],
+   "images": [
+    "/store/Green_Beans-1000.webp"
+   ]
+  },
+  "french-fries": {
+   "handle": "french-fries",
+   "title": "French Fries",
+   "he": "צ׳יפס",
+   "body": "<p>Approximately 220 grams of hand-cut, deep-fried potatoes seasoned with salt and black pepper.</p>",
+   "tags": [],
+   "options": [],
+   "variants": [
+    {
+     "id": 46741036662954,
+     "title": "Default Title",
+     "options": [
+      "Default Title"
+     ],
+     "price": 38,
+     "compare": null,
+     "available": true,
+     "kept": ""
+    }
+   ],
+   "images": [
+    "/store/9bff606e-ce4b-4c58-a071-366050d46b66-1000.webp"
+   ]
+  },
+  "private-challah-bread": {
+   "handle": "private-challah-bread",
+   "title": "Challah Bread - big",
+   "he": "חלה גדולה",
+   "body": "<p>Fresh baked homemade challah</p>",
+   "tags": [],
+   "options": [],
+   "variants": [
+    {
+     "id": 46741036171434,
+     "title": "Default Title",
+     "options": [
+      "Default Title"
+     ],
+     "price": 27,
+     "compare": null,
+     "available": true,
+     "kept": ""
+    }
+   ],
+   "images": [
+    "/store/challah_breadmedium-1000.webp",
+    "/store/1G4A2450-1000.webp",
+    "/store/Fresh_Shabbat_Challahs-1000.webp"
+   ]
+  },
+  "traditional-salad": {
+   "handle": "traditional-salad",
+   "title": "Traditional Salad",
+   "he": "סלט ירקות",
+   "body": "Traditional Middle Eastern salad, cucumber, tomatoes, purple.",
+   "tags": [
+    "סלט"
+   ],
+   "options": [],
+   "variants": [
+    {
+     "id": 46741035090090,
+     "title": "Default Title",
+     "options": [
+      "Default Title"
+     ],
+     "price": 35,
+     "compare": null,
+     "available": true,
+     "kept": ""
+    }
+   ],
+   "images": [
+    "/store/Traditional_Salad-1000.webp"
+   ]
+  },
+  "tahini": {
+   "handle": "tahini",
+   "title": "Tahini",
+   "he": "טחינה",
+   "body": "<p>A sesame tahini paste with fresh herbs and garlic.</p>",
+   "tags": [
+    "סלט"
+   ],
+   "options": [],
+   "variants": [
+    {
+     "id": 46741034369194,
+     "title": "Default Title",
+     "options": [
+      "Default Title"
+     ],
+     "price": 35,
+     "compare": null,
+     "available": true,
+     "kept": ""
+    }
+   ],
+   "images": [
+    "/store/Tahini-1000.webp"
+   ]
+  },
+  "carrot": {
+   "handle": "carrot",
+   "title": "Carrot",
+   "he": "גזר מזרחי",
+   "body": "<p>Grated carrots with lemon and spicy seasoning.</p>",
+   "tags": [
+    "סלט"
+   ],
+   "options": [],
+   "variants": [
+    {
+     "id": 46741033975978,
+     "title": "Default Title",
+     "options": [
+      "Default Title"
+     ],
+     "price": 35,
+     "compare": null,
+     "available": true,
+     "kept": ""
+    }
+   ],
+   "images": [
+    "/store/Carrot-1000.webp"
+   ]
+  },
+  "matbucha-condiment": {
+   "handle": "matbucha-condiment",
+   "title": "Matbucha",
+   "he": "מטבוחה",
+   "body": "<p>Roasted red peppers, tomatoes, and a blend of aromatic spices.</p>",
+   "tags": [
+    "סלט"
+   ],
+   "options": [],
+   "variants": [
+    {
+     "id": 46741033189546,
+     "title": "Default Title",
+     "options": [
+      "Default Title"
+     ],
+     "price": 35,
+     "compare": null,
+     "available": true,
+     "kept": ""
+    }
+   ],
+   "images": [
+    "/store/Matbucha-1000.webp"
+   ]
+  },
+  "homemade-pickles": {
+   "handle": "homemade-pickles",
+   "title": "Homemade pickles",
+   "he": "חמוצי הבית",
+   "body": "<p>A selection of pickled vegetables in lemon silage in Duba style</p>",
+   "tags": [
+    "סלט"
+   ],
+   "options": [],
+   "variants": [
+    {
+     "id": 46741029126314,
+     "title": "Default Title",
+     "options": [
+      "Default Title"
+     ],
+     "price": 35,
+     "compare": null,
+     "available": true,
+     "kept": ""
+    }
+   ],
+   "images": [
+    "/store/Homemade_pickles-1000.webp"
+   ]
+  },
+  "homemade-hummus": {
+   "handle": "homemade-hummus",
+   "title": "Homemade Hummus",
+   "he": "חומוס",
+   "body": "<p>Ground cooked chickpeas, tahini, lemon juice, and olive oil.</p>",
+   "tags": [
+    "סלט"
+   ],
+   "options": [],
+   "variants": [
+    {
+     "id": 46741027815594,
+     "title": "Default Title",
+     "options": [
+      "Default Title"
+     ],
+     "price": 35,
+     "compare": null,
+     "available": true,
+     "kept": ""
+    }
+   ],
+   "images": [
+    "/store/Homemade_Hummus-1000.webp"
+   ]
+  },
+  "green-tahini": {
+   "handle": "green-tahini",
+   "title": "Green Tahini",
+   "he": "טחינה ירוקה",
+   "body": "<p>A sesame tahini paste with fresh herbs and garlic.</p>",
+   "tags": [
+    "סלט"
+   ],
+   "options": [],
+   "variants": [
+    {
+     "id": 46741025718442,
+     "title": "Default Title",
+     "options": [
+      "Default Title"
+     ],
+     "price": 35,
+     "compare": null,
+     "available": true,
+     "kept": ""
+    }
+   ],
+   "images": [
+    "/store/Green_Tahini-1000.webp"
+   ]
+  },
+  "green-salad": {
+   "handle": "green-salad",
+   "title": "Green salad",
+   "he": "סלט ירוק",
+   "body": "<p>Green herb salad featuring crispy greens, tangy cranberries, various seeds, and “silan” dates sauce.</p>",
+   "tags": [
+    "סלט"
+   ],
+   "options": [],
+   "variants": [
+    {
+     "id": 46741024145578,
+     "title": "Default Title",
+     "options": [
+      "Default Title"
+     ],
+     "price": 35,
+     "compare": null,
+     "available": true,
+     "kept": ""
+    }
+   ],
+   "images": [
+    "/store/Green_salad-1000.webp"
+   ]
+  },
+  "eggplant-in-mayonnaise": {
+   "handle": "eggplant-in-mayonnaise",
+   "title": "Eggplant in Mayonnaise",
+   "he": "חציל במיונז",
+   "body": "<p>Roasted eggplant blended with mayonnaise.</p>",
+   "tags": [
+    "סלט"
+   ],
+   "options": [],
+   "variants": [
+    {
+     "id": 46741016117418,
+     "title": "Default Title",
+     "options": [
+      "Default Title"
+     ],
+     "price": 35,
+     "compare": null,
+     "available": true,
+     "kept": ""
+    }
+   ],
+   "images": [
+    "/store/Eggplant_in_Mayonnaise-1000.webp"
+   ]
+  },
+  "cabbage": {
+   "handle": "cabbage",
+   "title": "Cabbage",
+   "he": "כרוב לבן",
+   "body": "<p>Crunchy cabbage and grated carrots in a tangy lemon dressing.</p>",
+   "tags": [
+    "סלט"
+   ],
+   "options": [],
+   "variants": [
+    {
+     "id": 46741015068842,
+     "title": "Default Title",
+     "options": [
+      "Default Title"
+     ],
+     "price": 35,
+     "compare": null,
+     "available": true,
+     "kept": ""
+    }
+   ],
+   "images": [
+    "/store/Cabbage-1000.webp"
+   ]
+  },
+  "beet-salad": {
+   "handle": "beet-salad",
+   "title": "Beet Salad",
+   "he": "סלק",
+   "body": "<p>Grated boiled beets with lemon, herbs and olive oil.</p>",
+   "tags": [
+    "סלט"
+   ],
+   "options": [],
+   "variants": [
+    {
+     "id": 46741010972842,
+     "title": "Default Title",
+     "options": [
+      "Default Title"
+     ],
+     "price": 35,
+     "compare": null,
+     "available": true,
+     "kept": ""
+    }
+   ],
+   "images": [
+    "/store/Beet_Salad-1000.webp"
+   ]
+  }
+ },
+ "collections": [
+  {
+   "handle": "main-courses",
+   "title": "Main Courses",
+   "he": "עיקריות",
+   "image": "",
+   "products": [
+    "roast-beef-with-mushrooms",
+    "chicken-shawarma",
+    "head-stew-with-chickpeas-and-peppers",
+    "chicken-thigh-steak",
+    "homemade-schnitzel",
+    "grilled-chicken-with-potatoes",
+    "mafrum",
+    "meatballs-in-moroccan-red-sauce",
+    "shakshuka",
+    "spicy-moroccan-sea-bream-fillet",
+    "spicy-moroccan-tilapia-fillet",
+    "couscous-with-vegetables",
+    "pasta-with-tomato-sauce",
+    "meatballs-with-green-beans-in-moroccan-red-sauce"
+   ]
+  },
+  {
+   "handle": "side-dishes",
+   "title": "Side Dishes",
+   "he": "תוספות",
+   "image": "",
+   "products": [
+    "french-fries",
+    "white-rice",
+    "green-beans",
+    "potatoes",
+    "mujadara-rice"
+   ]
+  },
+  {
+   "handle": "starters",
+   "title": "Salads",
+   "he": "סלטים",
+   "image": "",
+   "products": [
+    "matbucha-condiment",
+    "beet-salad",
+    "cabbage",
+    "eggplant-in-mayonnaise",
+    "green-salad",
+    "green-tahini",
+    "homemade-hummus",
+    "homemade-pickles",
+    "carrot",
+    "tahini",
+    "traditional-salad",
+    "egg-salad",
+    "fried-eggplant",
+    "fried-hot-pepper"
+   ]
+  },
+  {
+   "handle": "sandwiches",
+   "title": "Sandwiches",
+   "he": "כריכים",
+   "image": "",
+   "products": [
+    "halat-schnitzel",
+    "beef-cuts-challah",
+    "pita-shawarma",
+    "fish-cuts-challah",
+    "sabich-challah",
+    "shakshuka-challah",
+    "omelette-challah-with-toppings-of-your-choice",
+    "vegetable-patties-challah",
+    "hamburger-and-fries",
+    "asado-challah"
+   ]
+  },
+  {
+   "handle": "combos",
+   "title": "Business Lunch",
+   "he": "ארוחות עסקיות",
+   "image": "",
+   "products": [
+    "hamburger-combo",
+    "schnitzel-challah-combo",
+    "shawarma-pita-combo",
+    "asado-challah-combo",
+    "meatballs-challah-combo",
+    "fish-patties-challah",
+    "shakshuka-challah-combo",
+    "vegetable-patties-challah-combo",
+    "sabich-challah-combo",
+    "omelette-challah-with-toppings-of-your-choice-combo"
+   ]
+  },
+  {
+   "handle": "desserts",
+   "title": "Desserts",
+   "he": "קינוחים",
+   "image": "",
+   "products": [
+    "yeast-cake",
+    "fruit-salad"
+   ]
+  },
+  {
+   "handle": "soft-drinks",
+   "title": "Soft Drinks",
+   "he": "שתייה קלה",
+   "image": "",
+   "products": [
+    "coca-cola",
+    "coca-cola-zero",
+    "sprite",
+    "mirinda",
+    "soda",
+    "water"
+   ]
+  },
+  {
+   "handle": "specials",
+   "title": "Specials",
+   "he": "ספיישל שף לשישי",
+   "image": "",
+   "products": [
+    "meat-filled-pastry",
+    "beet-kubbeh",
+    "meat-filled-cigars",
+    "maklouba",
+    "baqila"
+   ]
+  },
+  {
+   "handle": "shabbat-meal-packages",
+   "title": "Shabbat Meals",
+   "he": "ארוחות שבת",
+   "image": "",
+   "products": [
+    "friday-couples-meal",
+    "family-friday-dinner",
+    "chamin",
+    "jachnun",
+    "electric-hot-plate-for-rent",
+    "bottle-of-grape-juice-for-kiddush-1",
+    "schnitzel-platter-1kg",
+    "challah-bread-medium",
+    "private-challah-bread"
+   ]
+  }
+ ],
+ "menu": [
+  {
+   "id": "8128202604714",
+   "title": "Couscous with Vegetables",
+   "he": "קוסקוס עם ירקות",
+   "group": "main",
+   "fixed": false,
+   "image": "/store/Couscous_with_Vegetables-400.webp"
+  },
+  {
+   "id": "8128191168682",
+   "title": "Homemade Hummus",
+   "he": "חומוס",
+   "group": "salad",
+   "fixed": false,
+   "image": "/store/Homemade_Hummus-400.webp"
+  },
+  {
+   "id": "8128193167530",
+   "title": "Matbucha",
+   "he": "מטבוחה",
+   "group": "salad",
+   "fixed": false,
+   "image": "/store/Matbucha-400.webp"
+  },
+  {
+   "id": "8130097086634",
+   "title": "Egg Salad",
+   "he": "סלט ביצים",
+   "group": "salad",
+   "fixed": false,
+   "image": "/store/Egg_Salad-400.webp"
+  },
+  {
+   "id": "8128184877226",
+   "title": "Eggplant in Mayonnaise",
+   "he": "חציל במיונז",
+   "group": "salad",
+   "fixed": false,
+   "image": "/store/Eggplant_in_Mayonnaise-400.webp"
+  },
+  {
+   "id": "8128184320170",
+   "title": "Cabbage",
+   "he": "כרוב לבן",
+   "group": "salad",
+   "fixed": false,
+   "image": "/store/Cabbage-400.webp"
+  },
+  {
+   "id": "8129888157866",
+   "title": "Spicy Moroccan Sea Bream Fillet",
+   "he": "דניס מרוקאי",
+   "group": "starter",
+   "fixed": false,
+   "image": "/store/ChatGPT_Image_Nov_23_2025_03_18_45_PM-400.webp"
+  },
+  {
+   "id": "8128181862570",
+   "title": "Beet Salad",
+   "he": "סלק",
+   "group": "salad",
+   "fixed": false,
+   "image": "/store/Beet_Salad-400.webp"
+  },
+  {
+   "id": "8128191594666",
+   "title": "Homemade pickles",
+   "he": "חמוצי הבית",
+   "group": "salad",
+   "fixed": false,
+   "image": "/store/Homemade_pickles-400.webp"
+  },
+  {
+   "id": "8129864761514",
+   "title": "Meatballs in Moroccan Red Sauce",
+   "he": "קציצות ברוטב מרוקאי",
+   "group": "main",
+   "fixed": false,
+   "image": "/store/Meatballs_in_Moroccan_Red_Sauce-400.webp"
+  },
+  {
+   "id": "8128194576554",
+   "title": "Traditional Salad",
+   "he": "סלט ירקות",
+   "group": "salad",
+   "fixed": false,
+   "image": "/store/Traditional_Salad-400.webp"
+  },
+  {
+   "id": "8290329165994",
+   "title": "Fried hot pepper",
+   "he": "פלפל חריף מטוגן",
+   "group": "salad",
+   "fixed": false,
+   "image": "/store/Friedhotpepper-400.webp"
+  },
+  {
+   "id": "8256983400618",
+   "title": "Fried Eggplant",
+   "he": "חציל מטוגן",
+   "group": "salad",
+   "fixed": false,
+   "image": "/store/Fried_Eggplant-400.webp"
+  },
+  {
+   "id": "8129886978218",
+   "title": "Grilled Chicken with Potatoes",
+   "he": "עוף עם תפוחי אדמה",
+   "group": "main",
+   "fixed": false,
+   "image": "/store/16_6c9a92dd-ccc5-4ca0-a3ae-bfbf4364be2a-400.webp"
+  },
+  {
+   "id": "8128194052266",
+   "title": "Tahini",
+   "he": "טחינה",
+   "group": "salad",
+   "fixed": false,
+   "image": "/store/Tahini-400.webp"
+  },
+  {
+   "id": "8128193659050",
+   "title": "Carrot",
+   "he": "גזר מזרחי",
+   "group": "salad",
+   "fixed": false,
+   "image": "/store/Carrot-400.webp"
+  },
+  {
+   "id": "8129888125098",
+   "title": "Spicy Moroccan Amnon Fillet",
+   "he": "אמנון מרוקאי",
+   "group": "starter",
+   "fixed": false,
+   "image": "/store/6ff11d84-d5c7-4132-a783-721b24b167a2-400.webp"
+  },
+  {
+   "id": "8128190152874",
+   "title": "Green Tahini",
+   "he": "טחינה ירוקה",
+   "group": "salad",
+   "fixed": false,
+   "image": "/store/Green_Tahini-400.webp"
+  },
+  {
+   "id": "8257006207146",
+   "title": "Meatballs with Green Beans in Moroccan Red Sauce",
+   "he": "קציצות עם שעועית ירוקה",
+   "group": "main",
+   "fixed": false,
+   "image": "/store/Meatballs_with_Green_Beans_in_Moroccan_Red_Sauce-400.webp"
+  }
+ ],
+ "packages": {
+  "friday-couples-meal": {
+   "salad": 7,
+   "starter": 2,
+   "main": 2
+  },
+  "family-friday-dinner": {
+   "salad": 10,
+   "starter": 5,
+   "main": 5
+  }
+ },
+ "policies": {
+  "privacy-policy": {
+   "title": "Privacy policy",
+   "html": "<p>This Privacy Policy outlines how DUBA KOSHER KITCHEN CO. L.L.C (\"Duba\", \"we\", \"our\", or \"us\") collects, uses, stores, and protects your personal data in compliance with the applicable laws of the United Arab Emirates (UAE), including the <strong>Federal Decree-Law No. 45 of 2021 on the Protection of Personal Data (PDPL)</strong> and applicable regulations from the Ministry of Economy.</p>\n<p>By using our website [https://dubakosher.com], placing an order, or contacting us, you agree to this Privacy Policy.</p>\n\n<h3><strong>1. Information We Collect</strong></h3>\n<p>We may collect and process the following types of information:</p>\n<p><strong>Identity and Contact Information</strong>: Full name, phone number, email, delivery address</p>\n<p><strong>Order and Transactional Data</strong>: Order history, delivery preferences</p>\n<p><strong>Payment Information</strong>: Credit/debit card details (processed via secure payment gateway – we do not store this information)</p>\n<p><strong>Usage Data</strong>: IP address, browser type, device information, and usage behavior via cookies</p>\n\n<h3><strong>2. Legal Basis for Processing (UAE PDPL)</strong></h3>\n<p>We collect and process your personal data under the following lawful bases:</p>\n<p>Performance of a contract (to fulfill your food order)</p>\n<p>Compliance with UAE legal obligations (tax, invoicing, and consumer protection laws)</p>\n<p>Your explicit consent (e.g., marketing opt-in)</p>\n<p>Legitimate interests (service improvement, fraud prevention)</p>\n\n<h3><strong>3. Use of Your Information</strong></h3>\n<p>We use the collected data to:</p>\n<p>Fulfill food orders and deliver them to you</p>\n<p>Process secure payments through authorized gateways</p>\n<p>Provide customer support and order updates</p>\n<p>Comply with UAE commercial and tax regulations</p>\n<p>Analyze usage to improve our website and services</p>\n\n<h3><strong>4. Payment Security and Data Protection</strong></h3>\n<p><strong>All credit/debit card details and personally identifiable information will NOT be stored, sold, shared, rented, or leased to any third parties.</strong></p>\n<p><strong>https://dubakosher.com will NOT pass any debit/credit card details to third parties.</strong></p>\n<p>We use <strong>Telr</strong> as our secure payment gateway, which complies with PCI-DSS (Payment Card Industry Data Security Standards).</p>\n<p>Your data is protected using SSL encryption and secure server infrastructure.</p>\n\n<h3><strong>5. Data Retention</strong></h3>\n<p>We retain personal data only as long as required to:</p>\n<p>Fulfill your order</p>\n<p>Comply with UAE laws (e.g., accounting and tax)</p>\n<p>Resolve disputes or legal claims</p>\n<p>You may request data deletion at any time (unless legally required to retain it).</p>\n\n<h3><strong>6. Sharing of Information</strong></h3>\n<p>We <strong>do not sell or rent</strong> your personal data.<br>We may share your information with:</p>\n<p><strong>Delivery providers</strong> – for order fulfillment</p>\n<p><strong>Payment processors</strong> – for secure payment handling</p>\n<p><strong>Government authorities</strong> – where required by UAE law</p>\n\n<h3><strong>7. Cookies and Tracking</strong></h3>\n<p>We use cookies and analytics to improve user experience. You may disable cookies via your browser, but this may impact certain site features.</p>\n\n<h3><strong>8. International Transfers</strong></h3>\n<p>Your data is stored and processed in the UAE. If we use third-party providers outside the UAE, we ensure they meet adequate data protection standards.</p>\n\n<h3><strong>9. Children’s Privacy</strong></h3>\n<p>Users under the age of 18 are <strong>not permitted</strong> to use or register on our website. We do not knowingly collect data from minors.</p>\n\n<h3><strong>10. Your Rights (Under UAE PDPL)</strong></h3>\n<p>You have the right to:</p>\n<p>Access your personal data</p>\n<p>Request corrections or deletion</p>\n<p>Withdraw consent for marketing communications</p>\n<p>File a complaint with the UAE Data Office if your rights are violated</p>\n<p>For any request, contact: <strong>office@dubacatering.com</strong></p>\n\n<h3><strong>11. Updates to This Policy</strong></h3>\n<p>We may update this policy from time to time. Updates will be posted with the revised date at the top. Continued use of the site after changes indicates your acceptance.</p>\n\n<h3><strong>12. Contact Us</strong></h3>\n<p>If you have any questions regarding this Privacy Policy or your personal data:</p>\n<p>📧 Email: <strong>office@dubacatering.com</strong><br>📞 Phone: <strong>+971-55-906-0717</strong><br>📍 Office: Dubai, United Arab Emirates</p>"
+  },
+  "refund-policy": {
+   "title": "Refund policy",
+   "html": "<p>At DUBA KOSHER KITCHEN CO. L.L.C (\"Duba\", \"we\", \"our\"), customer satisfaction is our top priority. Due to the nature of our business — delivering freshly prepared kosher meals — <strong>we are unable to accept returns once the food has been delivered</strong>. However, we do allow cancellations and refunds under certain conditions.</p>\n\n<h3><strong>1. Cancellation Policy</strong></h3>\n<p><strong>Same-day orders</strong>: Cannot be canceled or refunded after the order is placed, as preparation begins immediately.</p>\n<p><strong>Scheduled orders (for future delivery)</strong>: May be canceled within <strong>24 hour of placing the order</strong> to qualify for a full refund.</p>\n\n<h3><strong>2. Refund Eligibility</strong></h3>\n<p>A refund or replacement may be issued <strong>only in the following cases</strong>:</p>\n<p>The order delivered is <strong>incorrect</strong></p>\n<p>The food is <strong>damaged</strong> or <strong>not suitable for consumption</strong> due to our handling</p>\n<p>The order was <strong>not delivered</strong> as confirmed</p>\n<p>Customers must report the issue <strong>within 2 hours of receiving the order</strong>, along with <strong>photos and order number</strong>, by contacting us via email or WhatsApp.</p>\n\n<h3><strong>3. Refund Process</strong></h3>\n<p>Refunds will be done <strong>only through the original mode of payment</strong></p>\n<p>Refunds will be processed within <strong>10 to 45 days</strong>, depending on the issuing bank of the credit card</p>\n<p>Delivery charges are <strong>non-refundable</strong> unless the issue was caused by our error</p>\n\n<h3><strong>4. Contact for Refunds or Issues</strong></h3>\n<p>📧 Email: <strong>office@dubacatering.com</strong><br>📞 Phone: <strong>+971-55-906-0717</strong></p>"
+  },
+  "shipping-policy": {
+   "title": "Shipping policy",
+   "html": "<p>This Shipping Policy outlines how DUBA KOSHER KITCHEN CO. L.L.C (\"Duba\", \"we\", \"our\") delivers orders placed through our website https://dubakosher.com.</p>\n\n<h3><strong>1. Delivery Method</strong></h3>\n<p>All orders are delivered by a <strong>dedicated courier</strong>, under proper food safety and handling standards, ensuring that meals remain fresh and secure during transport.</p>\n\n<h3><strong>2. Delivery Areas and Fees</strong></h3>\n<p>We currently deliver to the following areas in the United Arab Emirates:</p>\n<p><strong>Dubai</strong><br>Flat-rate delivery fee: <strong>AED 48</strong></p>\n<p><strong>Abu Dhabi</strong><br>Same-day delivery is available.<br><strong>Delivery fees vary</strong> based on the destination within Abu Dhabi.<br>👉 <em>For exact pricing and availability, please contact us directly before placing your order.</em></p>\n<p>We do <strong>not offer international delivery</strong> at this time.</p>\n\n<h3><strong>3. Delivery Timeframes</strong></h3>\n<p><strong>Dubai</strong>:<br>Orders are typically delivered <strong>on the same day</strong>, depending on availability and cut-off time.</p>\n<p><strong>Abu Dhabi</strong>:<br>Same-day delivery is available; however, <strong>please contact us in advance</strong> to coordinate logistics and confirm timing and delivery cost.</p>\n<p>Note: Delivery times may vary during high-demand periods, weekends, or holidays. We’ll notify you of any delays.</p>\n\n<h3><strong>4. Delivery Conditions</strong></h3>\n<p>A recipient must be present at the delivery address to receive the order.</p>\n<p>Incorrect addresses or missed deliveries may incur additional charges.</p>\n<p>Deliveries are made Sunday to Friday. No deliveries on <strong>Shabbat or major holidays</strong>.</p>\n\n<h3><strong>5. Delivery Confirmation</strong></h3>\n<p>Once your order is on the way, we will notify you via <strong>WhatsApp or email</strong> with an estimated arrival time and courier details if available.</p>\n\n<h3><strong>6. Contact Us</strong></h3>\n<p>For questions about delivery, Abu Dhabi orders, or special arrangements:</p>\n<p>📧 <strong>Email</strong>: office@dubacatering.com<br>📞 <strong>Phone</strong>: +971-55-906-0717</p>"
+  },
+  "terms-of-service": {
+   "title": "Terms of service",
+   "html": "<p><strong>OVERVIEW</strong><br>This website is operated by DUBA KOSHER KITCHEN CO. L.L.C (\"Duba\", \"we\", \"us\", \"our\"). Duba offers this website, including all information, tools, and services available from this site to you, conditioned upon your acceptance of all terms, conditions, policies, and notices stated here.</p>\n<p>By accessing or using our website, making a purchase, or engaging with our services, you agree to be bound by the following Terms and Conditions (\"Terms\"), including additional terms and policies referenced herein or available by hyperlink. These Terms apply to all users of the site, including browsers, customers, merchants, or contributors of content.</p>\n<p>We reserve the right to update or modify any part of these Terms. Continued use of the website after changes constitutes acceptance.</p>\n\n<h3><strong>1. GENERAL CONDITIONS</strong></h3>\n<p>We reserve the right to refuse service to anyone for any reason at any time. You agree not to reproduce, duplicate, copy, sell, or exploit any portion of the service without our written permission.</p>\n\n<h3><strong>2. ACCURACY OF INFORMATION</strong></h3>\n<p>We are not responsible if the information on this site is inaccurate, incomplete, or outdated. Content is for general information purposes only and may be subject to change.</p>\n\n<h3><strong>3. MODIFICATIONS TO SERVICES AND PRICES</strong></h3>\n<p>Prices may change without notice. We reserve the right to modify or discontinue services without prior notice at any time.</p>\n\n<h3><strong>4. PRODUCTS OR SERVICES</strong></h3>\n<p>Certain products may be available exclusively online and may have limited quantities. All descriptions and pricing are subject to change without notice. Returns and refunds are governed by our Refund Policy.</p>\n\n<h3><strong>5. PAYMENT &amp; MULTI-CURRENCY TRANSACTIONS</strong></h3>\n<p>We accept Visa and Mastercard debit/credit cards in AED. Transactions will reflect the selected checkout currency and appear accordingly on your receipt. Online payments are processed via the Telr payment gateway and governed by their terms.</p>\n\n<h3><strong>6. ACCURACY OF BILLING INFORMATION</strong></h3>\n<p>We reserve the right to limit or cancel orders per person, household, or account. You agree to provide current, complete, and accurate purchase and account information for all transactions.</p>\n\n<h3><strong>6.1 ACCOUNT ELIGIBILITY &amp; USER RESPONSIBILITIES</strong></h3>\n<p>Users under the age of 18 are not permitted to register or transact on the website.<br>Cardholders must retain a copy of transaction records and our policies, available at https://dubakosher.com.<br>Users are responsible for maintaining the confidentiality of their account credentials.</p>\n\n<h3><strong>6.2 PAYMENT CONFIRMATION</strong></h3>\n<p>Upon successful payment, a confirmation of your order and payment will be sent immediately via <strong>email and/or WhatsApp</strong> to the contact information provided during checkout.<br>If you do not receive a confirmation within <strong>15 minutes</strong>, please contact us at <strong>office@dubacatering.com</strong> or <strong>+971-55-906-0717</strong> to verify your transaction.</p>\n\n<h3><strong>7. REFUNDS &amp; CANCELLATION</strong></h3>\n<p>Immediate orders cannot be canceled once placed. Future orders must be canceled within one hour to qualify for a refund, in accordance with our Refund Policy.</p>\n\n<h3><strong>8. PROHIBITED USES</strong></h3>\n<p>You may not use our site for unlawful purposes or violate any UAE laws. This includes transmitting viruses or infringing on intellectual property rights.</p>\n\n<h3><strong>9. INTELLECTUAL PROPERTY &amp; USER SUBMISSIONS</strong></h3>\n<p>By submitting content, you grant us a perpetual, worldwide, royalty-free license to use it. We are not obligated to maintain content in confidence or provide compensation.</p>\n\n<h3><strong>10. PRIVACY POLICY</strong></h3>\n<p>Personal information submitted through our site is governed by our Privacy Policy, which complies with UAE data protection laws.</p>\n\n<h3><strong>11. THIRD-PARTY LINKS</strong></h3>\n<p>We are not responsible for third-party content or practices on sites linked from our website.</p>\n\n<h3><strong>12. DISCLAIMER OF WARRANTIES; LIMITATION OF LIABILITY</strong></h3>\n<p>Our services are provided \"as is\" and \"as available.\" We do not guarantee uninterrupted or error-free service and are not liable for indirect or consequential damages.</p>\n\n<h3><strong>13. INDEMNIFICATION</strong></h3>\n<p>You agree to indemnify and hold harmless Duba, its affiliates, officers, and employees from any claim arising from your breach of these Terms.</p>\n\n<h3><strong>14. TERMINATION</strong></h3>\n<p>We may suspend or terminate access to our services without notice for any violation of these Terms.</p>\n\n<h3><strong>15. SEVERABILITY</strong></h3>\n<p>If any provision of these Terms is found unenforceable, the remainder shall remain in full force and effect.</p>\n\n<h3><strong>16. GOVERNING LAW</strong></h3>\n<p>These Terms are governed by the laws of the United Arab Emirates. Any disputes will be handled in the competent courts of the UAE.</p>\n\n<h3><strong>17. OFFICE OF FOREIGN ASSETS CONTROL (OFAC)</strong></h3>\n<p>We do not trade with or provide services/products to individuals, entities, or countries sanctioned by OFAC.</p>\n\n<h3><strong>18. CONTACT INFORMATION</strong></h3>\n<p>For questions about these Terms:<br>📧 <strong>Email</strong>: office@dubacatering.com<br>📞 <strong>Phone</strong>: +971-55-906-0717</p>"
+  }
+ },
+ "customerPhotos": [
+  "/store/IMG-20250424-WA0006-800.webp",
+  "/store/WhatsApp_2025-04-23_23_13_47_bbab5fd8-800.webp",
+  "/store/IMG-20250424-WA0007-800.webp",
+  "/store/WhatsApp_2025-04-24_14_37_53_ac81e16e-800.webp",
+  "/store/IMG-20250424-WA0011-800.webp",
+  "/store/WhatsApp_2025-04-24_12_21_56_4f4a3292-800.webp",
+  "/store/IMG-20250424-WA0012-800.webp",
+  "/store/WhatsApp_2025-04-24_12_00_28_82ec2491-800.webp",
+  "/store/IMG-20250424-WA0014-800.webp",
+  "/store/IMG-20250424-WA0044-800.webp",
+  "/store/IMG-20250424-WA0009-800.webp",
+  "/store/IMG-20250424-WA0045-800.webp",
+  "/store/IMG-20250424-WA0013-800.webp",
+  "/store/IMG-20250424-WA0046-800.webp",
+  "/store/IMG-20250424-WA0010-800.webp",
+  "/store/IMG-20250424-WA0047-800.webp",
+  "/store/WhatsApp_2025-04-23_23_09_02_02493355-800.webp",
+  "/store/WhatsApp_2025-04-23_23_15_25_9c38d2e8-800.webp",
+  "/store/WhatsApp_2025-04-23_23_16_15_0974b462-800.webp",
+  "/store/WhatsApp_2025-04-23_23_21_06_ce7af6f0-800.webp",
+  "/store/WhatsApp_2025-04-23_23_32_50_58a8b6dd-800.webp",
+  "/store/IMG-20250424-WA0008-800.webp",
+  "/store/WhatsApp_2025-04-24_15_38_04_f14b3cce-800.webp"
+ ],
+ "extras": {
+  "chef": "/store/1G4A2612-1500.webp",
+  "story": "/store/Untitled-design-4-1500.webp",
+  "people": "/store/logo_breath_10-1500.webp",
+  "kosher": "/store/1_d1c78dbe-3e76-4ecf-ab4e-3487698be73e-2000.webp",
+  "shabbat": "/store/Couple_s_Packages_Friday_Dinner-1500.webp",
+  "sides": "/store/9bff606e-ce4b-4c58-a071-366050d46b66-1500.webp",
+  "video": "/store/home-video.mp4"
+ }
+}

@@ -13,10 +13,7 @@ export async function POST(request: Request) {
   }
   const result = await writeBotOrder(await request.json());
   if (result.ok) {
-    revalidatePath("/");
-    revalidatePath("/orders");
-    revalidatePath("/today");
-    revalidatePath("/board");
+    revalidatePath("/", "layout");
   }
   return Response.json(result, { status: result.status });
 }

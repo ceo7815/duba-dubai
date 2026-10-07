@@ -1,52 +1,129 @@
 "use client";
 
-import { useActionState } from "react";
+import { useActionState, useState } from "react";
 import type { FormState } from "@/app/auth-actions";
-import { MenuField } from "@/app/menu-field";
 import { WhenField } from "@/app/when-field";
-import { saveCash, saveFee, saveInvoice } from "@/app/money/actions";
+import { saveExpense, saveFee, type ExpenseState } from "@/app/money/actions";
+import { expenseKinds, paymentMethods, type ExpenseKind, type PaymentMethod } from "./expense-types";
 
 const initial: FormState = null;
 
-export function CashForm() {
-  const [state, action, pending] = useActionState(saveCash, initial);
+export function ExpenseForm({ today }: { today: string }) {
+  const [state, action, pending] = useActionState<ExpenseState, FormData>(saveExpense, null);
   return (
-    <form action={action} className="flex flex-col gap-3 rounded-2xl border border-line bg-card p-4">
-      <h2 className="text-lg font-extrabold">מזומן</h2>
-      <MenuField
-        name="direction"
-        defaultValue="in"
-        options={[
-          { value: "in", label: "נכנס" },
-          { value: "out", label: "יוצא" },
-          { value: "refund", label: "החזר" },
-        ]}
-      />
-      <input name="amount" required inputMode="decimal" dir="ltr" placeholder="סכום" className="field field-en" />
-      <WhenField name="happened_on" />
-      <input name="note" placeholder="הערה" className="field" />
+    <form action={action} className="flex flex-col gap-4 rounded-2xl border border-line bg-card p-4">
+      <div className="flex items-center justify-between gap-3">
+        <h2 className="text-lg font-extrabold">הוצאה חדשה</h2>
+        {state?.saved && !pending ? <span className="text-sm font-bold text-muted">נשמר ✓</span> : null}
+      </div>
+      <ExpenseFields key={state?.saved ?? 0} today={today} />
       {state?.error ? <p className="text-sm font-bold">{state.error}</p> : null}
       <button disabled={pending} className="button">
-        {pending ? "שומרים" : "שמירה"}
+        {pending ? "שומרים…" : "שמירת הוצאה"}
       </button>
     </form>
   );
 }
 
-export function InvoiceForm() {
-  const [state, action, pending] = useActionState(saveInvoice, initial);
+function ExpenseFields({ today }: { today: string }) {
+  const [kind, setKind] = useState<ExpenseKind>("supplier");
+  const [method, setMethod] = useState<PaymentMethod>("transfer");
+  const current = expenseKinds.find((item) => item.id === kind)!;
+
   return (
-    <form action={action} className="flex flex-col gap-3 rounded-2xl border border-line bg-card p-4">
-      <h2 className="text-lg font-extrabold">חשבונית ספק</h2>
-      <input name="supplier" required placeholder="ספק" className="field" />
-      <input name="amount" required inputMode="decimal" dir="ltr" placeholder="סכום" className="field field-en" />
-      <WhenField name="happened_on" />
-      <input name="note" placeholder="הערה לצילום" className="field" />
-      {state?.error ? <p className="text-sm font-bold">{state.error}</p> : null}
-      <button disabled={pending} className="button">
-        {pending ? "שומרים" : "לתור של מלי"}
-      </button>
-    </form>
+    <>
+      <input type="hidden" name="kind" value={kind} />
+      <input type="hidden" name="method" value={method} />
+
+      <Segmented label="סוג הוצאה" options={expenseKinds} value={kind} onChange={setKind} />
+
+      <label className="flex flex-col gap-1.5">
+        <span className="text-xs font-bold text-muted">{current.payee}</span>
+        <input name="supplier" required placeholder={current.hint} className="field" autoComplete="off" />
+      </label>
+
+      <div className="flex flex-col gap-4">
+        <label className="flex flex-col gap-1.5">
+          <span className="text-xs font-bold text-muted">סכום (AED)</span>
+          <input
+            name="amount"
+            required
+            inputMode="decimal"
+            dir="ltr"
+            placeholder="0"
+            className="field field-en text-lg font-extrabold"
+          />
+        </label>
+        <div className="flex flex-col gap-1.5">
+          <span className="text-xs font-bold text-muted">תאריך תשלום</span>
+          <WhenField name="happened_on" defaultValue={today} />
+        </div>
+      </div>
+
+      <Segmented label="אופן תשלום" options={paymentMethods} value={method} onChange={setMethod} columns={4} />
+
+      <label className="flex flex-col gap-1.5">
+        <span className="text-xs font-bold text-muted">הערות</span>
+        <textarea
+          name="note"
+          rows={2}
+          placeholder="מספר חשבונית, על מה שולם…"
+          className="field resize-none py-3 leading-6"
+        />
+      </label>
+    </>
+  );
+}
+
+function Segmented<T extends string>({
+  label,
+  options,
+  value,
+  onChange,
+  columns = 3,
+}: {
+  label: string;
+  options: readonly { id: T; label: string }[];
+  value: T;
+  onChange: (value: T) => void;
+  columns?: number;
+}) {
+  return (
+    <div className="flex flex-col gap-1.5" role="radiogroup" aria-label={label}>
+      <span className="text-xs font-bold text-muted">{label}</span>
+      <div
+        className="grid gap-1 rounded-2xl bg-paper p-1"
+        style={{ gridTemplateColumns: `repeat(${columns}, minmax(0, 1fr))` }}
+      >
+        {options.map((option) => (
+          <button
+            key={option.id}
+            type="button"
+            role="radio"
+            aria-checked={value === option.id}
+            onClick={() => onChange(option.id)}
+            className={`min-h-11 rounded-xl px-1 text-[13px] font-extrabold leading-tight ${
+              value === option.id ? "bg-ink text-white shadow-sm" : "text-ink/70"
+            }`}
+          >
+            {option.label}
+          </button>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+export function ConfirmDelete() {
+  return (
+    <button
+      className="px-1 text-xs font-bold text-muted underline"
+      onClick={(event) => {
+        if (!window.confirm("למחוק את ההוצאה?")) event.preventDefault();
+      }}
+    >
+      מחיקה
+    </button>
   );
 }
 

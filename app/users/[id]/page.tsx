@@ -1,17 +1,14 @@
 import { notFound, redirect } from "next/navigation";
 import { Work } from "@/app/shell";
+import { DeleteUser } from "@/app/users/delete-user";
 import { UserForm } from "@/app/users/user-form";
 import { requireProfile } from "@/lib/profile";
-import { isRole } from "@/lib/roles";
+import { isRole, fullAccess } from "@/lib/roles";
 import { createClient } from "@/lib/supabase/server";
 
-export default async function EditUserPage({
-  params,
-}: {
-  params: Promise<{ id: string }>;
-}) {
+export default async function EditUserPage({ params }: PageProps<"/users/[id]">) {
   const profile = await requireProfile();
-  if (profile.role !== "owner") redirect("/account");
+  if (!fullAccess(profile?.role)) redirect("/login");
 
   const { id } = await params;
   const supabase = await createClient();
@@ -22,12 +19,14 @@ export default async function EditUserPage({
     .maybeSingle();
 
   if (!data || !isRole(data.role)) notFound();
+  const self = data.id === profile.id;
 
   return (
     <Work title="עריכת משתמש" backHref="/users" role={profile.role}>
-      <UserForm
+      <section className="rounded-2xl border border-line bg-card p-4">
+        <UserForm
           mode="edit"
-          self={data.id === profile.id}
+          self={self}
           user={{
             id: data.id,
             full_name: data.full_name,
@@ -37,6 +36,8 @@ export default async function EditUserPage({
             active: data.active,
           }}
         />
+      </section>
+      {self ? null : <DeleteUser id={data.id} name={data.full_name} />}
     </Work>
   );
 }

@@ -7,10 +7,11 @@ import { inDays } from "@/lib/metrics";
 import { listOrders } from "@/lib/orders";
 import { requireProfile } from "@/lib/profile";
 import { createClient } from "@/lib/supabase/server";
+import { fullAccess } from "@/lib/roles";
 
 export default async function GrokPage() {
   const profile = await requireProfile();
-  if (profile.role !== "owner") redirect("/");
+  if (!fullAccess(profile?.role)) redirect("/login");
 
   const supabase = await createClient();
   const [orders, itemsResult] = await Promise.all([
@@ -38,7 +39,7 @@ export default async function GrokPage() {
   return (
     <Work title="Grok" role={profile.role}>
       <p className="text-sm leading-6 text-muted">
-        התשובות כאן מחושבות מההזמנות שכבר במערכת. וואטסאפ ושופיפיי עדיין לא מחוברים. כשיהיו, שניהם יכתבו לאותה הזמנה והתשלום יוריד אותה למטבח.
+        התשובות כאן מחושבות מההזמנות שכבר במערכת: הזמנות מחנות האתר והזמנות ידניות.
       </p>
       <Questions
         items={[
@@ -48,7 +49,7 @@ export default async function GrokPage() {
           },
           {
             question: "כמה כסף צפוי להיכנס",
-            answer: `מקישורי שופיפיי שעוד לא שולמו צפויים ${money(expected)}.`,
+            answer: `מקישורי תשלום שעוד לא שולמו צפויים ${money(expected)}.`,
           },
           {
             question: "מי הלקוח שקנה הכי הרבה",

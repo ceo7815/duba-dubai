@@ -1,9 +1,11 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import { confirmGuestOrder } from "@/app/o/actions";
 
 export function ConfirmOrder({ token }: { token: string }) {
+  const router = useRouter();
   const [done, setDone] = useState(false);
   const [pending, setPending] = useState(false);
   const [error, setError] = useState("");
@@ -18,12 +20,13 @@ export function ConfirmOrder({ token }: { token: string }) {
       return;
     }
     setDone(true);
+    router.refresh();
   }
 
   if (done) {
     return (
       <p className="rounded-full bg-[#1c1c1c] px-4 py-3.5 text-center text-sm font-medium text-white">
-        ההזמנה אושרה. הקישור נשאר פתוח
+        ההזמנה אושרה
       </p>
     );
   }

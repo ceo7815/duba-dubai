@@ -1,8 +1,9 @@
 "use server";
 
+import { flash } from "@/lib/flash";
 import { redirect } from "next/navigation";
 import { accessToken, getProfile } from "@/lib/profile";
-import { isRole } from "@/lib/roles";
+import { isRole, fullAccess } from "@/lib/roles";
 import { manageUsers } from "@/lib/manage-users";
 import { createClient } from "@/lib/supabase/server";
 
@@ -29,7 +30,7 @@ export async function login(
     return { error: "החשבון הזה כבוי" };
   }
 
-  redirect("/");
+  redirect("/login");
 }
 
 export async function setupOwner(
@@ -68,7 +69,8 @@ export async function createUser(
   formData: FormData,
 ): Promise<FormState> {
   const profile = await getProfile();
-  if (profile?.role !== "owner") return { error: "רק בעלים יכול להוסיף משתמש" };
+  if (!fullAccess(profile?.role))
+    return { error: "רק בעלים יכול להוסיף משתמש" };
 
   const fullName = field(formData, "full_name");
   const phone = field(formData, "phone");
@@ -97,6 +99,8 @@ export async function createUser(
   );
   if ("error" in created) return created;
 
+  await flash("המשתמש נוסף ✓");
+
   redirect("/users");
 }
 
@@ -105,7 +109,7 @@ export async function updateUser(
   formData: FormData,
 ): Promise<FormState> {
   const profile = await getProfile();
-  if (profile?.role !== "owner") return { error: "רק בעלים יכול לעדכן משתמש" };
+  if (!fullAccess(profile?.role)) return { error: "רק בעלים יכול לעדכן משתמש" };
 
   const id = field(formData, "id");
   const fullName = field(formData, "full_name");
@@ -136,6 +140,24 @@ export async function updateUser(
     token,
   );
   if ("error" in updated) return updated;
+
+  await flash("השינויים נשמרו ✓");
+
+  redirect("/users");
+}
+
+export async function deleteUser(id: string): Promise<FormState> {
+  const profile = await getProfile();
+  if (!fullAccess(profile?.role)) return { error: "רק בעלים יכול למחוק משתמש" };
+  if (!id || id === profile.id) return { error: "אי אפשר למחוק את עצמך" };
+
+  const token = await accessToken();
+  if (!token) return { error: "נדרשת כניסה מחדש" };
+
+  const removed = await manageUsers({ action: "delete", id }, token);
+  if ("error" in removed) return removed;
+
+  await flash("המשתמש נמחק ✓");
 
   redirect("/users");
 }

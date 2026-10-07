@@ -1,4 +1,13 @@
+import type { Metadata } from "next";
 import { LoginForm } from "@/app/login/login-form";
+
+const description = "קישור הכניסה של צוות דובה למערכת הניהול – הזמנות, מטבח, לקוחות וכספים.";
+
+export const metadata: Metadata = {
+  title: "כניסה למערכת הניהול · דובה",
+  description,
+  openGraph: { title: "דובה · כניסה למערכת הניהול", description, url: "/admin" },
+};
 
 export default function LoginPage() {
   return (
