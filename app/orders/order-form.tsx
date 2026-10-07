@@ -4,6 +4,7 @@ import { useEffect, useMemo, useState, type FormEvent } from "react";
 import { useRouter } from "next/navigation";
 import { MenuField } from "@/app/menu-field";
 import { MenuPicker } from "@/app/orders/menu-picker";
+import { PhoneField } from "@/app/phone-field";
 import { WhenField } from "@/app/when-field";
 import { saveOrder } from "@/app/orders/actions";
 import type { MenuDish } from "@/lib/catalog";
@@ -141,17 +142,10 @@ export function OrderForm({
           שם
           <input name="customer_name" required defaultValue={order?.customer_name} className="field" />
         </label>
-        <label className="flex flex-col gap-2 text-sm font-bold">
+        <div className="flex flex-col gap-2 text-sm font-bold">
           טלפון
-          <input
-            name="phone"
-            required
-            inputMode="tel"
-            dir="ltr"
-            defaultValue={order?.phone}
-            className="field field-en"
-          />
-        </label>
+          <PhoneField name="phone" defaultValue={order?.phone} />
+        </div>
         <label className="flex flex-col gap-2 text-sm font-bold">
           מלון
           <input

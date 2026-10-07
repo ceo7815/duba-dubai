@@ -15,10 +15,10 @@ import {
   isStatus,
   needsDestination,
   nextSteps,
-  phoneKey,
   stepPatch,
   type OrderStatus,
 } from "@/lib/domain";
+import { normalizePhone } from "@/lib/phone";
 import { getProfile } from "@/lib/profile";
 import { stripeCheckout } from "@/lib/stripe";
 import { createClient } from "@/lib/supabase/server";
@@ -50,8 +50,9 @@ export async function saveOrder(
 
   const id = field(formData, "id");
   const customerName = field(formData, "customer_name");
-  const phone = field(formData, "phone");
-  const key = phoneKey(phone);
+  const normalized = normalizePhone(field(formData, "phone"));
+  if (!normalized) return { error: "מספר הטלפון לא תקין. בחרו מדינה והקלידו את המספר" };
+  const { phone, key } = normalized;
   const when = field(formData, "scheduled_at");
   const orderKind = field(formData, "order_kind");
   const fulfillment = field(formData, "fulfillment");
