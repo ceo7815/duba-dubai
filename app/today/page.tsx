@@ -2,7 +2,7 @@ import Link from "next/link";
 import { redirect } from "next/navigation";
 import { SendToChef } from "@/app/orders/send-to-chef";
 import { Work } from "@/app/shell";
-import { dayMessage, kitchenChef } from "@/lib/kitchen-message";
+import { chefIntro, kitchenChef } from "@/lib/kitchen-message";
 import { formatClock } from "@/lib/dates";
 import { isStage, money, stageLabels, stageOf, stages, type Stage } from "@/lib/domain";
 import { itemsByOrder } from "@/lib/orders";
@@ -67,8 +67,9 @@ export default async function TodayPage({ searchParams }: PageProps<"/today">) {
 
       {shown.length > 0 ? (
         <SendToChef
-          text={dayMessage(shown, items)}
-          label={`שליחת ${shown.length === 1 ? "ההזמנה" : `${shown.length} ההזמנות`} ל${kitchenChef.name}`}
+          orderIds={shown.map((order) => order.id)}
+          intro={chefIntro(shown)}
+          label={`שליחת PDF של ${shown.length === 1 ? "ההזמנה" : `${shown.length} ההזמנות`} ל${kitchenChef.name}`}
         />
       ) : null}
 

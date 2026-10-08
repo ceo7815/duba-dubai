@@ -6,6 +6,7 @@ function isMachine(pathname: string) {
     pathname.startsWith("/api/bot") ||
     pathname.startsWith("/api/stripe") ||
     pathname.startsWith("/o/") ||
+    pathname.startsWith("/k/") ||
     pathname === "/shop" ||
     pathname.startsWith("/shop/") ||
     pathname.startsWith("/store/") ||

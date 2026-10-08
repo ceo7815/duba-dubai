@@ -138,7 +138,7 @@ export function OrderPage({
           <div className="shrink-0 text-end">
             <p className="text-[11pt] font-bold">{day}</p>
             <p className="text-[26pt] font-extrabold leading-[1.05] tabular-nums">
-              {formatClock(order.scheduled_at)}
+              <bdi dir="ltr">{formatClock(order.scheduled_at)}</bdi>
             </p>
           </div>
         </div>
