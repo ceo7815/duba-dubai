@@ -11,6 +11,7 @@ import {
 } from "@/lib/domain";
 import type { OrderItem, OrderRow } from "@/lib/orders";
 import { orderMoney } from "@/lib/currency";
+import { parsePick } from "@/lib/packages";
 
 export function PrintFrame({
   back,
@@ -69,7 +70,10 @@ export function OrderPage({
   const balance = Math.max(0, amount - Number(order.paid));
   const deposit = Number(order.tray_deposit ?? 0);
   const cash = order.ending === "cash";
-  const pieces = items.reduce((sum, item) => sum + Number(item.quantity), 0);
+  const pieces = items.reduce(
+    (sum, item, index) => (items[index + 1] && parsePick(items[index + 1].name) ? sum : sum + Number(item.quantity)),
+    0,
+  );
   const number = order.id.slice(0, 6).toUpperCase();
   const day = new Intl.DateTimeFormat("he-IL", {
     timeZone: "Asia/Dubai",
@@ -187,13 +191,18 @@ export function OrderPage({
         </div>
         <table className="w-full border-collapse">
           <tbody>
-            {items.map((item) => (
+            {items.map((item, index) => {
+              const pick = parsePick(item.name);
+              const parent = !pick && items[index + 1] && parsePick(items[index + 1].name);
+              return (
               <tr
                 key={item.id}
-                className="break-inside-avoid border-b border-[#e4dfd7]"
+                className={`break-inside-avoid border-b border-[#e4dfd7] ${parent ? "bg-[#f1eee9]" : ""}`}
               >
                 <td className="w-[9mm] py-[1.6mm] align-middle">
-                  <span className="block size-[5mm] rounded-[1.2mm] border-[1.5px] border-[#111111]" />
+                  {parent ? null : (
+                    <span className="block size-[5mm] rounded-[1.2mm] border-[1.5px] border-[#111111]" />
+                  )}
                 </td>
                 <td className="w-[15mm] py-[1.6mm] align-middle">
                   <span className="flex h-[8mm] w-[11mm] items-center justify-center rounded-[2mm] bg-[#f1eee9] text-[14pt] font-extrabold tabular-nums">
@@ -201,7 +210,14 @@ export function OrderPage({
                   </span>
                 </td>
                 <td className="py-[1.6mm] align-middle text-[12.5pt] font-bold leading-snug">
-                  {item.name}
+                  {pick ? (
+                    <span className="ps-[4mm]">
+                      <span className="text-[10pt] text-[#7a7268]">{pick.label} · </span>
+                      {pick.name}
+                    </span>
+                  ) : (
+                    <span className={parent ? "font-extrabold" : ""}>{item.name}</span>
+                  )}
                 </td>
                 <td className="w-[12mm] py-[1.6mm] align-middle">
                   {item.image_url ? (
@@ -213,7 +229,8 @@ export function OrderPage({
                   ) : null}
                 </td>
               </tr>
-            ))}
+              );
+            })}
           </tbody>
         </table>
         {items.length === 0 ? (

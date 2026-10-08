@@ -3,6 +3,7 @@ import { OrderForm } from "@/app/orders/order-form";
 import { Work } from "@/app/shell";
 import { toDubaiInput } from "@/lib/dates";
 import { listMenu } from "@/lib/menu";
+import { loadPackages } from "@/lib/package-rules";
 import { loadRates } from "@/lib/rates";
 import { getOrder } from "@/lib/orders";
 import { requireProfile } from "@/lib/profile";
@@ -35,6 +36,7 @@ export default async function EditOrderPage({
           currency_rate: Number(found.order.currency_rate),
         }}
         dishes={await listMenu()}
+        packages={await loadPackages()}
         autoLink={stripeReady()}
         rates={await loadRates()}
         items={found.items.map((item) => ({

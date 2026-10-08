@@ -1,6 +1,14 @@
 import { cache } from "react";
 import { createClient } from "@/lib/supabase/server";
-import { catalog, isPackage, type Collection, type MenuDish, type Product, type Variant } from "./catalog";
+import {
+  catalog,
+  isPackage,
+  type Collection,
+  type MenuDish,
+  type PackageMenu,
+  type Product,
+  type Variant,
+} from "./catalog";
 
 type MenuRow = { kept: string; label_he: string; price: number; compare: number | null; available: boolean };
 
@@ -18,7 +26,7 @@ type MenuProduct = {
   rows: MenuRow[];
 };
 
-type MenuData = { products: MenuProduct[]; package_dishes: MenuDish[] };
+type MenuData = { products: MenuProduct[]; package_dishes: MenuDish[]; packages?: Record<string, PackageMenu> };
 
 function combinations(lists: string[][]): string[][] {
   return lists.reduce<string[][]>((all, values) => all.flatMap((prefix) => values.map((value) => [...prefix, value])), [[]]);
@@ -55,7 +63,12 @@ function toProduct(row: MenuProduct): Product {
   };
 }
 
-function build(products: Product[], menu: MenuDish[], placement: Map<string, string[]>) {
+function build(
+  products: Product[],
+  menu: MenuDish[],
+  placement: Map<string, string[]>,
+  packages: Record<string, PackageMenu> = {},
+) {
   const byHandle = Object.fromEntries(products.map((item) => [item.handle, item]));
   const collections: Collection[] = catalog.collections.map((meta) => ({
     ...meta,
@@ -81,7 +94,13 @@ function build(products: Product[], menu: MenuDish[], placement: Map<string, str
       return (collection(handle)?.products ?? []).map((key) => byHandle[key]).filter(Boolean);
     },
     fridayOnly(handle: string) {
-      return isPackage(handle) || specials.has(handle);
+      return isPackage(handle) || handle in packages || specials.has(handle);
+    },
+    packageMenu(handle: string): PackageMenu | null {
+      const saved = packages[handle];
+      if (saved) return saved;
+      const limits = catalog.packages[handle];
+      return limits ? { limits, dishes: menu } : null;
     },
   };
 }
@@ -106,7 +125,7 @@ export const getStore = cache(async () => {
   }
   const products = menu.products.filter((row) => row.rows.length > 0).map(toProduct);
   const placement = new Map(menu.products.map((row) => [row.handle, row.collections ?? []]));
-  return build(products, menu.package_dishes, placement);
+  return build(products, menu.package_dishes, placement, menu.packages ?? {});
 });
 
 export type Store = Awaited<ReturnType<typeof getStore>>;

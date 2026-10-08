@@ -4,8 +4,8 @@ import Link from "next/link";
 import { useEffect, useRef, useState, useTransition } from "react";
 import { money } from "@/lib/domain";
 import { collectionLabels } from "@/lib/store/i18n";
-import { setPackageDish, setStock } from "./actions";
-import type { AdminProduct, PackageDish } from "./data";
+import { setStock } from "./actions";
+import type { AdminProduct } from "./data";
 import { menuCollections } from "./types";
 
 const NONE = "none";
@@ -212,46 +212,5 @@ function ProductRow({ product }: { product: AdminProduct }) {
         {error ? <p className="text-sm font-bold text-[#d64545]">{error}</p> : null}
       </div>
     </article>
-  );
-}
-
-const groupLabels: Record<string, string> = { salad: "סלטים", starter: "ראשונות", main: "עיקריות" };
-
-export function PackageDishes({ dishes }: { dishes: PackageDish[] }) {
-  return (
-    <section className="mt-4 flex flex-col gap-3">
-      <h2 className="text-lg font-extrabold">מנות לבחירה בחבילות שישי</h2>
-      <p className="text-sm leading-6 text-muted">מנה כבויה לא מופיעה ללקוח בבחירת החבילה.</p>
-      {["salad", "starter", "main"].map((grp) => (
-        <div key={grp} className="flex flex-col gap-2">
-          <p className="text-sm font-extrabold">{groupLabels[grp]}</p>
-          {dishes
-            .filter((dish) => dish.grp === grp)
-            .map((dish) => (
-              <PackageDishRow key={dish.id} dish={dish} />
-            ))}
-        </div>
-      ))}
-    </section>
-  );
-}
-
-function PackageDishRow({ dish }: { dish: PackageDish }) {
-  const [pending, start] = useTransition();
-  return (
-    <div className={`flex items-center gap-3 rounded-2xl border border-line bg-card p-2 ${pending ? "opacity-60" : ""}`}>
-      {dish.image ? <img src={dish.image} alt="" className="size-11 rounded-full object-cover" /> : null}
-      <p className="min-w-0 flex-1 truncate text-sm font-bold">{dish.title_he}</p>
-      <button
-        type="button"
-        disabled={pending}
-        onClick={() => start(async () => void (await setPackageDish(dish.id, !dish.active)))}
-        className={`min-h-9 rounded-xl px-3 text-xs font-extrabold ${
-          dish.active ? "bg-[#e3f3e8] text-[#1b6a33]" : "bg-[#d64545] text-white"
-        }`}
-      >
-        {dish.active ? "זמין" : "כבוי · להפעיל"}
-      </button>
-    </div>
   );
 }

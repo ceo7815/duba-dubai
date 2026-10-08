@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { catalog, isPackage, soldOut } from "@/lib/store/catalog";
+import { soldOut } from "@/lib/store/catalog";
 import { aed, nameOf } from "@/lib/store/i18n";
 import { getDict } from "@/lib/store/lang";
 import { getStore } from "@/lib/store/menu";
@@ -56,13 +56,13 @@ export default async function ProductPage({ params }: PageProps<"/shop/products/
   if (!item) notFound();
   const { lang, t } = await getDict();
   const name = nameOf(item, lang);
-  const pack = isPackage(handle);
+  const packMenu = store.packageMenu(handle);
+  const pack = packMenu !== null;
   const friday = store.fridayOnly(handle);
   const special = store.specials.has(handle);
   const closed = special && !specialsOpen();
-  const limits = catalog.packages[handle];
   const variant = item.variants[0];
-  const lines = pack ? packageText[lang](limits, handle === "family-friday-dinner" ? 3 : 2) : [];
+  const lines = packMenu ? packageText[lang](packMenu.limits, handle === "family-friday-dinner" ? 3 : 2) : [];
   const hebrewBody = lang === "he" && Boolean(item.bodyHe?.trim());
   const body = hebrewBody ? item.bodyHe ?? "" : item.body;
 
@@ -117,7 +117,7 @@ export default async function ProductPage({ params }: PageProps<"/shop/products/
             </details>
           </div>
         </div>
-        {pack && !soldOut(item) ? (
+        {packMenu && !soldOut(item) ? (
           <PackageBuilder
             handle={handle}
             title={item.title}
@@ -125,8 +125,8 @@ export default async function ProductPage({ params }: PageProps<"/shop/products/
             image={item.images[0] ?? ""}
             price={variant.price}
             variant={variant.kept}
-            limits={limits}
-            menu={store.menu}
+            limits={packMenu.limits}
+            menu={packMenu.dishes}
             lang={lang}
           />
         ) : null}

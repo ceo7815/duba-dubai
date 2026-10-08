@@ -64,11 +64,17 @@ export function MenuPicker({
   dishes,
   qty,
   onChange,
+  packs = {},
+  onPackage,
 }: {
   dishes: MenuDish[];
   qty: Record<string, number>;
   onChange: (id: string, next: number) => void;
+  /** Package dish id → number of packages built; these open the builder instead of a quantity. */
+  packs?: Record<string, number>;
+  onPackage?: (id: string) => void;
 }) {
+  const hasPacks = Object.values(packs).some((count) => count > 0);
   const [query, setQuery] = useState("");
   const [open, setOpen] = useState<Record<string, boolean>>({});
   const needle = query.trim();
@@ -121,7 +127,7 @@ export function MenuPicker({
             <span>{money(pickedTotal)}</span>
           </p>
         </div>
-      ) : (
+      ) : hasPacks ? null : (
         <p className="text-sm text-muted">בוחרים מנה מהתפריט, ואז מזינים כמות.</p>
       )}
       <input
@@ -134,7 +140,10 @@ export function MenuPicker({
         const rows = group === "נוספות" ? extra : visible.filter((dish) => dish.category === group);
         if (rows.length === 0) return null;
         const expanded = needle.length > 0 || Boolean(open[group]);
-        const chosen = rows.reduce((sum, dish) => sum + ((qty[dish.id] ?? 0) > 0 ? 1 : 0), 0);
+        const chosen = rows.reduce(
+          (sum, dish) => sum + ((qty[dish.id] ?? 0) > 0 || (packs[dish.id] ?? 0) > 0 ? 1 : 0),
+          0,
+        );
         return (
           <section key={group} className="overflow-hidden rounded-2xl border border-line bg-card">
             <button
@@ -155,7 +164,8 @@ export function MenuPicker({
             {expanded ? (
             <div className="flex flex-col gap-3 border-t border-line px-4 py-3">
             {rows.map((dish) => {
-              const count = qty[dish.id] ?? 0;
+              const isPack = dish.id in packs && onPackage;
+              const count = isPack ? packs[dish.id] : (qty[dish.id] ?? 0);
               return (
                 <div key={dish.id} className="flex items-center gap-3">
                   <img src={dish.image_url} alt="" className="size-16 rounded-2xl object-cover" />
@@ -164,6 +174,7 @@ export function MenuPicker({
                     <p className="text-sm text-muted">
                       {money(Number(dish.price))}
                       {dish.shortage ? " · חסר" : ""}
+                      {isPack ? " · בונים חבילה" : ""}
                     </p>
                   </div>
                   <div className="flex items-center gap-2">
@@ -171,8 +182,8 @@ export function MenuPicker({
                     <button
                       type="button"
                       className="grid size-11 place-items-center rounded-full bg-[#111111] text-lg font-bold text-white"
-                      aria-label={`הוספת ${dish.name}`}
-                      onClick={() => onChange(dish.id, count + 1)}
+                      aria-label={isPack ? `בניית ${dish.name}` : `הוספת ${dish.name}`}
+                      onClick={() => (isPack ? onPackage(dish.id) : onChange(dish.id, count + 1))}
                     >
                       +
                     </button>

@@ -10,6 +10,7 @@ import { currencyOf, formatCurrency, formatRate } from "@/lib/currency";
 import { money } from "@/lib/domain";
 import { guestLang, guestText, isGuestLang } from "@/lib/guest-text";
 import { foodTotal, lineTotal, type SheetItem } from "@/lib/sheet";
+import { parsePick, slotEnglish } from "@/lib/packages";
 import { catalog } from "@/lib/store/catalog";
 
 type GuestItem = SheetItem & { image_url?: string; handle?: string; variant?: string };
@@ -48,6 +49,14 @@ type GuestOrder = {
   amount_foreign?: number | null;
   items: GuestItem[];
 };
+
+function pickName(name: string, en: boolean) {
+  const pick = parsePick(name);
+  if (!pick) return null;
+  if (!en) return `${pick.label} · ${pick.name}`;
+  const title = catalog.menu.find((dish) => dish.he === pick.name)?.title ?? pick.name;
+  return `${pick.slot ? slotEnglish[pick.slot] : pick.label} · ${title}`;
+}
 
 function englishName(item: GuestItem) {
   const title = item.handle ? catalog.products[item.handle]?.title : "";
@@ -147,6 +156,19 @@ export default async function GuestOrderPage({ params, searchParams }: PageProps
             {(order.items ?? []).map((item, index) => {
               const qty = Number(item.quantity);
               const price = Number(item.unit_price);
+              const pick = pickName(item.name, en);
+              if (pick)
+                return (
+                  <li
+                    key={`${item.name}-${index}`}
+                    className="-mt-px flex items-baseline gap-2 border-b border-[#f3efe8] py-1.5 ps-[4.25rem] text-[13px] text-[#5f574d]"
+                  >
+                    <span className="tabular-nums" dir="ltr">
+                      {qty}×
+                    </span>
+                    <span className="min-w-0 flex-1">{pick}</span>
+                  </li>
+                );
               return (
                 <li key={`${item.name}-${index}`} className="flex items-center gap-3 border-b border-[#eee8df] py-3.5">
                   {item.image_url ? (

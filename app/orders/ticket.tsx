@@ -47,7 +47,12 @@ export function Ticket({
       ) : null}
       {items && items.length > 0 ? (
         <ul className="mt-3 flex flex-col gap-1 text-sm">
-          {items.map((item) => (
+          {items.map((item) =>
+            item.name.startsWith("↳") ? (
+              <li key={item.id} className="ps-12 text-[13px] text-muted">
+                {item.quantity} × {item.name.replace(/^↳\s*/, "")}
+              </li>
+            ) : (
             <li key={item.id} className="flex items-center justify-between gap-3">
               <span className="flex min-w-0 items-center gap-2">
                 {item.image_url ? (
@@ -60,7 +65,8 @@ export function Ticket({
               </span>
               <span>{money(Number(item.quantity) * Number(item.unit_price))}</span>
             </li>
-          ))}
+            ),
+          )}
         </ul>
       ) : null}
       {order.salad_note ? (

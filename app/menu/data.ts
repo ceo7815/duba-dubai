@@ -63,14 +63,3 @@ export async function adminProduct(handle: string) {
   if (!product.data) return null;
   return attach([product.data as Omit<AdminProduct, "rows">], (dishes.data ?? []) as DishRow[])[0];
 }
-
-export type PackageDish = { id: string; title_he: string; title_en: string; grp: string; active: boolean; image: string };
-
-export async function adminPackageDishes() {
-  const supabase = await createClient();
-  const { data } = await supabase
-    .from("store_package_dishes")
-    .select("id, title_he, title_en, grp, active, image")
-    .order("position");
-  return (data ?? []) as PackageDish[];
-}

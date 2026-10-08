@@ -39,7 +39,10 @@ export type MenuDish = {
   group: PackageGroup;
   fixed: boolean;
   image: string;
+  available?: boolean;
 };
+
+export type PackageMenu = { limits: Record<PackageGroup, number>; dishes: MenuDish[] };
 
 type Catalog = {
   products: Record<string, Product>;

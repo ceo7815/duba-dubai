@@ -1,15 +1,18 @@
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import { Work } from "@/app/shell";
+import { listMenu } from "@/lib/menu";
+import { loadPackages } from "@/lib/package-rules";
 import { requireProfile } from "@/lib/profile";
-import { adminPackageDishes, adminProducts } from "./data";
-import { MenuList, PackageDishes } from "./menu-list";
+import { adminProducts } from "./data";
+import { MenuList } from "./menu-list";
+import { PackagesEditor } from "./packages-editor";
 import { canOperate } from "@/lib/roles";
 
 export default async function MenuPage() {
   const profile = await requireProfile();
   if (!canOperate(profile?.role)) redirect("/login");
-  const [products, packageDishes] = await Promise.all([adminProducts(), adminPackageDishes()]);
+  const [products, packages, dishes] = await Promise.all([adminProducts(), loadPackages(), listMenu()]);
 
   return (
     <Work title="תפריט" role={profile.role}>
@@ -20,7 +23,17 @@ export default async function MenuPage() {
         + מוצר חדש
       </Link>
       <MenuList products={products} />
-      <PackageDishes dishes={packageDishes} />
+      <PackagesEditor
+        packages={packages}
+        candidates={dishes.map((dish) => ({
+          id: dish.id,
+          name: dish.name,
+          price: Number(dish.price),
+          image_url: dish.image_url ?? "",
+          shortage: dish.shortage,
+          category: dish.category,
+        }))}
+      />
     </Work>
   );
 }

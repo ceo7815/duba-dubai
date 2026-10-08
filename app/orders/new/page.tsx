@@ -2,6 +2,7 @@ import { redirect } from "next/navigation";
 import { OrderForm } from "@/app/orders/order-form";
 import { Work } from "@/app/shell";
 import { listMenu } from "@/lib/menu";
+import { loadPackages } from "@/lib/package-rules";
 import { loadRates } from "@/lib/rates";
 import { requireProfile } from "@/lib/profile";
 import { canOperate } from "@/lib/roles";
@@ -13,7 +14,12 @@ export default async function NewOrderPage() {
 
   return (
     <Work title="הזמנה חדשה" backHref="/orders" role={profile.role}>
-      <OrderForm dishes={await listMenu()} autoLink={stripeReady()} rates={await loadRates()} />
+      <OrderForm
+        dishes={await listMenu()}
+        packages={await loadPackages()}
+        autoLink={stripeReady()}
+        rates={await loadRates()}
+      />
     </Work>
   );
 }

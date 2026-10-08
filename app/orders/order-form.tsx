@@ -1,9 +1,11 @@
 "use client";
 
-import { useEffect, useMemo, useState, type FormEvent } from "react";
+import { useCallback, useEffect, useMemo, useState, type FormEvent } from "react";
 import { useRouter } from "next/navigation";
 import { MenuField } from "@/app/menu-field";
 import { MenuPicker } from "@/app/orders/menu-picker";
+import { PackageList, PackageSheet, packProblem, type Pack } from "@/app/orders/package-builder";
+import { packsFromItems, type PackageRule } from "@/lib/packages";
 import { PhoneField } from "@/app/phone-field";
 import { paymentLink } from "@/lib/payment-link";
 import { WhenField } from "@/app/when-field";
@@ -46,8 +48,10 @@ export function OrderForm({
   dishes,
   autoLink = false,
   rates,
+  packages,
 }: {
   dishes: MenuDish[];
+  packages: PackageRule[];
   autoLink?: boolean;
   rates: Rates;
   order?: {
@@ -107,17 +111,41 @@ export function OrderForm({
   const [rate, setRate] = useState(() =>
     order && order.currency !== "AED" ? String(Number(order.currency_rate)) : "",
   );
+  const packageIds = useMemo(() => new Set(packages.map((rule) => rule.id)), [packages]);
   const [qty, setQty] = useState<Record<string, number>>(() => {
     const next: Record<string, number> = {};
     for (const item of items ?? []) {
-      if (item.dish_id) next[item.dish_id] = item.quantity;
+      if (item.dish_id && !packageIds.has(item.dish_id))
+        next[item.dish_id] = (next[item.dish_id] ?? 0) + item.quantity;
     }
     return next;
   });
+  const [packs, setPacks] = useState<Pack[]>(() =>
+    packsFromItems(items ?? [], packages).map((pack, index) => ({ ...pack, key: `p${index}` })),
+  );
+  const [editing, setEditing] = useState<string | null>(null);
+  const editingPack = packs.find((pack) => pack.key === editing);
+  const editingRule = editingPack && packages.find((rule) => rule.id === editingPack.packageId);
+  const packCounts = useMemo(() => {
+    const counts: Record<string, number> = {};
+    for (const rule of packages) counts[rule.id] = 0;
+    for (const pack of packs) counts[pack.packageId] = (counts[pack.packageId] ?? 0) + 1;
+    return counts;
+  }, [packages, packs]);
+
+  const closePack = useCallback(() => setEditing(null), []);
+
+  function addPack(packageId: string) {
+    const key = `p${Date.now()}`;
+    setPacks((current) => [...current, { key, packageId, picks: {} }]);
+    setEditing(key);
+  }
 
   const suggested = useMemo(
-    () => dishes.reduce((sum, dish) => sum + (qty[dish.id] ?? 0) * Number(dish.price), 0),
-    [dishes, qty],
+    () =>
+      dishes.reduce((sum, dish) => sum + (qty[dish.id] ?? 0) * Number(dish.price), 0) +
+      packs.reduce((sum, pack) => sum + (packages.find((rule) => rule.id === pack.packageId)?.price ?? 0), 0),
+    [dishes, qty, packs, packages],
   );
   const deliveryFee = Number(delivery.replace(",", "."));
   const suggestedTotal = suggested + (Number.isFinite(deliveryFee) ? deliveryFee : 0);
@@ -146,6 +174,12 @@ export function OrderForm({
     if (!isHandler(handledBy)) {
       setHandlerMissing(true);
       document.getElementById("handled-by")?.scrollIntoView({ behavior: "smooth", block: "center" });
+      return;
+    }
+    const problem = packProblem(packages, packs);
+    if (problem) {
+      setError(problem.text);
+      setEditing(problem.key);
       return;
     }
     if (pay !== "card" && pay !== "cash") {
@@ -322,12 +356,31 @@ export function OrderForm({
 
       <section className="flex flex-col gap-3 rounded-2xl border border-line bg-card p-4">
         <h2 className="text-base font-extrabold">המנות</h2>
+        <PackageList
+          rules={packages}
+          packs={packs}
+          onEdit={setEditing}
+          onRemove={(key) => setPacks((current) => current.filter((pack) => pack.key !== key))}
+        />
         <MenuPicker
           dishes={dishes}
           qty={qty}
           onChange={(id, next) => setQty((current) => ({ ...current, [id]: Math.max(0, next) }))}
+          packs={packCounts}
+          onPackage={addPack}
         />
       </section>
+      {editingPack && editingRule ? (
+        <PackageSheet
+          rule={editingRule}
+          picks={editingPack.picks}
+          onChange={(picks) =>
+            setPacks((current) => current.map((pack) => (pack.key === editingPack.key ? { ...pack, picks } : pack)))
+          }
+          onExtra={(dishId) => setQty((current) => ({ ...current, [dishId]: (current[dishId] ?? 0) + 1 }))}
+          onClose={closePack}
+        />
+      ) : null}
 
       <section className="flex flex-col gap-3 rounded-2xl border border-line bg-card p-4">
         <h2 className="text-base font-extrabold">לתשלום</h2>

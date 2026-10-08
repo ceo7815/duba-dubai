@@ -6,7 +6,7 @@ import { addLine } from "@/lib/store/cart";
 import type { MenuDish, PackageGroup } from "@/lib/store/catalog";
 import { aed, dict, nameOf, type Lang } from "@/lib/store/i18n";
 
-const groups: { id: PackageGroup; icon: string }[] = [
+const allGroups: { id: PackageGroup; icon: string }[] = [
   { id: "salad", icon: "🥗" },
   { id: "starter", icon: "🍲" },
   { id: "main", icon: "🍖" },
@@ -34,7 +34,8 @@ export function PackageBuilder({
   lang: Lang;
 }) {
   const t = dict(lang);
-  const [tab, setTab] = useState<PackageGroup>("salad");
+  const groups = allGroups.filter((group) => limits[group.id] > 0);
+  const [tab, setTab] = useState<PackageGroup>(groups[0]?.id ?? "salad");
   const [counts, setCounts] = useState<Record<string, number>>(() =>
     Object.fromEntries(menu.filter((dish) => dish.fixed).map((dish) => [dish.id, 1])),
   );
@@ -48,6 +49,7 @@ export function PackageBuilder({
   function change(dish: MenuDish, delta: number) {
     if (dish.fixed) return;
     const current = counts[dish.id] ?? 0;
+    if (delta > 0 && dish.available === false) return;
     if (delta > 0 && total(dish.group) >= limits[dish.group]) {
       setNotice(t.limit(limits[dish.group]));
       return;
@@ -143,6 +145,8 @@ export function PackageBuilder({
                 <p className="mt-2 min-h-10 text-sm font-semibold leading-5">{nameOf(dish, lang)}</p>
                 {dish.fixed ? (
                   <span className="mt-2 rounded-full bg-[#3d8b40] px-3 py-1 text-xs font-semibold text-white">{t.included}</span>
+                ) : dish.available === false && count === 0 ? (
+                  <span className="mt-2 rounded-full bg-[#eee6d8] px-3 py-1 text-xs font-semibold text-[#5d5a55]">{t.soldOut}</span>
                 ) : (
                   <div className="mt-2 flex items-center gap-3">
                     <button

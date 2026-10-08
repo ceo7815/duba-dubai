@@ -21,6 +21,8 @@ import {
 } from "@/lib/domain";
 import { aedValue, foreignTotal, isCurrency, validRate } from "@/lib/currency";
 import { guestLang } from "@/lib/guest-text";
+import { loadPackages } from "@/lib/package-rules";
+import { buildPackLines } from "@/lib/packages";
 import { normalizePhone } from "@/lib/phone";
 import { getProfile } from "@/lib/profile";
 import { paymentLink } from "@/lib/payment-link";
@@ -118,8 +120,16 @@ export async function saveOrder(
     return { error: "משלוח או פיקדון לא תקינים" };
   }
   if (leavesAt.length > 20) return { error: "שעת היציאה ארוכה מדי" };
+  const packInputs = formData.getAll("pack").map((value) => {
+    try {
+      return JSON.parse(String(value)) as unknown;
+    } catch {
+      return null;
+    }
+  });
+  if (packInputs.length > 20) return { error: "יותר מדי חבילות בהזמנה אחת" };
   if (
-    dishIds.length === 0 ||
+    (dishIds.length === 0 && packInputs.length === 0) ||
     dishIds.some(
       (dishId, index) =>
         !dishId ||
@@ -176,24 +186,29 @@ export async function saveOrder(
   }
   if (manualLink) shopifyUrl = manualLink;
 
-  const { data: catalog } = await supabase
-    .from("dishes")
-    .select("id, name, price")
-    .in("id", dishIds);
+  const rules = await loadPackages();
+  const built = buildPackLines(packInputs, rules);
+  if ("error" in built) return { error: built.error };
+  if (dishIds.some((dishId) => rules.some((rule) => rule.id === dishId)))
+    return { error: "חבילה צריך לבנות דרך בחירת המנות שלה" };
+
+  const { data: catalog } = dishIds.length
+    ? await supabase.from("dishes").select("id, name, price").in("id", dishIds)
+    : { data: [] };
   const byId = new Map((catalog ?? []).map((dish) => [dish.id, dish]));
   const items = dishIds.map((dishId, index) => {
     const dish = byId.get(dishId);
     if (!dish) return null;
     return {
-      dish_id: dishId,
+      dish_id: dishId as string | null,
       name: dish.name,
       quantity: quantities[index],
       unit_price: Number(dish.price),
-      position: index,
     };
   });
-  const lines = items.flatMap((item) => (item ? [item] : []));
-  if (lines.length !== dishIds.length) return { error: "מנה לא נמצאה בתפריט" };
+  const dishLines = items.flatMap((item) => (item ? [item] : []));
+  if (dishLines.length !== dishIds.length) return { error: "מנה לא נמצאה בתפריט" };
+  const lines = [...built.lines, ...dishLines].map((line, position) => ({ ...line, position }));
 
   const progressed =
     status === "in_kitchen" ||

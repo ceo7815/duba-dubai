@@ -1,6 +1,8 @@
 "use server";
 
+import { revalidatePath } from "next/cache";
 import { done } from "@/lib/flash";
+import { isSlot, slots, type Slot } from "@/lib/packages";
 import { getProfile } from "@/lib/profile";
 import { createClient } from "@/lib/supabase/server";
 import type { ProductInput } from "./types";
@@ -136,17 +138,50 @@ export async function deleteProduct(
   return {};
 }
 
-export async function setPackageDish(
-  id: string,
-  active: boolean,
+export async function savePackageLimits(
+  packageId: string,
+  need: Record<Slot, number>,
 ): Promise<{ error?: string }> {
   if (!(await owner())) return { error: saveErrors.owner };
+  const values = slots.map((slot) => need[slot]);
+  if (values.some((value) => !Number.isInteger(value) || value < 0 || value > 40) || values.every((value) => value === 0))
+    return { error: "הכמויות לא תקינות" };
   const supabase = await createClient();
-  const { error } = await supabase
-    .from("store_package_dishes")
-    .update({ active })
-    .eq("id", id);
+  const { data, error } = await supabase
+    .from("package_rules")
+    .update({ ...need, updated_at: new Date().toISOString() })
+    .eq("dish_id", packageId)
+    .select("dish_id");
+  if (error || !data?.length) return { error: "לא עודכן" };
+  revalidatePath("/menu");
+  await done("הכמויות נשמרו ✓");
+  return {};
+}
+
+export async function setPackageOption(
+  packageId: string,
+  slot: string,
+  dishId: string,
+  on: boolean,
+): Promise<{ error?: string }> {
+  if (!(await owner())) return { error: saveErrors.owner };
+  if (!isSlot(slot)) return { error: "לא עודכן" };
+  const supabase = await createClient();
+  const { error } = on
+    ? await supabase
+        .from("package_options")
+        .upsert({ package_id: packageId, slot, dish_id: dishId, position: 100 }, { onConflict: "package_id,slot,dish_id" })
+    : await supabase.from("package_options").delete().match({ package_id: packageId, slot, dish_id: dishId });
   if (error) return { error: "לא עודכן" };
-  await done("עודכן ✓");
+  revalidatePath("/menu");
+  return {};
+}
+
+export async function setDishShortage(dishId: string, shortage: boolean): Promise<{ error?: string }> {
+  if (!(await owner())) return { error: saveErrors.owner };
+  const supabase = await createClient();
+  const { data, error } = await supabase.from("dishes").update({ shortage }).eq("id", dishId).select("id");
+  if (error || !data?.length) return { error: "לא עודכן" };
+  revalidatePath("/menu");
   return {};
 }
