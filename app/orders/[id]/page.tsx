@@ -1,7 +1,9 @@
 import Link from "next/link";
 import { notFound, redirect } from "next/navigation";
 import { PrintButton } from "@/app/orders/print-button";
+import { SendToChef } from "@/app/orders/send-to-chef";
 import { SendToCustomer } from "@/app/orders/send-to-customer";
+import { kitchenChef, orderMessage } from "@/lib/kitchen-message";
 import { DeleteOrder, Train } from "@/app/orders/stage-switch";
 import { Ticket } from "@/app/orders/ticket";
 import { Work } from "@/app/shell";
@@ -71,6 +73,7 @@ export default async function OrderPage({
       ) : null}
       <div className="no-print flex flex-col gap-3">
         <PrintButton orderId={order.id} />
+        <SendToChef text={orderMessage(order, items)} label={`שליחה ל${kitchenChef.name} בוואטסאפ`} />
         {canOperate(profile?.role) ? (
           <>
             <SendToCustomer orderId={order.id} />
