@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { MenuField } from "@/app/menu-field";
 import { MenuPicker } from "@/app/orders/menu-picker";
 import { PhoneField } from "@/app/phone-field";
+import { paymentLink } from "@/lib/payment-link";
 import { WhenField } from "@/app/when-field";
 import { saveOrder } from "@/app/orders/actions";
 import type { MenuDish } from "@/lib/catalog";
@@ -29,8 +30,10 @@ export function OrderForm({
   order,
   items,
   dishes,
+  autoLink = false,
 }: {
   dishes: MenuDish[];
+  autoLink?: boolean;
   order?: {
     id: string;
     customer_name: string;
@@ -60,6 +63,10 @@ export function OrderForm({
   const [pay, setPay] = useState<"card" | "cash" | "">(
     order?.ending === "cash" ? "cash" : order?.ending === "shopify_link" || order?.ending === "shopify_paid" ? "card" : "",
   );
+  const [link, setLink] = useState(() => paymentLink(order?.shopify_url ?? "") ?? "");
+  const [linkOpen, setLinkOpen] = useState(false);
+  const [draft, setDraft] = useState("");
+  const [linkError, setLinkError] = useState("");
   const [origin, setOrigin] = useState("");
   const [error, setError] = useState("");
   const [pending, setPending] = useState(false);
@@ -102,6 +109,10 @@ export function OrderForm({
       setError("צריך אופן תשלום");
       return;
     }
+    if (pay === "card" && !link && !autoLink) {
+      openLink();
+      return;
+    }
     const popup = window.open("about:blank", "_blank");
     setPending(true);
     setError("");
@@ -109,6 +120,12 @@ export function OrderForm({
     setPending(false);
     if (result && "error" in result && result.error) {
       popup?.close();
+      if ("needsLink" in result && result.needsLink) {
+        setPay("card");
+        openLink();
+        setLinkError(result.error);
+        return;
+      }
       if (result.id) router.push(`/orders/${result.id}`);
       else setError(result.error);
       return;
@@ -119,6 +136,34 @@ export function OrderForm({
       else window.open(url, "_blank", "noopener");
     }
     if (result && "id" in result) router.push(`/orders/${result.id}`);
+  }
+
+  function openLink() {
+    setDraft(link);
+    setLinkError("");
+    setLinkOpen(true);
+  }
+
+  function closeLink() {
+    setLinkOpen(false);
+  }
+
+  function saveLink() {
+    const value = draft.trim();
+    if (!value && autoLink) {
+      setLink("");
+      setPay("card");
+      setLinkOpen(false);
+      return;
+    }
+    const clean = paymentLink(value);
+    if (!clean) {
+      setLinkError(value ? "זה לא נראה כמו קישור Stripe. צריך להתחיל ב-https://buy.stripe.com" : "צריך להדביק קישור");
+      return;
+    }
+    setLink(clean);
+    setPay("card");
+    setLinkOpen(false);
   }
 
   function applyKind(next: OrderKind) {
@@ -136,6 +181,7 @@ export function OrderForm({
       <input type="hidden" name="origin" value={origin} />
       <input type="hidden" name="paid" value={order?.paid ?? 0} />
       <input type="hidden" name="payment_method" value={pay} />
+      <input type="hidden" name="payment_url" value={pay === "card" ? link : ""} />
       <section className="flex flex-col gap-3 rounded-2xl border border-line bg-card p-4">
         <h2 className="text-base font-extrabold">למי</h2>
         <label className="flex flex-col gap-2 text-sm font-bold">
@@ -316,10 +362,12 @@ export function OrderForm({
           <button
             type="button"
             className={`min-h-24 rounded-2xl px-3 text-center ${pay === "card" ? "bg-[#111111] text-white" : "border border-[#111111] bg-white"}`}
-            onClick={() => setPay("card")}
+            onClick={openLink}
           >
             <span className="block text-base font-extrabold">כרטיס אשראי</span>
-            <span className="mt-1 block text-xs font-bold opacity-80">אישור וקישור לתשלום</span>
+            <span className="mt-1 block text-xs font-bold opacity-80">
+              {pay === "card" && link ? "קישור Stripe מוכן ✓" : "אישור וקישור לתשלום"}
+            </span>
           </button>
           <button
             type="button"
@@ -330,7 +378,80 @@ export function OrderForm({
             <span className="mt-1 block text-xs font-bold opacity-80">אישור הזמנה</span>
           </button>
         </div>
+        {pay === "card" && link ? (
+          <div className="flex items-center gap-2 rounded-xl bg-paper px-3 py-2 text-xs">
+            <span dir="ltr" className="min-w-0 flex-1 truncate text-start font-medium">
+              {link}
+            </span>
+            <button type="button" onClick={openLink} className="shrink-0 font-extrabold underline">
+              שינוי
+            </button>
+          </div>
+        ) : null}
       </section>
+
+      {linkOpen ? (
+        <div
+          className="fixed inset-0 z-50 flex items-end justify-center bg-black/45 sm:items-center"
+          onClick={closeLink}
+        >
+          <div
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="pay-link-title"
+            className="w-full max-w-md rounded-t-3xl bg-card p-5 pb-[max(1.25rem,env(safe-area-inset-bottom))] sm:rounded-3xl"
+            onClick={(event) => event.stopPropagation()}
+          >
+            <h2 id="pay-link-title" className="text-lg font-extrabold">
+              קישור תשלום Stripe
+            </h2>
+            <p className="mt-1 text-sm text-muted">
+              יוצרים קישור תשלום ב-Stripe
+              {Number(amount) > 0 ? ` על ${Number(amount).toLocaleString("en-US")} AED` : ""} ומדביקים כאן. הלקוח יקבל
+              אותו בסיכום ההזמנה.
+            </p>
+            <input
+              autoFocus
+              dir="ltr"
+              type="url"
+              inputMode="url"
+              value={draft}
+              onChange={(event) => {
+                setDraft(event.target.value);
+                setLinkError("");
+              }}
+              onKeyDown={(event) => {
+                if (event.key === "Enter") {
+                  event.preventDefault();
+                  saveLink();
+                }
+              }}
+              placeholder="https://buy.stripe.com/..."
+              className="field field-en mt-4"
+            />
+            {linkError ? (
+              <p role="alert" className="mt-2 text-sm font-bold text-red-700">
+                {linkError}
+              </p>
+            ) : null}
+            {autoLink ? (
+              <p className="mt-2 text-xs text-muted">אפשר להשאיר ריק, והמערכת תיצור קישור לבד.</p>
+            ) : null}
+            <div className="mt-4 grid grid-cols-[1fr_auto] gap-2">
+              <button type="button" onClick={saveLink} className="button">
+                שמירת הקישור
+              </button>
+              <button
+                type="button"
+                onClick={closeLink}
+                className="min-h-[3.25rem] rounded-2xl border border-line px-5 text-sm font-bold"
+              >
+                ביטול
+              </button>
+            </div>
+          </div>
+        </div>
+      ) : null}
 
       {error ? (
         <p role="alert" className="text-sm font-bold">

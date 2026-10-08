@@ -62,6 +62,9 @@ export function UserForm({
             type="email"
             inputMode="email"
             autoComplete="off"
+            autoCapitalize="none"
+            autoCorrect="off"
+            spellCheck={false}
             dir="ltr"
             required
             className="field field-en"
@@ -76,6 +79,9 @@ export function UserForm({
           name="password"
           type={showPassword ? "text" : "password"}
           autoComplete="new-password"
+          autoCapitalize="none"
+          autoCorrect="off"
+          spellCheck={false}
           required={mode === "create"}
           minLength={mode === "create" ? 8 : undefined}
           placeholder={mode === "edit" ? "השאירו ריק כדי לא לשנות" : undefined}

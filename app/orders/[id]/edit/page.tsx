@@ -6,6 +6,7 @@ import { listMenu } from "@/lib/menu";
 import { getOrder } from "@/lib/orders";
 import { requireProfile } from "@/lib/profile";
 import { canOperate } from "@/lib/roles";
+import { stripeReady } from "@/lib/stripe";
 
 export default async function EditOrderPage({
   params,
@@ -32,6 +33,7 @@ export default async function EditOrderPage({
           tray_return: Number(found.order.tray_return),
         }}
         dishes={await listMenu()}
+        autoLink={stripeReady()}
         items={found.items.map((item) => ({
           ...item,
           unit_price: Number(item.unit_price),

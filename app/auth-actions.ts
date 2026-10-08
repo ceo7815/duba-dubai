@@ -1,5 +1,7 @@
 "use server";
 
+import { randomInt } from "crypto";
+import { createClient as createSupabase } from "@supabase/supabase-js";
 import { flash } from "@/lib/flash";
 import { redirect } from "next/navigation";
 import { accessToken, getProfile } from "@/lib/profile";
@@ -144,6 +146,61 @@ export async function updateUser(
   await flash("השינויים נשמרו ✓");
 
   redirect("/users");
+}
+
+const passwordWords = ["duba", "shabbat", "kosher", "dubai", "challah", "kitchen", "table", "dinner"];
+
+function friendlyPassword() {
+  const word = passwordWords[randomInt(passwordWords.length)];
+  const digits = String(randomInt(1000, 10000));
+  return `${word}${digits}`;
+}
+
+async function loginWorks(email: string, password: string) {
+  const probe = createSupabase(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY!,
+    { auth: { persistSession: false, autoRefreshToken: false } },
+  );
+  const { error } = await probe.auth.signInWithPassword({ email, password });
+  if (!error) await probe.auth.signOut();
+  return !error;
+}
+
+export async function resetUserPassword(
+  id: string,
+): Promise<{ error: string } | { password: string; email: string; verified: boolean }> {
+  const profile = await getProfile();
+  if (!fullAccess(profile?.role)) return { error: "רק בעלים יכול לאפס סיסמה" };
+
+  const supabase = await createClient();
+  const { data: target } = await supabase
+    .from("profiles")
+    .select("id, full_name, phone, email, role, active")
+    .eq("id", id)
+    .maybeSingle();
+  if (!target || !isRole(target.role)) return { error: "המשתמש לא נמצא" };
+
+  const token = await accessToken();
+  if (!token) return { error: "נדרשת כניסה מחדש" };
+
+  const password = friendlyPassword();
+  const updated = await manageUsers(
+    {
+      action: "update",
+      id,
+      full_name: target.full_name,
+      phone: target.phone ?? "",
+      role: target.role,
+      active: "true",
+      password,
+    },
+    token,
+  );
+  if ("error" in updated) return updated;
+
+  const email = String(target.email ?? "").toLowerCase();
+  return { password, email, verified: await loginWorks(email, password) };
 }
 
 export async function deleteUser(id: string): Promise<FormState> {

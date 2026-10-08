@@ -20,7 +20,8 @@ import {
 } from "@/lib/domain";
 import { normalizePhone } from "@/lib/phone";
 import { getProfile } from "@/lib/profile";
-import { stripeCheckout } from "@/lib/stripe";
+import { paymentLink } from "@/lib/payment-link";
+import { stripeCheckout, stripeReady } from "@/lib/stripe";
 import { createClient } from "@/lib/supabase/server";
 import { canOperate } from "@/lib/roles";
 
@@ -43,7 +44,7 @@ export async function saveOrder(
   _state: FormState,
   formData: FormData,
 ): Promise<
-  | { error: string; id?: string }
+  | { error: string; id?: string; needsLink?: boolean }
   | { id: string; phone?: string; message?: string }
 > {
   if (!(await owner())) return { error: "אין לך הרשאה לשמור הזמנה" };
@@ -91,6 +92,10 @@ export async function saveOrder(
   if (!allergy) return { error: "צריך אלרגיה, או לסמן שאין" };
   if (method !== "card" && method !== "cash")
     return { error: "צריך אופן תשלום" };
+  const typedLink = field(formData, "payment_url");
+  const manualLink = method === "card" && typedLink ? paymentLink(typedLink) : null;
+  if (typedLink && method === "card" && !manualLink)
+    return { error: "קישור התשלום לא תקין. צריך קישור Stripe שמתחיל ב-https://", needsLink: true };
   if (
     !Number.isFinite(amount) ||
     amount < 0 ||
@@ -156,6 +161,7 @@ export async function saveOrder(
         shopifyUrl = existing.shopify_url ?? "";
     }
   }
+  if (manualLink) shopifyUrl = manualLink;
 
   const { data: catalog } = await supabase
     .from("dishes")
@@ -181,6 +187,8 @@ export async function saveOrder(
     status === "out" ||
     status === "feedback_sent" ||
     status === "paid_shopify";
+  if (!progressed && method === "card" && !shopifyUrl.startsWith("https://") && !stripeReady())
+    return { error: "צריך להדביק קישור תשלום של Stripe", needsLink: true };
   if (!progressed && method === "cash") {
     status = "cash_agreed";
     ending = "cash";

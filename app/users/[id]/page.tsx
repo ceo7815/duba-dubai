@@ -1,6 +1,7 @@
 import { notFound, redirect } from "next/navigation";
 import { Work } from "@/app/shell";
 import { DeleteUser } from "@/app/users/delete-user";
+import { ResetPassword } from "@/app/users/reset-password";
 import { UserForm } from "@/app/users/user-form";
 import { requireProfile } from "@/lib/profile";
 import { isRole, fullAccess } from "@/lib/roles";
@@ -37,6 +38,7 @@ export default async function EditUserPage({ params }: PageProps<"/users/[id]">)
           }}
         />
       </section>
+      {self ? null : <ResetPassword id={data.id} name={data.full_name} phone={data.phone ?? ""} />}
       {self ? null : <DeleteUser id={data.id} name={data.full_name} />}
     </Work>
   );

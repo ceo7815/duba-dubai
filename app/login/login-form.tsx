@@ -18,6 +18,9 @@ export function LoginForm() {
           type="email"
           inputMode="email"
           autoComplete="off"
+          autoCapitalize="none"
+          autoCorrect="off"
+          spellCheck={false}
           defaultValue=""
           readOnly
           onFocus={(event) => event.currentTarget.removeAttribute("readonly")}
@@ -32,6 +35,9 @@ export function LoginForm() {
           name="password"
           type={showPassword ? "text" : "password"}
           autoComplete="off"
+          autoCapitalize="none"
+          autoCorrect="off"
+          spellCheck={false}
           defaultValue=""
           readOnly
           onFocus={(event) => event.currentTarget.removeAttribute("readonly")}

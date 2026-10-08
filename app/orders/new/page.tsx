@@ -4,6 +4,7 @@ import { Work } from "@/app/shell";
 import { listMenu } from "@/lib/menu";
 import { requireProfile } from "@/lib/profile";
 import { canOperate } from "@/lib/roles";
+import { stripeReady } from "@/lib/stripe";
 
 export default async function NewOrderPage() {
   const profile = await requireProfile();
@@ -11,7 +12,7 @@ export default async function NewOrderPage() {
 
   return (
     <Work title="הזמנה חדשה" backHref="/orders" role={profile.role}>
-      <OrderForm dishes={await listMenu()} />
+      <OrderForm dishes={await listMenu()} autoLink={stripeReady()} />
     </Work>
   );
 }
