@@ -10,6 +10,7 @@ import {
   orderKindLabels,
 } from "@/lib/domain";
 import type { OrderItem, OrderRow } from "@/lib/orders";
+import { orderMoney } from "@/lib/currency";
 
 export function PrintFrame({
   back,
@@ -96,12 +97,12 @@ export function OrderPage({
       : cash
         ? {
             label: "לגבייה במזומן במסירה",
-            value: showMoney ? money(balance) : "מזומן",
+            value: showMoney ? orderMoney(order, balance, false) : "מזומן",
             strong: true,
           }
         : {
             label: "ממתין לתשלום באשראי",
-            value: showMoney ? money(balance) : "",
+            value: showMoney ? orderMoney(order, balance, false) : "",
             strong: false,
           };
 

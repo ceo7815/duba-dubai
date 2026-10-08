@@ -3,6 +3,7 @@ import { OrderForm } from "@/app/orders/order-form";
 import { Work } from "@/app/shell";
 import { toDubaiInput } from "@/lib/dates";
 import { listMenu } from "@/lib/menu";
+import { loadRates } from "@/lib/rates";
 import { getOrder } from "@/lib/orders";
 import { requireProfile } from "@/lib/profile";
 import { canOperate } from "@/lib/roles";
@@ -31,9 +32,11 @@ export default async function EditOrderPage({
           delivery_fee: Number(found.order.delivery_fee),
           tray_deposit: Number(found.order.tray_deposit),
           tray_return: Number(found.order.tray_return),
+          currency_rate: Number(found.order.currency_rate),
         }}
         dishes={await listMenu()}
         autoLink={stripeReady()}
+        rates={await loadRates()}
         items={found.items.map((item) => ({
           ...item,
           unit_price: Number(item.unit_price),

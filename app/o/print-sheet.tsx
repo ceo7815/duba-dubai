@@ -1,9 +1,9 @@
 "use client";
 
-export function PrintSheet() {
+export function PrintSheet({ label }: { label: string }) {
   return (
     <button type="button" className="text-sm font-medium text-[#8a8175] underline decoration-[#d9d1c7] underline-offset-4 no-print" onClick={() => window.print()}>
-      שמירה כ-PDF
+      {label}
     </button>
   );
 }

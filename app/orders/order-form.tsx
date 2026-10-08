@@ -10,8 +10,22 @@ import { WhenField } from "@/app/when-field";
 import { saveOrder } from "@/app/orders/actions";
 import type { MenuDish } from "@/lib/catalog";
 import {
+  aedValue,
+  currencies,
+  currencyOf,
+  foreignTotal,
+  formatCurrency,
+  formatRate,
+  isCurrency,
+  validRate,
+  type Currency,
+  type Rates,
+} from "@/lib/currency";
+import {
   fulfillmentLabels,
   fulfillments,
+  handlers,
+  isHandler,
   needsDestination,
   orderKindLabels,
   orderKinds,
@@ -31,9 +45,11 @@ export function OrderForm({
   items,
   dishes,
   autoLink = false,
+  rates,
 }: {
   dishes: MenuDish[];
   autoLink?: boolean;
+  rates: Rates;
   order?: {
     id: string;
     customer_name: string;
@@ -56,6 +72,9 @@ export function OrderForm({
     amount: number;
     paid: number;
     shopify_url: string;
+    currency: string;
+    currency_rate: number;
+    handled_by: string | null;
   };
   items?: { dish_id: string | null; name: string; quantity: number; unit_price: number }[];
 }) {
@@ -80,6 +99,14 @@ export function OrderForm({
   const [delivery, setDelivery] = useState(order ? String(order.delivery_fee) : "");
   const [amount, setAmount] = useState(order ? String(order.amount) : "");
   const [amountTouched, setAmountTouched] = useState(Boolean(order));
+  const [handledBy, setHandledBy] = useState(order?.handled_by ?? "");
+  const [handlerMissing, setHandlerMissing] = useState(false);
+  const [currency, setCurrency] = useState<Currency>(
+    order && isCurrency(order.currency) ? order.currency : "AED",
+  );
+  const [rate, setRate] = useState(() =>
+    order && order.currency !== "AED" ? String(Number(order.currency_rate)) : "",
+  );
   const [qty, setQty] = useState<Record<string, number>>(() => {
     const next: Record<string, number> = {};
     for (const item of items ?? []) {
@@ -103,8 +130,24 @@ export function OrderForm({
     setOrigin(window.location.origin);
   }, []);
 
+  const aedTotal = Number(amount.replace(",", "."));
+  const rateValue = Number(rate.replace(",", "."));
+  const foreign = currency === "AED" ? 0 : foreignTotal(aedTotal, rateValue);
+  const customerTotal = currency === "AED" ? aedTotal : foreign;
+
+  function pickCurrency(next: Currency) {
+    setCurrency(next);
+    if (next === "AED") return;
+    setRate(order?.currency === next ? String(Number(order.currency_rate)) : String(rates[next]));
+  }
+
   async function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    if (!isHandler(handledBy)) {
+      setHandlerMissing(true);
+      document.getElementById("handled-by")?.scrollIntoView({ behavior: "smooth", block: "center" });
+      return;
+    }
     if (pay !== "card" && pay !== "cash") {
       setError("צריך אופן תשלום");
       return;
@@ -182,6 +225,36 @@ export function OrderForm({
       <input type="hidden" name="paid" value={order?.paid ?? 0} />
       <input type="hidden" name="payment_method" value={pay} />
       <input type="hidden" name="payment_url" value={pay === "card" ? link : ""} />
+      <input type="hidden" name="handled_by" value={handledBy} />
+      <section
+        id="handled-by"
+        className={`flex flex-col gap-3 rounded-2xl border bg-card p-4 ${handlerMissing ? "border-ink" : "border-line"}`}
+      >
+        <div className="flex items-baseline justify-between gap-2">
+          <h2 className="text-base font-extrabold">מי טיפל בהזמנה</h2>
+          <span className="text-[11px] font-bold text-muted">פנימי · הלקוח לא רואה</span>
+        </div>
+        <div className="grid grid-cols-3 gap-1.5" role="radiogroup" aria-label="מי טיפל בהזמנה">
+          {handlers.map((name) => (
+            <button
+              key={name}
+              type="button"
+              role="radio"
+              aria-checked={handledBy === name}
+              onClick={() => {
+                setHandledBy(name);
+                setHandlerMissing(false);
+              }}
+              className={`min-h-12 rounded-xl border text-[15px] font-extrabold ${
+                handledBy === name ? "border-ink bg-ink text-white" : "border-line bg-card"
+              }`}
+            >
+              {name}
+            </button>
+          ))}
+        </div>
+        {handlerMissing ? <p className="text-sm font-bold">צריך לבחור מי טיפל בהזמנה</p> : null}
+      </section>
       <section className="flex flex-col gap-3 rounded-2xl border border-line bg-card p-4">
         <h2 className="text-base font-extrabold">למי</h2>
         <label className="flex flex-col gap-2 text-sm font-bold">
@@ -271,7 +344,11 @@ export function OrderForm({
           />
         </label>
         <label className="flex flex-col gap-2 text-sm font-bold">
-          {Number.isFinite(deliveryFee) && deliveryFee > 0 ? "כולל משלוח" : "סה״כ לתשלום"}
+          {currency === "AED"
+            ? Number.isFinite(deliveryFee) && deliveryFee > 0
+              ? "כולל משלוח"
+              : "סה״כ לתשלום"
+            : `סה״כ בדירהם${Number.isFinite(deliveryFee) && deliveryFee > 0 ? " · כולל משלוח" : ""}`}
           <input
             name="amount"
             required
@@ -285,6 +362,75 @@ export function OrderForm({
             className="field field-en"
           />
         </label>
+
+        <div className="flex flex-col gap-2">
+          <span className="text-sm font-bold">מטבע ללקוח</span>
+          <input type="hidden" name="currency" value={currency} />
+          <div className="grid grid-cols-4 gap-1.5" role="radiogroup" aria-label="מטבע ללקוח">
+            {currencies.map((item) => (
+              <button
+                key={item.code}
+                type="button"
+                role="radio"
+                aria-checked={currency === item.code}
+                onClick={() => pickCurrency(item.code)}
+                className={`flex min-h-14 flex-col items-center justify-center rounded-xl border text-center ${
+                  currency === item.code ? "border-ink bg-ink text-white" : "border-line bg-card"
+                }`}
+              >
+                <span className="text-sm font-extrabold leading-tight">
+                  {item.flag} {item.label}
+                </span>
+                <span className={`text-[11px] font-bold ${currency === item.code ? "text-white/70" : "text-muted"}`}>
+                  {item.symbol}
+                </span>
+              </button>
+            ))}
+          </div>
+
+          {currency !== "AED" ? (
+            <div className="flex flex-col gap-3 rounded-2xl bg-paper p-3">
+              <label className="flex items-center gap-2 text-sm font-bold">
+                <span className="shrink-0">
+                  שער · 1 {currencyOf(currency).symbol} =
+                </span>
+                <input
+                  name="currency_rate"
+                  required
+                  inputMode="decimal"
+                  dir="ltr"
+                  value={rate}
+                  onChange={(event) => setRate(event.target.value)}
+                  className="field field-en !min-h-11 min-w-0 flex-1"
+                />
+                <span className="shrink-0">AED</span>
+              </label>
+              {Number(rate) !== rates[currency] && validRate(rateValue) ? (
+                <button
+                  type="button"
+                  onClick={() => setRate(String(rates[currency]))}
+                  className="self-start text-xs font-bold text-muted underline"
+                >
+                  חזרה לשער הקבוע ({formatRate(rates[currency])})
+                </button>
+              ) : null}
+              <div className="rounded-xl bg-card px-3 py-3">
+                <p className="text-xs font-bold text-muted">הלקוח משלם</p>
+                <p className="text-2xl font-extrabold" dir="ltr">
+                  {foreign > 0 ? formatCurrency(foreign, currency) : "—"}
+                </p>
+                {foreign > 0 ? (
+                  <p className="mt-1 text-xs text-muted">
+                    מעוגל לעשרות · נרשם בדוחות כ-{formatCurrency(aedValue(foreign, rateValue), "AED")}
+                  </p>
+                ) : !validRate(rateValue) && rate ? (
+                  <p className="mt-1 text-xs font-bold text-red-700">השער לא תקין</p>
+                ) : null}
+              </div>
+            </div>
+          ) : null}
+        </div>
+
         <div className="grid grid-cols-2 gap-2">
           <label className="flex flex-col gap-2 text-sm font-bold">
             פלטה בפיקדון
@@ -407,8 +553,13 @@ export function OrderForm({
             </h2>
             <p className="mt-1 text-sm text-muted">
               יוצרים קישור תשלום ב-Stripe
-              {Number(amount) > 0 ? ` על ${Number(amount).toLocaleString("en-US")} AED` : ""} ומדביקים כאן. הלקוח יקבל
-              אותו בסיכום ההזמנה.
+              {customerTotal > 0 ? (
+                <>
+                  {" "}
+                  על <bdi className="font-extrabold text-ink">{formatCurrency(customerTotal, currency)}</bdi>
+                </>
+              ) : null}{" "}
+              ומדביקים כאן. הלקוח יקבל אותו בסיכום ההזמנה.
             </p>
             <input
               autoFocus

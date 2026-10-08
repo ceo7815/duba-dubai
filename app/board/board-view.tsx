@@ -1,6 +1,7 @@
 "use client";
 
 import { useDeferredValue, useState } from "react";
+import { DateRange } from "@/app/date-range";
 import { Ticket } from "@/app/orders/ticket";
 import { addDays, formatDay } from "@/lib/dates";
 import { matchesQuery, type Haystack } from "@/lib/order-search";
@@ -64,16 +65,7 @@ export function BoardView({ entries, today }: { entries: Entry[]; today: string 
         />
       </label>
 
-      <div className="grid grid-cols-2 gap-2">
-        <label className="flex flex-col gap-1 text-xs font-bold text-muted">
-          מתאריך
-          <input type="date" value={from} onChange={(event) => setFrom(event.target.value)} className="field" />
-        </label>
-        <label className="flex flex-col gap-1 text-xs font-bold text-muted">
-          עד תאריך
-          <input type="date" value={to} onChange={(event) => setTo(event.target.value)} className="field" />
-        </label>
-      </div>
+      <DateRange from={from} to={to} onChange={(range) => setRange(range.from, range.to)} label="טווח תאריכים" />
 
       <div className="flex items-center justify-between gap-3 px-1 text-sm text-muted">
         <p>

@@ -3,7 +3,8 @@
 import { useActionState, useState } from "react";
 import type { FormState } from "@/app/auth-actions";
 import { WhenField } from "@/app/when-field";
-import { saveExpense, saveFee, type ExpenseState } from "@/app/money/actions";
+import { saveExpense, saveFee, saveRates, type ExpenseState } from "@/app/money/actions";
+import { currencies, type ForeignCurrency } from "@/lib/currency";
 import { expenseKinds, paymentMethods, type ExpenseKind, type PaymentMethod } from "./expense-types";
 
 const initial: FormState = null;
@@ -124,6 +125,46 @@ export function ConfirmDelete() {
     >
       מחיקה
     </button>
+  );
+}
+
+export function RatesForm({ rates }: { rates: { code: ForeignCurrency; rate: number; updated_at: string }[] }) {
+  const [state, action, pending] = useActionState(saveRates, initial);
+  const updated = rates.map((row) => row.updated_at).sort().at(-1);
+  return (
+    <form action={action} className="flex flex-col gap-3 rounded-2xl border border-line bg-card p-4">
+      <div>
+        <h2 className="text-lg font-extrabold">שערי מטבע</h2>
+        <p className="mt-1 text-xs leading-5 text-muted">
+          כמה דירהם שווה מטבע אחד. זה השער שנכנס אוטומטית בהזמנה חדשה, ואפשר לשנות אותו בכל הזמנה.
+          {updated
+            ? ` עודכן ${new Intl.DateTimeFormat("he-IL", { timeZone: "Asia/Dubai", day: "numeric", month: "numeric", year: "numeric" }).format(new Date(updated))}.`
+            : ""}
+        </p>
+      </div>
+      {currencies
+        .filter((item) => item.code !== "AED")
+        .map((item) => (
+          <label key={item.code} className="flex items-center gap-2 text-sm font-bold">
+            <span className="w-24 shrink-0">
+              {item.flag} 1 {item.symbol} =
+            </span>
+            <input
+              name={item.code}
+              required
+              inputMode="decimal"
+              dir="ltr"
+              defaultValue={rates.find((row) => row.code === item.code)?.rate ?? ""}
+              className="field field-en min-w-0 flex-1"
+            />
+            <span className="shrink-0">AED</span>
+          </label>
+        ))}
+      {state?.error ? <p className="text-sm font-bold">{state.error}</p> : null}
+      <button disabled={pending} className="button">
+        {pending ? "שומרים" : "שמירת השערים"}
+      </button>
+    </form>
   );
 }
 

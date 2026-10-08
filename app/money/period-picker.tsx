@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { DateRange } from "@/app/date-range";
 import { formatDay } from "@/lib/dates";
 import { monthLabel } from "./data";
 import { periods, stepAnchor, type Window } from "./income/analytics";
@@ -42,17 +43,9 @@ export function PeriodPicker({ basePath, span, today }: { basePath: string; span
       </nav>
 
       {span.period === "range" ? (
-        <form action={basePath} className="grid grid-cols-[1fr_1fr_auto] items-end gap-2">
+        <form action={basePath}>
           <input type="hidden" name="p" value="range" />
-          <label className="flex flex-col gap-1 text-xs font-bold text-muted">
-            מתאריך
-            <input type="date" name="from" defaultValue={span.start} className="field" />
-          </label>
-          <label className="flex flex-col gap-1 text-xs font-bold text-muted">
-            עד תאריך
-            <input type="date" name="to" defaultValue={span.end} className="field" />
-          </label>
-          <button className="button min-h-[3.25rem] px-4">הצג</button>
+          <DateRange from={span.start} to={span.end} names={{ from: "from", to: "to" }} label="טווח תאריכים" />
         </form>
       ) : (
         <div className="flex items-center justify-between gap-2">

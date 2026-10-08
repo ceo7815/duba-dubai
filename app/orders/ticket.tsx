@@ -2,6 +2,7 @@ import Link from "next/link";
 import { formatWhen } from "@/lib/dates";
 import { endingLabels, isEnding, isSource, money, sourceLabels, stageLabels, stageOf } from "@/lib/domain";
 import type { OrderItem, OrderRow } from "@/lib/orders";
+import { orderMoney } from "@/lib/currency";
 
 export function Ticket({
   order,
@@ -78,9 +79,10 @@ export function Ticket({
         {stageLabels[stageOf(order.status)]}
         {order.ending && isEnding(order.ending) ? ` · ${endingLabels[order.ending]}` : ""}
         {isSource(order.source) ? ` · ${sourceLabels[order.source]}` : ""}
+        {order.handled_by ? ` · טיפל/ה: ${order.handled_by}` : ""}
       </p>
       <p className="mt-1 text-sm font-bold">
-        שולם {money(Number(order.paid))} מתוך {money(Number(order.amount))}
+        שולם {money(Number(order.paid))} מתוך <bdi>{orderMoney(order, Number(order.amount))}</bdi>
       </p>
     </article>
   );

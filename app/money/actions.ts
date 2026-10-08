@@ -2,6 +2,7 @@
 
 import { done } from "@/lib/flash";
 import type { FormState } from "@/app/auth-actions";
+import { validRate } from "@/lib/currency";
 import { getProfile } from "@/lib/profile";
 import { fullAccess, type Role } from "@/lib/roles";
 import { createClient } from "@/lib/supabase/server";
@@ -66,6 +67,30 @@ export async function markInvoice(formData: FormData) {
   const supabase = await createClient();
   await supabase.from("invoices").update({ sent_to_mali: true }).eq("id", id);
   await done("סומן שנשלח לאילנית ✓");
+}
+
+export async function saveRates(
+  _state: FormState,
+  formData: FormData,
+): Promise<FormState> {
+  const profile = await getProfile();
+  if (!fullAccess(profile?.role)) return { error: "רק הבעלים משנה שערים" };
+  const rows = (["USD", "EUR", "ILS"] as const).map((code) => ({
+    code,
+    rate: Number(field(formData, code).replace(",", ".")),
+  }));
+  if (rows.some((row) => !validRate(row.rate))) return { error: "אחד השערים לא תקין" };
+  const supabase = await createClient();
+  for (const row of rows) {
+    const { error } = await supabase
+      .from("currency_rates")
+      .update({ rate: row.rate, updated_at: new Date().toISOString(), updated_by: profile!.id })
+      .eq("code", row.code)
+      .neq("rate", row.rate);
+    if (error) return { error: "השערים לא נשמרו" };
+  }
+  await done("השערים נשמרו ✓");
+  return null;
 }
 
 export async function saveFee(

@@ -2,6 +2,7 @@
 
 import { useRef, useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
+import { DateRange } from "@/app/date-range";
 
 export type OrderQuery = {
   q: string;
@@ -89,27 +90,17 @@ export function OrderFilters({ query }: { query: OrderQuery }) {
         ))}
       </div>
 
-      <div className="grid grid-cols-[1fr_1fr_auto] items-end gap-1.5">
-        <label className="text-xs font-bold text-muted">
-          מתאריך
-          <input
-            type="date"
-            value={query.from}
-            onChange={(event) => go({ from: event.target.value, range: "" })}
-            className="field mt-1 !min-h-11 !rounded-xl"
+      <div className="flex items-stretch gap-1.5">
+        <div className="min-w-0 flex-1">
+          <DateRange
+            from={query.from}
+            to={query.to}
+            onChange={(range) => go({ ...range, range: "" })}
+            label="טווח תאריכים"
           />
-        </label>
-        <label className="text-xs font-bold text-muted">
-          עד תאריך
-          <input
-            type="date"
-            value={query.to}
-            onChange={(event) => go({ to: event.target.value, range: "" })}
-            className="field mt-1 !min-h-11 !rounded-xl"
-          />
-        </label>
+        </div>
         {query.from || query.to ? (
-          <button type="button" onClick={() => go({ from: "", to: "" })} className="quick min-h-11 rounded-xl px-3">
+          <button type="button" onClick={() => go({ from: "", to: "" })} className="quick rounded-xl px-3">
             ניקוי
           </button>
         ) : null}

@@ -33,7 +33,15 @@ export function lineLabel(item: SheetItem) {
   return `${qty} ${item.name} × ${price} = ${money(lineTotal(item))}`;
 }
 
-export function customerMessage(order: SheetOrder, url: string, pay: "card" | "cash") {
+export function customerMessage(order: SheetOrder, url: string, pay: "card" | "cash", lang: "he" | "en" = "he") {
+  if (lang === "en") {
+    const line = order.is_quote
+      ? "Here is your quote from Duba Dubai Kosher Catering."
+      : pay === "card"
+        ? "Here is your order. Please confirm and pay securely by card at the link."
+        : "Here is your order. Please confirm at the link. Payment is in cash on delivery.";
+    return `Hi ${order.customer_name},\n\nThank you for choosing Duba Dubai Kosher Catering.\n${line}\n\n${url}`;
+  }
   const attached = order.is_quote
     ? "מצורפת הצעת המחיר מקייטרינג דובה דובאי."
     : pay === "card"

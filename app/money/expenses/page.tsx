@@ -42,19 +42,19 @@ export default async function ExpensesPage({ searchParams }: PageProps<"/money/e
       />
 
       <section className="flex flex-col gap-2">
-        <div className="-mx-4 flex gap-2 overflow-x-auto px-4 [scrollbar-width:none]">
-          {[{ id: null, plural: "הכל" }, ...expenseKinds].map((kind) => {
+        <div className="grid grid-cols-4 gap-1.5">
+          {[{ id: null, short: "הכל" }, ...expenseKinds].map((kind) => {
             const count = kind.id ? monthRows.filter((row) => row.kind === kind.id).length : monthRows.length;
             const active = filter === kind.id;
             return (
               <Link
                 key={kind.id ?? "all"}
                 href={filterHref(kind.id)}
-                className={`flex shrink-0 items-center gap-1.5 rounded-full border px-4 py-2 text-sm font-extrabold ${
+                className={`flex min-w-0 items-center justify-center gap-1 rounded-full border px-2 py-2 text-[13px] font-extrabold ${
                   active ? "border-ink bg-ink text-white" : "border-line bg-card"
                 }`}
               >
-                {kind.plural}
+                <span className="truncate">{kind.short}</span>
                 <span className={`text-xs ${active ? "text-white/60" : "text-muted"}`}>{count}</span>
               </Link>
             );

@@ -7,7 +7,8 @@ import { chefIntro, kitchenChef } from "@/lib/kitchen-message";
 import { DeleteOrder, Train } from "@/app/orders/stage-switch";
 import { Ticket } from "@/app/orders/ticket";
 import { Work } from "@/app/shell";
-import { isSource, money, sourceLabels, stageLabels, stageOf } from "@/lib/domain";
+import { currencyOf, formatRate, orderMoney } from "@/lib/currency";
+import { isSource, sourceLabels, stageLabels, stageOf } from "@/lib/domain";
 import { getOrder } from "@/lib/orders";
 import { requireProfile } from "@/lib/profile";
 import { canOperate } from "@/lib/roles";
@@ -50,8 +51,16 @@ export default async function OrderPage({
       <section className="rounded-2xl border border-line bg-card p-4">
         <h2 className="text-lg font-extrabold">סיכום ללקוח</h2>
         <p className="mt-2 text-sm leading-6">
-          {order.customer_name}, {order.phone}. יתרה {money(balance)}.
+          {order.customer_name}, <bdi dir="ltr">{order.phone}</bdi>. יתרה <bdi>{orderMoney(order, balance)}</bdi>.
         </p>
+        {order.currency !== "AED" ? (
+          <p className="mt-1 text-xs text-muted">
+            מטבע ללקוח {currencyOf(order.currency).label} ·{" "}
+            <bdi dir="ltr">
+              1 {currencyOf(order.currency).symbol} = {formatRate(Number(order.currency_rate))} AED
+            </bdi>
+          </p>
+        ) : null}
       </section>
       {inKitchen ? (
         <section className="rounded-2xl border border-line bg-card p-4">

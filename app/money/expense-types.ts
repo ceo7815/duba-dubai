@@ -1,7 +1,7 @@
 export const expenseKinds = [
-  { id: "supplier", label: "ספק", plural: "ספקים", payee: "שם הספק", hint: "למשל: ירקות אבו עלי" },
-  { id: "salary", label: "משכורת", plural: "משכורות", payee: "שם העובד", hint: "למשל: מוחמד, טבח" },
-  { id: "fixed", label: "קבועה", plural: "הוצאות קבועות", payee: "שם ההוצאה", hint: "למשל: שכירות, חשמל, אינטרנט" },
+  { id: "supplier", label: "ספק", plural: "ספקים", short: "ספקים", payee: "שם הספק", hint: "למשל: ירקות אבו עלי" },
+  { id: "salary", label: "משכורת", plural: "משכורות", short: "משכורות", payee: "שם העובד", hint: "למשל: מוחמד, טבח" },
+  { id: "fixed", label: "קבועה", plural: "הוצאות קבועות", short: "קבועות", payee: "שם ההוצאה", hint: "למשל: שכירות, חשמל, אינטרנט" },
 ] as const;
 
 export const paymentMethods = [

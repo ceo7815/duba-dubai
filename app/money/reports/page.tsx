@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
 import Link from "next/link";
-import { FeeForm } from "@/app/money/money-forms";
+import { FeeForm, RatesForm } from "@/app/money/money-forms";
+import { loadRateRows } from "@/lib/rates";
 import { Work } from "@/app/shell";
 import { dubaiKey } from "@/lib/dates";
 import { money } from "@/lib/domain";
@@ -229,6 +230,7 @@ export default async function ReportsPage({ searchParams }: PageProps<"/money/re
         {owner ? "" : " הכנסות מהזמנות מוצגות רק לבעלים."}
       </p>
 
+      {owner ? <RatesForm rates={await loadRateRows()} /> : null}
       {owner ? <FeeForm fee={data.fee} /> : null}
     </Work>
   );

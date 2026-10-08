@@ -46,6 +46,11 @@ export const fulfillmentLabels: Record<Fulfillment, string> = {
   hosting: "אירוח אצלנו",
 };
 
+export const handlers = ["סוזי", "איתי", "אילנית"] as const;
+
+export const isHandler = (value: string): value is (typeof handlers)[number] =>
+  (handlers as readonly string[]).includes(value);
+
 export const sources = ["bot", "owner_chat", "site", "manual"] as const;
 
 export type OrderSource = (typeof sources)[number];

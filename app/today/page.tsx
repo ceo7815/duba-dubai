@@ -4,13 +4,15 @@ import { SendToChef } from "@/app/orders/send-to-chef";
 import { Work } from "@/app/shell";
 import { chefIntro, kitchenChef } from "@/lib/kitchen-message";
 import { formatClock } from "@/lib/dates";
-import { isStage, money, stageLabels, stageOf, stages, type Stage } from "@/lib/domain";
+import { isStage, money, stageOf, stages, type Stage } from "@/lib/domain";
 import { itemsByOrder } from "@/lib/orders";
 import { requireProfile } from "@/lib/profile";
 import { DayCard } from "./day-card";
 import { todayOrders } from "./orders";
 import { Refresher } from "./refresher";
 import { canOperate } from "@/lib/roles";
+
+const tabLabels: Record<Stage, string> = { waiting: "ממתין", kitchen: "במטבח", out: "יצא" };
 
 export default async function TodayPage({ searchParams }: PageProps<"/today">) {
   const profile = await requireProfile();
@@ -32,7 +34,7 @@ export default async function TodayPage({ searchParams }: PageProps<"/today">) {
     { key: "all", label: "הכל", count: orders.length },
     ...stages
       .filter((stage) => owner || stage !== "waiting")
-      .map((stage) => ({ key: stage, label: stageLabels[stage], count: counts[stage] })),
+      .map((stage) => ({ key: stage, label: tabLabels[stage], count: counts[stage] })),
   ];
 
   return (
@@ -73,12 +75,12 @@ export default async function TodayPage({ searchParams }: PageProps<"/today">) {
         />
       ) : null}
 
-      <div className="-mx-4 flex gap-1.5 overflow-x-auto px-4 [scrollbar-width:none]">
+      <div className="grid auto-cols-fr grid-flow-col gap-1.5">
         {tabs.map((tab) => (
           <Link
             key={tab.key}
             href={tab.key === "all" ? "/today" : `/today?show=${tab.key}`}
-            className={`shrink-0 rounded-lg px-3 py-2 text-sm font-extrabold ${
+            className={`min-w-0 truncate rounded-lg px-1.5 py-2 text-center text-[13px] font-extrabold ${
               show === tab.key ? "bg-[#111111] text-white" : "bg-card text-ink"
             }`}
           >

@@ -10,6 +10,7 @@ import { fromDubaiInput } from "@/lib/dates";
 import { customerMessage } from "@/lib/sheet";
 import {
   isFulfillment,
+  isHandler,
   isOrderKind,
   isSource,
   isStatus,
@@ -18,6 +19,8 @@ import {
   stepPatch,
   type OrderStatus,
 } from "@/lib/domain";
+import { aedValue, foreignTotal, isCurrency, validRate } from "@/lib/currency";
+import { guestLang } from "@/lib/guest-text";
 import { normalizePhone } from "@/lib/phone";
 import { getProfile } from "@/lib/profile";
 import { paymentLink } from "@/lib/payment-link";
@@ -132,6 +135,16 @@ export async function saveOrder(
     return { error: "מספר הסועדים לא תקין" };
   }
 
+  const handledBy = field(formData, "handled_by");
+  if (!isHandler(handledBy)) return { error: "צריך לבחור מי טיפל בהזמנה" };
+
+  const currency = field(formData, "currency") || "AED";
+  if (!isCurrency(currency)) return { error: "המטבע לא תקין" };
+  const currencyRate = currency === "AED" ? 1 : moneyField(field(formData, "currency_rate"));
+  if (!validRate(currencyRate)) return { error: "שער המטבע לא תקין" };
+  const amountForeign = currency === "AED" ? null : foreignTotal(amount, currencyRate);
+  const total = amountForeign === null ? amount : aedValue(amountForeign, currencyRate);
+
   const supabase = await createClient();
   const { data: customer, error: customerError } = await supabase
     .from("customers")
@@ -149,15 +162,15 @@ export async function saveOrder(
   if (id) {
     const { data: existing } = await supabase
       .from("orders")
-      .select("status, ending, shopify_url, source, amount")
+      .select("status, ending, shopify_url, source, amount, currency")
       .eq("id", id)
       .maybeSingle();
     if (existing && isStatus(existing.status)) {
       status = existing.status;
       ending = existing.ending;
       if (isSource(existing.source)) source = existing.source;
-      // A Stripe Checkout link is fixed to the amount it was created for.
-      if (Number(existing.amount) === amount)
+      // A Stripe Checkout link is fixed to the amount and currency it was created for.
+      if (Number(existing.amount) === total && existing.currency === currency)
         shopifyUrl = existing.shopify_url ?? "";
     }
   }
@@ -220,8 +233,12 @@ export async function saveOrder(
     source,
     ending,
     status,
-    amount,
+    amount: total,
     paid,
+    currency,
+    currency_rate: currencyRate,
+    amount_foreign: amountForeign,
+    handled_by: handledBy,
     shopify_url: shopifyUrl,
   };
 
@@ -306,7 +323,7 @@ export async function issueGuestLink(
   const { data: order } = await supabase
     .from("orders")
     .select(
-      "id, customer_name, phone, share_token, status, ending, amount, scheduled_at, shopify_url, destination, guest_count, guest_note, leaves_at, is_quote, delivery_fee, tray_deposit, tray_return, salad_note",
+      "id, customer_name, phone, share_token, status, ending, amount, currency, amount_foreign, scheduled_at, shopify_url, destination, guest_count, guest_note, leaves_at, is_quote, delivery_fee, tray_deposit, tray_return, salad_note",
     )
     .eq("id", orderId)
     .maybeSingle();
@@ -322,7 +339,9 @@ export async function issueGuestLink(
       ? String(order.shopify_url)
       : await stripeCheckout({
           orderId: order.id,
-          amount: Number(order.amount),
+          ...(order.currency !== "AED" && order.amount_foreign !== null
+            ? { amount: Number(order.amount_foreign), currency: order.currency }
+            : { amount: Number(order.amount) }),
           name: order.customer_name,
           successUrl: `${host}/o/${token}`,
         });
@@ -366,6 +385,7 @@ export async function issueGuestLink(
     },
     url,
     cash ? "cash" : "card",
+    guestLang(String(order.phone)),
   );
 
   revalidatePath("/", "layout");

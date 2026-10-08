@@ -5,6 +5,7 @@ export function stripeReady() {
 export async function stripeCheckout(input: {
   orderId: string;
   amount: number;
+  currency?: string;
   name: string;
   successUrl: string;
   cancelUrl?: string;
@@ -13,6 +14,7 @@ export async function stripeCheckout(input: {
 }) {
   const key = process.env.STRIPE_SECRET_KEY;
   const fils = Math.round(input.amount * 100);
+  const currency = /^[A-Z]{3}$/.test(input.currency ?? "") ? input.currency!.toLowerCase() : "aed";
   if (!key || fils < 1) return "";
   const body = new URLSearchParams();
   body.set("mode", "payment");
@@ -22,7 +24,7 @@ export async function stripeCheckout(input: {
   body.set("metadata[order_id]", input.orderId);
   body.set("payment_intent_data[metadata][order_id]", input.orderId);
   body.set("line_items[0][quantity]", "1");
-  body.set("line_items[0][price_data][currency]", "aed");
+  body.set("line_items[0][price_data][currency]", currency);
   body.set("line_items[0][price_data][unit_amount]", String(fils));
   body.set(
     "line_items[0][price_data][product_data][name]",

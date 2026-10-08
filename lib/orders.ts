@@ -36,11 +36,15 @@ export type OrderRow = {
   amount: number;
   paid: number;
   shopify_url: string;
+  currency: string;
+  currency_rate: number;
+  amount_foreign: number | null;
+  handled_by: string | null;
   created_at: string;
 };
 
 const orderColumns =
-  "id, customer_name, phone, phone_key, scheduled_at, order_kind, fulfillment, destination, guest_count, guest_note, leaves_at, allergy, special_request, delivery_fee, tray_deposit, tray_return, salad_note, is_quote, source, ending, status, amount, paid, shopify_url, created_at";
+  "id, customer_name, phone, phone_key, scheduled_at, order_kind, fulfillment, destination, guest_count, guest_note, leaves_at, allergy, special_request, delivery_fee, tray_deposit, tray_return, salad_note, is_quote, source, ending, status, amount, paid, shopify_url, currency, currency_rate, amount_foreign, handled_by, created_at";
 
 export async function listOrders() {
   const supabase = await createClient();
