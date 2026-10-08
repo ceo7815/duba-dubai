@@ -15,12 +15,16 @@ function field(formData: FormData, name: string) {
   return String(formData.get(name) ?? "").trim();
 }
 
+function pasted(value: string) {
+  return value.replace(/[\u200b-\u200f\u202a-\u202e\ufeff]/g, "").trim();
+}
+
 export async function login(
   _state: FormState,
   formData: FormData,
 ): Promise<FormState> {
-  const email = field(formData, "email").toLowerCase();
-  const password = String(formData.get("password") ?? "");
+  const email = pasted(field(formData, "email")).toLowerCase();
+  const password = pasted(String(formData.get("password") ?? "")).replace(/^סיסמה\s*:\s*/, "");
   const supabase = await createClient();
   const { error } = await supabase.auth.signInWithPassword({ email, password });
 

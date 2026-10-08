@@ -10,20 +10,18 @@ export function LoginForm() {
   const [showPassword, setShowPassword] = useState(false);
 
   return (
-    <form action={action} autoComplete="off" className="flex flex-col gap-4">
+    <form action={action} className="flex flex-col gap-4">
       <label className="flex flex-col gap-2 text-sm font-bold">
         דוא״ל
         <input
           name="email"
           type="email"
           inputMode="email"
-          autoComplete="off"
+          autoComplete="username"
           autoCapitalize="none"
           autoCorrect="off"
           spellCheck={false}
           defaultValue=""
-          readOnly
-          onFocus={(event) => event.currentTarget.removeAttribute("readonly")}
           dir="ltr"
           required
           className="field field-en"
@@ -34,13 +32,11 @@ export function LoginForm() {
         <input
           name="password"
           type={showPassword ? "text" : "password"}
-          autoComplete="off"
+          autoComplete="current-password"
           autoCapitalize="none"
           autoCorrect="off"
           spellCheck={false}
           defaultValue=""
-          readOnly
-          onFocus={(event) => event.currentTarget.removeAttribute("readonly")}
           dir="ltr"
           required
           className="field field-en"
