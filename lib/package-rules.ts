@@ -1,17 +1,21 @@
 import "server-only";
 import { createClient } from "@/lib/supabase/server";
-import { isSlot, type PackageRule } from "@/lib/packages";
+import { cleanIncluded, isSlot, type PackageRule } from "@/lib/packages";
 
 type DishRow = { id: string; name: string; price: number | string; image_url: string | null; shortage: boolean };
 
 export async function loadPackages(): Promise<PackageRule[]> {
   const supabase = await createClient();
-  const [rules, options] = await Promise.all([
+  const [rules, options, includes] = await Promise.all([
     supabase.from("package_rules").select("dish_id, salad, starter, main"),
     supabase.from("package_options").select("package_id, slot, dish_id, position").order("position", { ascending: true }),
+    supabase
+      .from("package_includes")
+      .select("package_id, name, name_en, quantity, position")
+      .order("position", { ascending: true }),
   ]);
-  if (rules.error || options.error) {
-    console.error("loadPackages failed", rules.error?.message ?? options.error?.message);
+  if (rules.error || options.error || includes.error) {
+    console.error("loadPackages failed", rules.error?.message ?? options.error?.message ?? includes.error?.message);
     return [];
   }
   const ids = [...new Set([...(rules.data ?? []).map((row) => row.dish_id), ...(options.data ?? []).map((row) => row.dish_id)])];
@@ -50,6 +54,7 @@ export async function loadPackages(): Promise<PackageRule[]> {
         shortage: dish.shortage,
         need: { salad: rule.salad, starter: rule.starter, main: rule.main },
         options: picked,
+        included: cleanIncluded((includes.data ?? []).filter((row) => row.package_id === rule.dish_id)),
       },
     ];
   });

@@ -2,7 +2,7 @@
 
 import { revalidatePath } from "next/cache";
 import { done } from "@/lib/flash";
-import { isSlot, slots, type Slot } from "@/lib/packages";
+import { cleanIncluded, isSlot, slots, type IncludedItem, type Slot } from "@/lib/packages";
 import { getProfile } from "@/lib/profile";
 import { createClient } from "@/lib/supabase/server";
 import type { ProductInput } from "./types";
@@ -155,6 +155,31 @@ export async function savePackageLimits(
   if (error || !data?.length) return { error: "לא עודכן" };
   revalidatePath("/menu");
   await done("הכמויות נשמרו ✓");
+  return {};
+}
+
+export async function savePackageIncluded(packageId: string, items: IncludedItem[]): Promise<{ error?: string }> {
+  if (!(await owner())) return { error: saveErrors.owner };
+  const included = cleanIncluded(items);
+  if (included.length > 20) return { error: "יותר מדי פריטים" };
+  if (new Set(included.map((item) => item.name)).size !== included.length) return { error: "יש פריט שמופיע פעמיים" };
+  const supabase = await createClient();
+  const cleared = await supabase.from("package_includes").delete().eq("package_id", packageId);
+  if (cleared.error) return { error: "לא עודכן" };
+  if (included.length) {
+    const { error } = await supabase.from("package_includes").insert(
+      included.map((item, index) => ({
+        package_id: packageId,
+        name: item.name,
+        name_en: item.name_en ?? "",
+        quantity: item.quantity,
+        position: index + 1,
+      })),
+    );
+    if (error) return { error: "לא עודכן" };
+  }
+  revalidatePath("/menu");
+  await done("נשמר ✓");
   return {};
 }
 

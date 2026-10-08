@@ -10,7 +10,7 @@ import { currencyOf, formatCurrency, formatRate } from "@/lib/currency";
 import { money } from "@/lib/domain";
 import { guestLang, guestText, isGuestLang } from "@/lib/guest-text";
 import { foodTotal, lineTotal, type SheetItem } from "@/lib/sheet";
-import { parsePick, slotEnglish } from "@/lib/packages";
+import { includedLabel, parsePick, slotEnglish } from "@/lib/packages";
 import { catalog } from "@/lib/store/catalog";
 
 type GuestItem = SheetItem & { image_url?: string; handle?: string; variant?: string };
@@ -50,12 +50,22 @@ type GuestOrder = {
   items: GuestItem[];
 };
 
+const includedEnglish: Record<string, string> = {
+  אורז: "White rice",
+  "תפו״א": "Oven-baked potatoes",
+  "תפוחי אדמה": "Oven-baked potatoes",
+  חלה: "Challah",
+  חלות: "Challahs",
+  "תירוש קטן לקידוש": "Small grape juice for Kiddush",
+};
+
 function pickName(name: string, en: boolean) {
   const pick = parsePick(name);
   if (!pick) return null;
   if (!en) return `${pick.label} · ${pick.name}`;
-  const title = catalog.menu.find((dish) => dish.he === pick.name)?.title ?? pick.name;
-  return `${pick.slot ? slotEnglish[pick.slot] : pick.label} · ${title}`;
+  const title = catalog.menu.find((dish) => dish.he === pick.name)?.title ?? includedEnglish[pick.name] ?? pick.name;
+  const label = pick.slot ? slotEnglish[pick.slot] : pick.label === includedLabel ? "Included" : pick.label;
+  return `${label} · ${title}`;
 }
 
 function englishName(item: GuestItem) {

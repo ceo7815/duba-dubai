@@ -3,8 +3,15 @@
 import { useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
 import { money } from "@/lib/domain";
-import { slotTitles, slots, type PackageOption, type PackageRule, type Slot } from "@/lib/packages";
-import { savePackageLimits, setDishShortage, setPackageOption } from "./actions";
+import {
+  slotTitles,
+  slots,
+  type IncludedItem,
+  type PackageOption,
+  type PackageRule,
+  type Slot,
+} from "@/lib/packages";
+import { savePackageIncluded, savePackageLimits, setDishShortage, setPackageOption } from "./actions";
 
 export type Candidate = PackageOption & { category: string };
 
@@ -36,6 +43,12 @@ function PackageCard({ rule, candidates }: { rule: PackageRule; candidates: Cand
   const [slot, setSlot] = useState<Slot>("starter");
   const [error, setError] = useState("");
   const changed = slots.some((key) => need[key] !== rule.need[key]);
+  const [included, setIncluded] = useState(rule.included);
+  const includedChanged = JSON.stringify(included) !== JSON.stringify(rule.included);
+
+  function editItem(index: number, patch: Partial<IncludedItem>) {
+    setIncluded((current) => current.map((item, at) => (at === index ? { ...item, ...patch } : item)));
+  }
 
   function run(action: () => Promise<{ error?: string }>) {
     setError("");
@@ -104,6 +117,72 @@ function PackageCard({ rule, candidates }: { rule: PackageRule; candidates: Cand
           </button>
         </div>
       ) : null}
+
+      <div className="mt-4 flex flex-col gap-2">
+        <p className="text-sm font-extrabold">כלול בחבילה (בלי בחירה)</p>
+        {included.map((item, index) => (
+          <div key={index} className="flex items-center gap-2">
+            <input
+              value={item.name}
+              onChange={(event) => editItem(index, { name: event.target.value })}
+              placeholder="למשל: אורז"
+              aria-label="שם הפריט"
+              className="field min-w-0 flex-1"
+            />
+            <button
+              type="button"
+              className="grid size-9 shrink-0 place-items-center rounded-full border border-ink font-bold"
+              aria-label={`פחות ${item.name}`}
+              onClick={() => editItem(index, { quantity: Math.max(1, item.quantity - 1) })}
+            >
+              −
+            </button>
+            <span className="w-5 text-center font-extrabold tabular-nums">{item.quantity}</span>
+            <button
+              type="button"
+              className="grid size-9 shrink-0 place-items-center rounded-full bg-ink font-bold text-white"
+              aria-label={`יותר ${item.name}`}
+              onClick={() => editItem(index, { quantity: Math.min(40, item.quantity + 1) })}
+            >
+              +
+            </button>
+            <button
+              type="button"
+              className="shrink-0 px-1 text-sm font-bold"
+              aria-label={`הסרת ${item.name}`}
+              onClick={() => setIncluded((current) => current.filter((_, at) => at !== index))}
+            >
+              ✕
+            </button>
+          </div>
+        ))}
+        <button
+          type="button"
+          className="min-h-10 rounded-xl border border-dashed border-line text-sm font-bold"
+          onClick={() => setIncluded((current) => [...current, { name: "", quantity: 1 }])}
+        >
+          + פריט
+        </button>
+        {includedChanged ? (
+          <div className="grid grid-cols-[1fr_auto] gap-2">
+            <button
+              type="button"
+              disabled={pending}
+              className="min-h-11 rounded-xl bg-ink text-sm font-extrabold text-white"
+              onClick={() => run(() => savePackageIncluded(rule.id, included))}
+            >
+              שמירת מה שכלול
+            </button>
+            <button
+              type="button"
+              className="min-h-11 rounded-xl border border-line px-4 text-sm font-bold"
+              onClick={() => setIncluded(rule.included)}
+            >
+              ביטול
+            </button>
+          </div>
+        ) : null}
+      </div>
 
       <div className="mt-4 grid grid-cols-3 gap-1.5" role="tablist">
         {slots.map((key) => (

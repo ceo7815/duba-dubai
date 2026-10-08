@@ -24,7 +24,26 @@ export type PackageRule = {
   shortage: boolean;
   need: Record<Slot, number>;
   options: Record<Slot, PackageOption[]>;
+  included: IncludedItem[];
 };
+
+export type IncludedItem = { name: string; quantity: number; name_en?: string };
+
+export const includedLabel = "כלול";
+
+export function includedText(items: IncludedItem[]) {
+  return items.map((item) => (item.quantity > 1 ? `${item.quantity} ${item.name}` : item.name)).join(" · ");
+}
+
+export function cleanIncluded(value: unknown): IncludedItem[] {
+  if (!Array.isArray(value)) return [];
+  return value.flatMap((row) => {
+    const name = String((row as IncludedItem)?.name ?? "").trim().slice(0, 60);
+    const quantity = Math.round(Number((row as IncludedItem)?.quantity ?? 1));
+    const name_en = String((row as IncludedItem)?.name_en ?? "").trim().slice(0, 80);
+    return name && quantity >= 1 && quantity <= 40 ? [{ name, quantity, name_en }] : [];
+  });
+}
 
 /** Chosen quantities keyed by `${slot}:${dishId}`. */
 export type PackagePicks = Record<string, number>;
@@ -92,6 +111,8 @@ export function buildPackLines(inputs: unknown[], rules: PackageRule[]): { lines
         if (quantity) lines.push({ dish_id: null, name: pickLine(slot, option.name), quantity, unit_price: 0 });
       }
     }
+    for (const item of rule.included)
+      lines.push({ dish_id: null, name: `↳ ${includedLabel}: ${item.name}`, quantity: item.quantity, unit_price: 0 });
   }
   return { lines };
 }

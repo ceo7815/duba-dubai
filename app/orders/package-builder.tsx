@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { money } from "@/lib/domain";
 import {
+  includedText,
   missingText,
   pickKey,
   slotCount,
@@ -88,6 +89,11 @@ export function PackageList({
                 );
               })}
             </div>
+            {rule.included.length ? (
+              <p className="mt-1 text-[13px] leading-5">
+                <span className="font-extrabold">כולל:</span> {includedText(rule.included)}
+              </p>
+            ) : null}
             {problem ? <p className="mt-2 text-sm font-extrabold">{problem}</p> : null}
             <button
               type="button"
@@ -183,6 +189,11 @@ export function PackageSheet({
               .join(" · ")}{" "}
             · {money(rule.price)}
           </p>
+          {rule.included.length ? (
+            <p className="mt-1 text-sm">
+              <span className="font-extrabold">כולל:</span> {includedText(rule.included)}
+            </p>
+          ) : null}
         </div>
         <div className="flex-1 overflow-y-auto overscroll-contain px-5 py-3">
           {slots.map((slot) => {

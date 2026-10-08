@@ -19,6 +19,7 @@ const PICK_GROUPS: Record<string, string> = {
   סלט: "סלטים",
   ראשונה: "ראשונות",
   עיקרית: "עיקריות",
+  כלול: "כלול בחבילות",
 };
 
 export async function itemsFor(orderIds: string[]) {
